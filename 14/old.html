@@ -1,0 +1,100 @@
+﻿<!doctype html>
+<canvas id=a></canvas>
+<script>
+// Init
+c = a.getContext("2d");
+w = (a.width = innerWidth)/2;
+h = (a.height = innerHeight-5)/2;
+
+// Camera
+cx = 5;
+cy = 0;
+cz = -15;
+crx = 40;
+cry = 0;
+crz = 0;
+perspective = 500;
+
+// Camera rotation helper
+rotate = (a, b, angle) => [
+  Math.cos(angle) * a - Math.sin(angle) * b,
+  Math.sin(angle) * a + Math.cos(angle) * b
+];
+
+// Map
+roads = [
+  
+  [0,0,0,0,"#d92"]  // x, y, z, block, color
+
+];
+
+// Render
+draw = () => {
+
+  // Road parts
+  for(i of roads){
+  
+    // Block 0: basic road
+    if(i[3] == 0){
+    
+      var pts = [
+        
+        [i[0],i[1],i[2]],
+        [i[0]+10,i[1],i[2]],
+        [i[0]+10,i[1]+10,i[2]],
+        [i[0],i[1]+10,i[2]],
+      ];
+    
+    }
+    
+    c.beginPath();
+    moveto = 1;
+    c.fillStyle = i[4];
+    for(j of pts){
+      console.log(j);
+    
+      [x,y,z] = j;
+      
+      [x,z] = rotate(x,z,cry);
+      [y,z] = rotate(y,z,crx);
+      [x,y] = rotate(x,y,crz);
+      
+      x -= cx;
+      y -= cy;
+      z -= cz;
+      console.log(z);
+      
+      realSize = 0.2;
+      size = realSize / z * perspective;
+      
+      if(z > 0){
+        X = w + x / z * perspective;
+        Y = h + y / z * perspective;
+      }
+      else {
+        X = w + x / z * perspective;
+        Y = h+ y / z * perspective;
+      }
+      if(moveto){
+        c.moveTo(X,Y);
+        moveto = 0;
+      }
+      else {
+        c.lineTo(X,Y);
+      }
+      c.fill()
+    }
+  }
+}
+
+draw();
+setInterval(()=> {
+  a.width = a.width;
+  cz += .1;
+  draw();
+},33)
+
+
+
+</script>
+<style>*{margin:0;padding:0}#a{background:#def}

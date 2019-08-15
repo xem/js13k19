@@ -1,0 +1,236 @@
+﻿<!doctype html>
+
+<div id=viewport>
+  <div id=camera>
+    <div id=scene></div>
+  </div>
+</div>
+
+<script>
+// CSS3D framework
+C = {
+  unit: "in",
+  camX: 0,
+  camY: 0,
+  camZ: 0,
+  camRX: 0,
+  camRY: 0,
+  camRZ: 0,
+  sprite_count: 0,
+  sprites: [],
+  plane_count: 0,
+  cube_count: 0,
+  pyramid_count: 0,
+  options: {},
+  
+  $: id => document.getElementById(id),
+  
+  set_perspective: o => {
+    viewport.style.perspective = `${o}${C.unit}`;
+  },
+  
+  init: o => {
+    if(!o.css) o.css = "";
+    if(!o.html) o.html = "";
+    if(!o.g) o.g = "scene";
+    if(!o.o) o.o = "center";
+    if(o.o == "top left");// o.x += o.w/2, o.y += o.h/2;
+    //if(o.o == "top") o.y += o.h/2;
+    //if(o.o == "top right") o.x -= o.w/2, o.y += o.h/2;
+    //if(o.o == "right") o.x -= o.w/2;
+    //if(o.o == "bottom right") o.x -= o.w/2, o.y -= o.h/2;
+    if(o.o == "bottom") o.y -= o.h/2;
+    //if(o.o == "bottom left") o.x += o.w/2, o.y -= o.h/2;
+    //if(o.o == "left") o.x += o.w/2;
+    if(!o.w) o.w = 0;
+    if(!o.h) o.h = 0;
+    if(!o.x) o.x = 0;
+    if(!o.y) o.y = 0;
+    if(!o.z) o.z = 0;
+    if(!o.rx) o.rx = 0;
+    if(!o.ry) o.ry = 0;
+    if(!o.rz) o.rz = 0;
+    if(!o.sx) o.sx = 1;
+    if(!o.sy) o.sy = 1;
+    if(!o.sz) o.sz = 1;
+    C.options[o.n] = o;
+  },
+  
+  group: o => {
+    if(!o.d && !(o.d === 0)) o.d = o.h;
+    C.init(o);
+    C.$(o.g).innerHTML += `<div id="${o.n}"class="group ${o.css}"style="position:absolute;width:${o.w}${C.unit};height:${o.d}${C.unit};transform:${C.tr(o)}">`;
+  },
+  
+  plane: o => {
+    if(!o.n) o.n = `plane${C.plane_count++}`;
+    C.init(o);
+    C.$(o.g).innerHTML += `<div id="${o.n}"class="plane ${o.css}"style="position:absolute;width:${o.w}${C.unit};height:${o.h}${C.unit};background:${o.b};transform-origin:${o.o};transform:${C.tr(o)}">${o.html}`;
+    C.camera();
+  },
+  
+  sprite: o => {
+    if(!o.n) o.n = `sprite${C.sprite_count++}`;
+    C.init(o);
+    C.$(o.g).innerHTML += `<div id="${o.n}"class="sprite ${o.css}"style="position:absolute;width:${o.w}${C.unit};height:${o.h}${C.unit};background:${o.b};transform-origin:${o.o};transform:${C.tr(o)}">${o.html}`;
+    C.sprites.push(o.n);
+    C.camera();
+  },
+
+  cube: o => {
+    if(!o.n) o.n = `cube${C.cube_count++}`;
+    C.init(o);
+    C.group(o);
+    C.plane({g:o.n,x:o.w/2,y:o.d/2,w:o.w,h:o.d,b:o.b,css:"bottom"}); // bottom
+    C.plane({g:o.n,y:o.d/2,w:o.d,h:o.h,b:o.b,rx:-90,ry:-90,o:"bottom",css:"left"}); // left
+    C.plane({g:o.n,x:o.w,y:o.d/2,w:o.d,h:o.h,b:o.b3,rx:-90,ry:-90,o:"bottom",css:"right"}); // right
+    C.plane({g:o.n,x:o.w/2,y:0,w:o.w,h:o.h,b:o.b2,rx:-90,o:"bottom",css:"back"}); // back
+    C.plane({g:o.n,x:o.w/2,y:o.d,w:o.w,h:o.h,b:o.b2,rx:-90,o:"bottom",css:"front"}); // front
+    C.plane({g:o.n,x:o.w/2,y:o.d/2,z:o.h,w:o.w,h:o.d,b:o.b,css:"top"}); // top
+  },
+
+  camera: o => {
+    if(o && (o.x || o.x === 0)) C.camX = o.x;
+    if(o && (o.y || o.y === 0)) C.camY = o.y;
+    if(o && (o.z || o.z === 0)) C.camZ = o.z;
+    if(o && (o.rx || o.rx === 0)) C.camRX = o.rx;
+    if(o && (o.ry || o.ry === 0)) C.camRY = o.ry;
+    if(o && (o.rz || o.rz === 0)) C.camRZ = o.rz;
+    C.camX += ((Math.random() - .5)/1000);
+    scene.style.transformOrigin = `${C.camX}${C.unit} ${C.camY}${C.unit}`;
+    scene.style.transform = `translateX(${-C.camX}${C.unit})translateY(${-C.camY}${C.unit})translateZ(${-C.camZ}${C.unit})rotateX(${C.camRX}deg)rotateY(${C.camRY}deg)rotateZ(${C.camRZ}deg)`;
+    /*for(var i in C.sprites){
+      var s = C.$(C.sprites[i]);
+      var t = s.style.transform.replace(/ *rotate.*\(.*?deg\)/g,"");
+      s.style.transform = t + `rotateZ(${-C.camRZ}deg)rotateX(${-C.camRX}deg)`;
+    }*/
+  },
+
+  move: o => {
+    if(o.n){
+      var obj = C.$(o.n);
+      var opt = C.options[o.n];
+      if(o.x || o.x === 0) opt.x = o.x;
+      if(o.y || o.y === 0) opt.y = o.y;
+      if(o.z || o.z === 0) opt.z = o.z;
+      if(o.rx || o.rx === 0) opt.rx = o.rx;
+      if(o.ry || o.ry === 0) opt.ry = o.ry;
+      if(o.rz || o.rz === 0) opt.rz = o.rz;
+      C.options[o.n] = opt;
+      obj.style.transform = C.tr(opt);
+    }
+  },
+  
+  tr: o => `${o.o=="top left"?"":"translateX(-50%)translateY(-50%)"}translateX(${o.x}${C.unit})translateY(${o.y}${C.unit})translateZ(${o.z}${C.unit})rotateX(${o.rx}deg)rotateY(${o.ry}deg)rotateZ(${o.rz}deg)`
+}
+
+// Camera
+cx = 5;
+cy = 0;
+cz = 0;
+crx = 50;
+cry = 0;
+crz = 0;
+
+// Car
+carx = 25;
+cary = 25;
+carrz = 0;
+
+
+// RENDER
+
+// Map (20x20 grid, the center is 10:10.)
+C.plane({w:200,h:200,b:'#fff'});
+C.camera({x:25,y:25,z:20,rx:crx});
+
+// Block #0: basic road
+C.plane({x:20,y:20,z:.1,w:10,h:10,b:"#eee",o:"top left"});
+C.plane({x:20.5,y:20.5,z:.2,w:9,h:9,b:"#d90",o:"top left"});
+
+// Car
+C.group({x:25,y:25,n:"car",w:0,h:0,rz:90})
+
+// body
+C.cube({g:"car",b:"#a33",b2:"#922",b3:"#c44",w:4,d:2,h:.75,z:.4});
+C.cube({g:"car",b:"#a33",b2:"#922",b3:"#c44",w:2,d:2,h:.55,z:1.15});
+
+// wheel
+C.plane({g:"car",b:"#555",w:.8,h:.8,rx:90,x:1,y:1.1,z:.58,css:"circle"});
+C.plane({g:"car",b:"#555",w:.8,h:.8,rx:90,x:1,y:-1.1,z:.58,css:"circle"});
+C.plane({g:"car",b:"#555",w:.8,h:.8,rx:90,x:-1,y:1.1,z:.58,css:"circle"});
+C.plane({g:"car",b:"#555",w:.8,h:.8,rx:90,x:-1,y:-1.1,z:.58,css:"circle"});
+
+// wheel depth
+C.plane({g:"car",b:"#555",w:.3,h:.78,rx:90,ry:90,x:1,y:.95,z:.58});
+C.plane({g:"car",b:"#555",w:.3,h:.78,rx:90,ry:90,x:1,y:-.95,z:.58});
+C.plane({g:"car",b:"#555",w:.3,h:.78,rx:90,ry:90,x:-1,y:.95,z:.58});
+C.plane({g:"car",b:"#555",w:.3,h:.78,rx:90,ry:90,x:-1,y:-.95,z:.58});
+
+
+
+
+
+
+
+roads = [
+  
+  [0,0,0,0,"#d92"]  // x, y, z, block, color
+
+];
+
+// Render
+draw = () => {
+
+  
+}
+
+draw();
+
+//rz=0;setInterval("rz+=10;C.camera({rz})",500)
+
+// Input
+u=l=d=r=0;onkeydown=onkeyup=e=>top['lld*rlurdu'[e.which%32%17]]=e.type[5];
+
+// Game loop
+
+function toRadians (angle) { return angle * (Math.PI / 180); }
+
+setInterval(()=> {
+  
+  if(u){
+    carx += .1 * Math.sin(toRadians(carrz));
+    cary -= .1 * Math.cos(toRadians(carrz));
+  }
+  if(d){
+    carx -= .1 * Math.sin(toRadians(carrz));
+    cary += .1 * Math.cos(toRadians(carrz));
+  }
+  if(l){
+    carrz -= 5;
+  }
+  if(r){
+    carrz += 5;
+  }
+  
+  console.log(carrz, cary);
+  
+  
+  C.move({n:"car",x:carx,y:cary,rz:carrz+90});
+  //C.camera({x:carx,y:cary,rz:carrz})
+
+},33)
+
+
+
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+#viewport{width:100vw;height:100vh;background:#def;overflow:hidden;position:relative;perspective:8in}
+#viewport *{transform-style:preserve-3d;box-sizing:border-box}
+#camera{width:0;height:0;position:absolute;top:50%;left:50%}
+#scene{transition:.5s linear}
+.group{transition:.1s linear;}
+.circle{border-radius:50%}
+
+/* Custom */
