@@ -1,13 +1,12 @@
-﻿<!doctype html>
-
-<div id=viewport>
-  <div id=camera>
-    <div id=scene></div>
-  </div>
-</div>
+﻿<body id=b>
 
 <script>
-// CSS3D framework
+// ===============
+//  BACK ON TRACK
+// ===============
+
+// CSS3D framework (customized for this game)
+// source: http://github.com/xem/CSS3Dframework
 C = {
   unit: "in",
   camX: 0,
@@ -16,32 +15,18 @@ C = {
   camRX: 0,
   camRY: 0,
   camRZ: 0,
-  sprite_count: 0,
-  sprites: [],
   plane_count: 0,
   cube_count: 0,
-  pyramid_count: 0,
   options: {},
   
   $: id => document.getElementById(id),
-  
-  set_perspective: o => {
-    viewport.style.perspective = `${o}${C.unit}`;
-  },
   
   init: o => {
     if(!o.css) o.css = "";
     if(!o.html) o.html = "";
     if(!o.g) o.g = "scene";
     if(!o.o) o.o = "center";
-    if(o.o == "top left");// o.x += o.w/2, o.y += o.h/2;
-    //if(o.o == "top") o.y += o.h/2;
-    //if(o.o == "top right") o.x -= o.w/2, o.y += o.h/2;
-    //if(o.o == "right") o.x -= o.w/2;
-    //if(o.o == "bottom right") o.x -= o.w/2, o.y -= o.h/2;
     if(o.o == "bottom") o.y -= o.h/2;
-    //if(o.o == "bottom left") o.x += o.w/2, o.y -= o.h/2;
-    //if(o.o == "left") o.x += o.w/2;
     if(!o.w) o.w = 0;
     if(!o.h) o.h = 0;
     if(!o.x) o.x = 0;
@@ -68,14 +53,6 @@ C = {
     C.$(o.g).innerHTML += `<div id="${o.n}"class="plane ${o.css}"style="position:absolute;width:${o.w}${C.unit};height:${o.h}${C.unit};background:${o.b};transform-origin:${o.o};transform:${C.tr(o)}">${o.html}`;
     C.camera();
   },
-  
-  sprite: o => {
-    if(!o.n) o.n = `sprite${C.sprite_count++}`;
-    C.init(o);
-    C.$(o.g).innerHTML += `<div id="${o.n}"class="sprite ${o.css}"style="position:absolute;width:${o.w}${C.unit};height:${o.h}${C.unit};background:${o.b};transform-origin:${o.o};transform:${C.tr(o)}">${o.html}`;
-    C.sprites.push(o.n);
-    C.camera();
-  },
 
   cube: o => {
     if(!o.n) o.n = `cube${C.cube_count++}`;
@@ -99,11 +76,6 @@ C = {
     C.camX += ((Math.random() - .5)/1000);
     scene.style.transformOrigin = `${C.camX}${C.unit} ${C.camY}${C.unit}`;
     scene.style.transform = `translateX(${-C.camX}${C.unit})translateY(${-C.camY}${C.unit})translateZ(${-C.camZ}${C.unit})rotateX(${C.camRX}deg)rotateY(${C.camRY}deg)rotateZ(${C.camRZ}deg)`;
-    /*for(var i in C.sprites){
-      var s = C.$(C.sprites[i]);
-      var t = s.style.transform.replace(/ *rotate.*\(.*?deg\)/g,"");
-      s.style.transform = t + `rotateZ(${-C.camRZ}deg)rotateX(${-C.camRX}deg)`;
-    }*/
   },
 
   move: o => {
@@ -113,8 +85,6 @@ C = {
       if(o.x || o.x === 0) opt.x = o.x;
       if(o.y || o.y === 0) opt.y = o.y;
       if(o.z || o.z === 0) opt.z = o.z;
-      //if(o.w || o.w === 0) opt.w = o.w, obj.style.width = `${o.w}${C.unit}`;
-      //if(o.h || o.h === 0) opt.h = o.h, obj.style.height = `${o.h}${C.unit}`;
       if(o.rx || o.rx === 0) opt.rx = o.rx;
       if(o.ry || o.ry === 0) opt.ry = o.ry;
       if(o.rz || o.rz === 0) opt.rz = o.rz;
@@ -126,91 +96,80 @@ C = {
   tr: o => `${o.o=="top left"?"":"translateX(-50%)translateY(-50%)"}translateX(${o.x}${C.unit})translateY(${o.y}${C.unit})translateZ(${o.z}${C.unit})rotateX(${o.rx}deg)rotateY(${o.ry}deg)rotateZ(${o.rz}deg)`
 }
 
+// Global vars
+// -----------
+
+// Game
+var mode = 2; // 0: menu, 1: editor, 2: race
+var world = 0 // 0: snow, 1: desert, 2: castle
+var puzzle = 0; // Current puzzle
+var race = 0; // Current race
+
 // Camera
-cx = 5;
-cy = 0;
-cz = 0;
-crx = 60;
-cry = 0;
-crz = 0;
+var cx = 5;
+var cy = 0;
+var cz = 0;
+var crx = 60;
+var cry = 0;
+var crz = 0;
 
 // Car
-carx = 25;
-cary = 25;
-carrz = 0;
-carspeed = 0;
+var carx = 25;
+var cary = 25;
+var carrz = 0;
+var carspeed = 0;
 
-// RENDER
+// Data
+var space = []; // 3D space: 15*15*15 blocks
+var roadlinks = []; // Links between road blocks
 
-// Map (20x20 grid, the center is 10:10.)
-C.plane({w:200,h:200,b:'#fff'});
-C.camera({x:25,y:25,z:50,rx:crx});
+// Helpers
+// -------
 
+// Degrees to radians
+var toRadians = (angle) => angle * (Math.PI / 180);
 
-
-// Car
-C.group({x:25,y:25,n:"car",w:0,h:0,rz:90})
-
-// body
-C.cube({g:"car",b:"#a33",b2:"#922",b3:"#c44",w:4,d:2,h:.75,z:.4});
-C.cube({g:"car",b:"#a33",b2:"#922",b3:"#c44",w:2,d:2,h:.55,z:1.15});
-
-// wheel
-C.plane({g:"car",b:"#555",w:.8,h:.8,rx:90,x:1,y:1.1,z:.58,css:"circle"});
-C.plane({g:"car",b:"#555",w:.8,h:.8,rx:90,x:1,y:-1.1,z:.58,css:"circle"});
-C.plane({g:"car",b:"#555",w:.8,h:.8,rx:90,x:-1,y:1.1,z:.58,css:"circle"});
-C.plane({g:"car",b:"#555",w:.8,h:.8,rx:90,x:-1,y:-1.1,z:.58,css:"circle"});
-
-// wheel depth
-C.plane({g:"car",b:"#555",w:.3,h:.78,rx:90,ry:90,x:1,y:.95,z:.58});
-C.plane({g:"car",b:"#555",w:.3,h:.78,rx:90,ry:90,x:1,y:-.95,z:.58});
-C.plane({g:"car",b:"#555",w:.3,h:.78,rx:90,ry:90,x:-1,y:.95,z:.58});
-C.plane({g:"car",b:"#555",w:.3,h:.78,rx:90,ry:90,x:-1,y:-.95,z:.58});
-
-//C.plane({n:"debug",b:"#00F",w:1,h:1,z:1});
-
-// Compute barriers
-var barriers = (i) => {
-  var [x,y,z]=i;
+// Compute and draw barriers on a [x,y,z] block.
+var barriers = i => {
+  var [x,y,z] = i;
   
   if(z == 0){
-    
   
     var block = space[x][y][z];
-    console.log(block, x, y, z);
+    
+    //console.log(block, x, y, z);
 
-    // reset barriers
+    // Reset barriers
     block.barriers = {u: 0, r: 0, d: 0, l: 0};
     
     // Block with no link: no barrier
-    if(block.u + block.r + block.d + block.l == 0){
-      
-    }
-    // Else, 
-    else {
+    // Block with at least 1 link
+    if(block.u + block.r + block.d + block.l > 0){
+    
       // if a side has no link and opposite side has no link: barrier on both
-      if(block.u == 0 && block.d == 0){
+      if(!block.u && !block.d){
         block.barriers.u = 1;
         block.barriers.d = 1;
       }
-      if(block.l == 0 && block.r == 0){
+      else if(!block.l && !block.r){
         block.barriers.l = 1;
         block.barriers.r = 1;
       }
-      // if 2 consecutive sides have link and the two other don't, put barriers on the two others
-      if(block.u == 1 && block.l == 1 && block.r == 0 && block.d == 0){
+      
+      // if 2 consecutive sides have a link and the two other don't, put barriers on the two others
+      else if(block.u && block.l && !block.r && !block.d){
         block.barriers.r = 1;
         block.barriers.d = 1;
       }
-      if(block.u == 1 && block.l == 0 && block.r == 1 && block.d == 0){
+      else if(block.u && !block.l && block.r && !block.d){
         block.barriers.l = 1;
         block.barriers.d = 1;
       }
-      if(block.u == 0 && block.l == 1 && block.r == 0 && block.d == 1){
+      else if(!block.u && block.l && !block.r && block.d){
         block.barriers.r = 1;
         block.barriers.u = 1;
       }
-      if(block.u == 0 && block.l == 0 && block.r == 1 && block.d == 1){
+      if(!block.u && !block.l && block.r && block.d){
         block.barriers.u = 1;
         block.barriers.l = 1;
       }
@@ -231,126 +190,184 @@ var barriers = (i) => {
   }
 }
 
-// The entire 3D space (15x15x15 blocks)
-space = []
-for(i=0;i<15;i++){
-  space[i] = [];
-  for(j=0;j<15;j++){
-    space[i][j] = [];
+// Compute and draw links between road blocks
+var links = () => {
+  for(i of roadlinks){
+
+    // link from front ^ to back v 
+    if(i[0][0] == i[1][0] && i[0][2] == i[1][2] && i[0][1] == i[1][1] - 1){
+      C.plane({w:9,h:1,x:i[0][0]*10+.5,y:i[0][1]*10+9.5,z:.2,b:"#d90",o:"top left"});
+      space[i[0][0]][i[0][1]][i[0][2]].d = 1;
+      space[i[1][0]][i[1][1]][i[1][2]].u = 1;
+    }
+    
+    // link from back v to front ^
+    if(i[0][0] == i[1][0] && i[0][2] == i[1][2] && i[0][1] == i[1][1] + 1){
+      C.plane({w:9,h:1,x:i[1][0]*10+.5,y:i[1][1]*10+9.5,z:.2,b:"#d90",o:"top left"});
+      space[i[0][0]][i[0][1]][i[0][2]].u = 1;
+      space[i[1][0]][i[1][1]][i[1][2]].d = 1;
+    }
+    
+    // link from left < to right >
+    if(i[0][0] == i[1][0] - 1 && i[0][2] == i[1][2] && i[0][1] == i[1][1]){
+      C.plane({w:1,h:9,x:i[0][0]*10+9.5,y:i[1][1]*10+.5,z:.2,b:"#d90",o:"top left"});
+      space[i[0][0]][i[0][1]][i[0][2]].r = 1;
+      space[i[1][0]][i[1][1]][i[1][2]].l = 1;
+    }
+    
+    // link from right > to left <
+    if(i[0][0] == i[1][0] + 1 && i[0][2] == i[1][2] && i[0][1] == i[1][1]){
+      C.plane({w:1,h:9,x:i[1][0]*10+9.5,y:i[1][1]*10+.5,z:.2,b:"#d90",o:"top left"});
+      space[i[0][0]][i[0][1]][i[0][2]].l = 1;
+      space[i[1][0]][i[1][1]][i[1][2]].r = 1;
+    }
+  }
+  for(i of roadlinks){
+    // Check if barriers are needed on the sides of each block
+    barriers(i[0]);
+    barriers(i[1]);
   }
 }
+
+// Initialization (called when switching modes)
+// --------------
+
+var init = () => {
+
+  // CSS3D base
+  b.innerHTML = "<div id=viewport><div id=camera><div id=scene>";
+  
+  // Race mode:
+  if(mode == 2){
+
+    // Reset the space
+    for(i=0;i<15;i++){
+      space[i] = [];
+      for(j=0;j<15;j++){
+        space[i][j] = [];
+      }
+    }
+  
+    // Ground
+    C.plane({w:200,h:200,b:'#fff',o:"top left"});
+    
+    // Camera
+    C.camera({x:25,y:25,z:50,rx:crx});
+    
+    // Car
+    C.group({x:25,y:25,n:"car",w:0,h:0,rz:90})
+
+      // car body
+      C.cube({g:"car",b:"#a33",b2:"#922",b3:"#c44",w:4,d:2,h:.75,z:.4});
+      C.cube({g:"car",b:"#a33",b2:"#922",b3:"#c44",w:2,d:2,h:.55,z:1.15});
+
+      // wheel
+      C.plane({g:"car",b:"#555",w:.8,h:.8,rx:90,x:1,y:1.1,z:.58,css:"circle"});
+      C.plane({g:"car",b:"#555",w:.8,h:.8,rx:90,x:1,y:-1.1,z:.58,css:"circle"});
+      C.plane({g:"car",b:"#555",w:.8,h:.8,rx:90,x:-1,y:1.1,z:.58,css:"circle"});
+      C.plane({g:"car",b:"#555",w:.8,h:.8,rx:90,x:-1,y:-1.1,z:.58,css:"circle"});
+
+      // wheel depth
+      C.plane({g:"car",b:"#555",w:.3,h:.78,rx:90,ry:90,x:1,y:.95,z:.58});
+      C.plane({g:"car",b:"#555",w:.3,h:.78,rx:90,ry:90,x:1,y:-.95,z:.58});
+      C.plane({g:"car",b:"#555",w:.3,h:.78,rx:90,ry:90,x:-1,y:.95,z:.58});
+      C.plane({g:"car",b:"#555",w:.3,h:.78,rx:90,ry:90,x:-1,y:-.95,z:.58});
       
-    
-
-roads = [];
-for(i=0;i<9;i++){
-  for(j=0;j<3;j++){
+    // Road blocks
+    for(i=0;i<9;i++){
+      for(j=0;j<3;j++){
   
-    // Block #0: basic road
-    roads.push([i,j,0,0,"#d92"])  // x, y, z, block, color
-    space[i][j][0] = {type: 0, u: 0, r: 0, d: 0, l: 0, barriers: {u: 0, r: 0, d: 0, l: 0}}; // u/r/d/l: 1 = link / 0 = no link (draw a barrier if z == 0 and u+l+d+r >= 0 and the opposite side is > 0)
+        // Block #0: basic road
+        space[i][j][0] = {type: 0, u: 0, r: 0, d: 0, l: 0, barriers: {u: 0, r: 0, d: 0, l: 0}}; // 1 = link / 0 = no link
+        C.plane({x:10*i,y:10*j,z:.1,w:10,h:10,b:"#ddd",o:"top left"});
+        C.plane({n:`road-${i}-${j}-${0}`,x:10*i+.5,y:10*j+.5,z:.2,w:9,h:9,b:"#d90",o:"top left"});
+      }
+    }
     
-    C.plane({x:10*i,y:10*j,z:.1,w:10,h:10,b:"#ddd",o:"top left"});
-    C.plane({n:`road-${i}-${j}-${0}`,x:10*i+.5,y:10*j+.5,z:.2,w:9,h:9,b:"#d90",o:"top left"});
+    // Road links
+    roadlinks = [
+      [[0,0,0],[0,1,0]],
+      [[1,1,0],[1,0,0]],
+      
+      [[2,0,0],[3,0,0]],
+      [[2,1,0],[3,1,0]],
+      [[3,1,0],[3,2,0]],
+      [[3,2,0],[4,2,0]],
+      
+      [[4,0,0],[5,0,0]],
+      [[4,1,0],[5,1,0]],
+      [[4,0,0],[4,1,0]],
+      [[5,0,0],[5,1,0]],
+      
+      [[7,0,0],[7,1,0]],
+      [[6,1,0],[7,1,0]],
+      [[7,1,0],[8,1,0]],
+      [[7,1,0],[7,2,0]],
+    ];
+    
+    links();
     
   }
 }
 
-roadlinks = [
-  [[0,0,0],[0,1,0]],
-  [[1,1,0],[1,0,0]],
-  
-  [[2,0,0],[3,0,0]],
-  [[2,1,0],[3,1,0]],
-  [[3,1,0],[3,2,0]],
-  [[3,2,0],[4,2,0]],
-  
-  [[4,0,0],[5,0,0]],
-  [[4,1,0],[5,1,0]],
-  [[4,0,0],[4,1,0]],
-  [[5,0,0],[5,1,0]],
-  
-  [[7,0,0],[7,1,0]],
-  [[6,1,0],[7,1,0]],
-  [[7,1,0],[8,1,0]],
-  [[7,1,0],[7,2,0]],
-  
-]
+init();
 
-for(i of roadlinks){
+// Controls (source: https://xem.github.io/articles/jsgamesinputs.html)
+// -------- 
 
-  // link from front ^ to back v 
-  if(i[0][0] == i[1][0] && i[0][2] == i[1][2] && i[0][1] == i[1][1] - 1){
-    C.plane({w:9,h:1,x:i[0][0]*10+.5,y:i[0][1]*10+9.5,z:.2,b:"#d90",o:"top left"});
-    space[i[0][0]][i[0][1]][i[0][2]].d = 1;
-    space[i[1][0]][i[1][1]][i[1][2]].u = 1;
-  }
-  
-  // link from back v to front ^
-  if(i[0][0] == i[1][0] && i[0][2] == i[1][2] && i[0][1] == i[1][1] + 1){
-    C.plane({w:9,h:1,x:i[1][0]*10+.5,y:i[1][1]*10+9.5,z:.2,b:"#d90",o:"top left"});
-    space[i[0][0]][i[0][1]][i[0][2]].u = 1;
-    space[i[1][0]][i[1][1]][i[1][2]].d = 1;
-  }
-  
-  // link from left < to right >
-  if(i[0][0] == i[1][0] - 1 && i[0][2] == i[1][2] && i[0][1] == i[1][1]){
-    C.plane({w:1,h:9,x:i[0][0]*10+9.5,y:i[1][1]*10+.5,z:.2,b:"#d90",o:"top left"});
-    space[i[0][0]][i[0][1]][i[0][2]].r = 1;
-    space[i[1][0]][i[1][1]][i[1][2]].l = 1;
-  }
-  
-  // link from right > to left <
-  if(i[0][0] == i[1][0] + 1 && i[0][2] == i[1][2] && i[0][1] == i[1][1]){
-    C.plane({w:1,h:9,x:i[1][0]*10+9.5,y:i[1][1]*10+.5,z:.2,b:"#d90",o:"top left"});
-    space[i[0][0]][i[0][1]][i[0][2]].l = 1;
-    space[i[1][0]][i[1][1]][i[1][2]].r = 1;
-  }
-}
-for(i of roadlinks){
-  // Check if barriers are needed on the sides of each block
-  barriers(i[0]);
-  barriers(i[1]);
-}
-
-//rz=0;setInterval("rz+=10;C.camera({rz})",500)
-
-// Input
-u=l=d=r=0;onkeydown=onkeyup=e=>top['lld*rlurdu'[e.which%32%17]]=e.type[5];
+var u = 0, l = 0, d = 0, r = 0;
+onkeydown = onkeyup = e => top['lld*rlurdu'[e.which % 32 % 17]] = e.type[5];
 
 // Game loop
-
-function toRadians (angle) { return angle * (Math.PI / 180); }
+// ---------
 
 setInterval(()=> {
   
-  if(u){
-    carspeed += .01;
-    if(carspeed > 3) carspeed = 3;
-  }
-  else if(d){
-    carspeed -= .01;
-    if(carspeed < -2) carspeed = -2;
-  }
-  else{
-    carspeed *= .9; 
+  // Race mode:
+  if(mode == 2){
+  
+    // Up (go forward)
+    if(u){
+      carspeed += .01;
+      if(carspeed > 3) carspeed = 3;
+    }
+    
+    // Down (go back)
+    else if(d){
+      carspeed -= .01;
+      if(carspeed < -2) carspeed = -2;
+    }
+    
+    // Idle: decelerate if the car speed is not zero
+    else{
+      carspeed *= .9;
+    }
+    
+    // Up + left or down + right: Z angle decreases
+    if((l && u) || (r && d)){
+      carrz -= 5;
+    }
+    
+    // Up + right or down + left: angle increases
+    else if((r && u) || (l && d)){
+      carrz += 5;
+    }
+
+    // Update car position based on Z angle and speed
+    carx += carspeed * Math.sin(toRadians(carrz));
+    cary -= carspeed * Math.cos(toRadians(carrz));
+    
+    //console.log(carrz, cary);
+    
+    // Move the CSS3D car and the camera
+    C.move({n:"car",x:carx,y:cary,rz:carrz+90});
+    C.camera({x:carx,y:cary,rz:-carrz});
   }
   
-  if(l && (u||d)){
-    carrz -= 3;
-  }
-  else if(r && (u||d)){
-    carrz += 3;
-  }
-  
-  carx += carspeed * Math.sin(toRadians(carrz));
-  cary -= carspeed * Math.cos(toRadians(carrz));
-  
-  //console.log(carrz, cary);
-  
-  C.move({n:"car",x:carx,y:cary,rz:carrz+90});
-  C.camera({x:carx,y:cary,rz:-carrz});
 },33)
+
+//C.plane({n:"debug",b:"#00F",w:1,h:1,z:1});
+
 
 </script>
 <style>
@@ -359,5 +376,5 @@ setInterval(()=> {
 #viewport *{transform-style:preserve-3d;box-sizing:border-box}
 #camera{width:0;height:0;position:absolute;top:50%;left:50%}
 #scene{transition:.25s linear}
-.group{transition:.1s linear;}
+.group{transition:.1s linear}
 .circle{border-radius:50%}

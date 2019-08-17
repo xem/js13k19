@@ -108,8 +108,8 @@ var race = 0; // Current race
 // Camera
 var cx = 25;
 var cy = 25;
-var cz = 20;
-var crx = 70;
+var cz = 200;
+var crx = 40;
 var cry = 0;
 var crz = 0;
 
@@ -426,7 +426,7 @@ setInterval(()=> {
       var bcell = [~~(b[0]/20),~~(b[1]/20),0];
       
       delog()
-      log("oob", oob, "cell", JSON.stringify(fcell));
+      log("oob", oob, "front cell", JSON.stringify(fcell));
       
       // Compute collisions with barriers and out of track:
       var frcell, bacell;
@@ -601,7 +601,7 @@ setInterval(()=> {
   
 },33);
 
-/*setTimeout(()=>{
+setTimeout(()=>{
   rx=75,
   z=20;
   scene.style.transition = "1s linear";
@@ -614,7 +614,7 @@ setTimeout(()=>{
 
 setTimeout(()=>{
   scene.style.transition = ".15s linear";
-},5000);*/
+},5000);
 
 var delog = () => deb.innerHTML = "";
 var log = (...a) => deb.innerHTML += a + "\n";
@@ -635,5 +635,5 @@ C.plane({x:10*20+19.5,y:16*20+15.1,z:7.5,w:1,h:10,rx:-90,b:"#000",o:"center"});
 x#scene{transition:1s linear}
 .group{transition:.1s linear}
 .circle{border-radius:50%}
-#deb{position:fixed;top:0;left:0;z-index:2;xtop:-999px;}
+#deb{position:fixed;top:0;left:0;z-index:2;top:-999px;}
 .plane{text-align:center;font-size:4in;}
