@@ -73,7 +73,7 @@ C = {
   },
 
   move: o => {
-    //console.log(o.n, C.$(o.n));
+    console.log(o.n, C.$(o.n));
     if(o.n){
       var obj = C.$(o.n);
       var opt = C.options[o.n];

@@ -6,17 +6,17 @@ onkeydown=onkeyup=z=>top['lurdl*d*l*ur*u*s****'[(z.which+3)%20]]=top['LURDL*D*L*
 // Editor
 gridup.onclick = () => {
   if(gridz < 10) gridz++;
-  C.move({n:"grid", z: gridz * size})
-  C.move({n:"cursor", z: gridz * size})
-  C.camera({z:500+gridz*size})
+  C.move({n:"grid", z: gridz * 20})
+  C.move({n:"cursor", z: gridz * 20})
+  C.camera({z:-300+gridz*20})
   
 }
 
 griddown.onclick = () => {
   if(gridz) gridz--;
-  C.move({n:"grid", z: gridz * size})
-  C.move({n:"cursor", z: gridz * size})
-  C.camera({z:500+gridz*size})
+  C.move({n:"grid", z: gridz * 20})
+  C.move({n:"cursor", z: gridz * 20})
+  C.camera({z:-300+gridz*20})
 }
 
 gridrl.onclick = () => {

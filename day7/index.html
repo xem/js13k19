@@ -1,0 +1,55 @@
+﻿<body id=b>
+
+<script src=css3d.js></script>
+<script src=global.js></script>
+<script src=helpers.js></script>
+<script src=func.js></script>
+<script src=init.js></script>
+<script src=input.js></script>
+<script src=collision.js></script>
+<script src=loop.js></script>
+
+<script>
+// ===============
+//  BACK ON TRACK
+// ===============
+
+// Summary
+// -------
+
+// The game takes place on a 20x20x20 3D grid. (=> see space)
+// Each cell of this grid:
+// - measures 20x20x20in,
+// - can contain 0 or 1 road cell,
+// - has an equation that the game can check to ensure the car is on the road,
+// - can be linked to 0 to 4 other road ,
+// - can have 0 to 4 barriers.
+
+
+
+// Temp
+// ----
+
+// Start flag
+C.plane({x:10*20+10,y:16*20+15,z:10,w:19,h:5,rx:-90,b:"#abf",o:"center",html:"start"});
+C.plane({x:10*20,y:16*20+15.1,z:6.25,w:1,h:12.5,rx:-90,b:"#000",o:"center"});
+C.plane({x:10*20+19.5,y:16*20+15.1,z:6.25,w:1,h:12.5,rx:-90,b:"#000",o:"center"});
+//C.plane({n:"debug",b:"#00F",w:1,h:1,z:1});
+
+</script>
+
+
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:calibri}
+#viewport{width:100vw;height:100vh;background:#fff;overflow:hidden;position:relative;perspective:8in}
+#viewport *{transform-style:preserve-3d;box-sizing:border-box}
+#camera{width:0;height:0;position:absolute;top:90%;left:50%}
+x#scene{transition:1s linear}
+x.group{transition:.1s linear}
+.circle{border-radius:50%}
+#deb{position:fixed;top:0;left:0;z-index:2;xtop:-999px;font-size:10px}
+.plane{text-align:center;font-size:4in;}
+.block0.z0{border:.5in solid #ddd}
+.barrierleftright{border-left:.5in solid #000;border-right:.5in solid #000}
+.barriertopbottom{border-top:.5in solid #000;border-bottom:.5in solid #000}

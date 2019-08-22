@@ -2,7 +2,7 @@
 // ---------------
 
 C = {
-  unit: "px",
+  unit: "in",
   camX: 0,
   camY: 0,
   camZ: 0,
@@ -38,7 +38,7 @@ C = {
   group: o => {
     if(!o.d && !(o.d === 0)) o.d = o.h;
     C.init(o);
-    C.$(o.g).innerHTML += `<div id="${o.n}"class="group ${o.css}"style="position:absolute;width:${o.w}${C.unit};height:${o.d}${C.unit};background:${o.b};transform:${C.tr(o)}">`;
+    C.$(o.g).innerHTML += `<div id="${o.n}"class="group ${o.css}"style="position:absolute;width:${o.w}${C.unit};height:${o.d}${C.unit};transform:${C.tr(o)}">`;
   },
   
   plane: o => {
@@ -73,7 +73,6 @@ C = {
   },
 
   move: o => {
-    //console.log(o.n, C.$(o.n));
     if(o.n){
       var obj = C.$(o.n);
       var opt = C.options[o.n];

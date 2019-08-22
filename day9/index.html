@@ -32,14 +32,14 @@
 // ----
 
 // Start flag
-//C.plane({x:7*size+size/2,y:16*size+size/2,z:size/2,w:size,h:5,rx:-90,b:"#5f5",o:"center",html:"start"});
-//C.plane({x:7*size,y:16*size+size/2,z:6.25,w:1,h:12.5,rx:-90,b:"#000",o:"center"});
-//C.plane({x:7*size+size,y:16*size+size/2,z:6.25,w:1,h:12.5,rx:-90,b:"#000",o:"center"});
+C.plane({x:7*20+10,y:16*20+15,z:10,w:19,h:5,rx:-90,b:"#5f5",o:"center",html:"start"});
+C.plane({x:7*20,y:16*20+15.1,z:6.25,w:1,h:12.5,rx:-90,b:"#000",o:"center"});
+C.plane({x:7*20+19.5,y:16*20+15.1,z:6.25,w:1,h:12.5,rx:-90,b:"#000",o:"center"});
 
 // End flag
-//C.plane({x:10*size+size/2,y:10*size+size/2,z:size/2,w:size,h:5,rx:-90,b:"#f55",o:"center",html:"end"});
-//C.plane({x:10*size,y:10*size+size/2,z:6.25,w:1,h:12.5,rx:-90,b:"#000",o:"center"});
-//C.plane({x:10*size+size,y:10*size+size/2,z:6.25,w:1,h:12.5,rx:-90,b:"#000",o:"center"});
+C.plane({x:10*20+10,y:10*20+15,z:10,w:19,h:5,rx:-90,b:"#f55",o:"center",html:"end"});
+C.plane({x:10*20,y:10*20+15.1,z:6.25,w:1,h:12.5,rx:-90,b:"#000",o:"center"});
+C.plane({x:10*20+19.5,y:10*20+15.1,z:6.25,w:1,h:12.5,rx:-90,b:"#000",o:"center"});
 
 //C.plane({n:"debug",b:"#00F",w:1,h:1,z:1});
 
@@ -56,17 +56,16 @@
 x.group{transition:.1s linear}
 .circle{border-radius:50%}
 #deb{position:fixed;top:0;left:0;z-index:2;top:-999px;font-size:10px}
-.plane{text-align:center;font-size:40px;}
+.plane{text-align:center;font-size:4px;}
 .block0.z0{border:1px solid #ddd}
 .barrierleftright{border-left:.5in solid #000;border-right:.5in solid #000}
 .barriertopbottom{border-top:.5in solid #000;border-bottom:.5in solid #000}
 
 /* Editor CSS */
-#grid { background: linear-gradient(#888 2px, transparent 2px), linear-gradient(90deg, #888 2px, transparent 2px),#def8; background-size: 100px 100px; }
+#grid { background: linear-gradient(#888 1px, transparent 1px), linear-gradient(90deg, #888 1px, transparent 1px),#def8; background-size: 20px 20px; }
 #menu { position: fixed; left: 2px; top: 0; text-align:center; width: 100px; background: #fff; padding: 5px; border: 2px solid}
 #menu div { height: 30px; border: 2px solid #555; background:#eee; }
 #parts { position: fixed; bottom: 0; text-align:center; width: 100%; }
 .part { width: 60px; height: 80px; border: 2px solid #555; background:#eee; display: inline-block; vertical-align: top; }
-.part.selected { background: #fff}
 .visual { height: 30px; margin: 25px 30px 0; }
 .editor #scene{transition:.2s linear}

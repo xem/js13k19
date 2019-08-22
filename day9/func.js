@@ -60,15 +60,27 @@ var barriers = i => {
     
     if(block.barriers.u){
      C.$(`road-${x}-${y}-${z}`).style.borderTop = ".5in solid #000";
+     //C.$(`barrier1-${x}-${y}-${z}`).style.borderTop = ".5in solid #000";
+     //C.$(`barrier2-${x}-${y}-${z}`).style.borderTop = "1in solid #000";
+     //C.$(`barrier3-${x}-${y}-${z}`).style.borderTop = "1in solid #000";
     }
     if(block.barriers.d){
      C.$(`road-${x}-${y}-${z}`).style.borderBottom = ".5in solid #000";
+     //C.$(`barrier1-${x}-${y}-${z}`).style.borderBottom = ".5in solid #000";
+     //C.$(`barrier2-${x}-${y}-${z}`).style.borderBottom = "1in solid #000";
+     //C.$(`barrier3-${x}-${y}-${z}`).style.borderBottom = "1in solid #000";
     }
     if(block.barriers.l){
      C.$(`road-${x}-${y}-${z}`).style.borderLeft = ".5in solid #000";
+     //C.$(`barrier1-${x}-${y}-${z}`).style.borderLeft = ".5in solid #000";
+     //C.$(`barrier2-${x}-${y}-${z}`).style.borderLeft = "1in solid #000";
+     //C.$(`barrier3-${x}-${y}-${z}`).style.borderLeft = "1in solid #000";
     }
     if(block.barriers.r){
      C.$(`road-${x}-${y}-${z}`).style.borderRight = ".5in solid #000";
+     //C.$(`barrier1-${x}-${y}-${z}`).style.borderRight = ".5in solid #000";
+     //C.$(`barrier2-${x}-${y}-${z}`).style.borderRight = "1in solid #000";
+     //C.$(`barrier3-${x}-${y}-${z}`).style.borderRight = "1in solid #000";
     }
   }
 }
@@ -79,28 +91,28 @@ var links = () => {
 
     // link from front ^ to back v 
     if(i[0][0] == i[1][0] && i[0][2] == i[1][2] && i[0][1] == i[1][1] - 1){
-      C.plane({w:size,h:size*.1,x:i[0][0]*size,y:i[0][1]*size+size*.9,z:.2,b:"#d90",o:"top left",css:"barrierleftright"});
+      C.plane({w:20,h:1,x:i[0][0]*20,y:i[0][1]*20+19.5,z:.2,b:"#d90",o:"top left",css:"barrierleftright"});
       space[i[0][0]][i[0][1]][i[0][2]].d = 1;
       space[i[1][0]][i[1][1]][i[1][2]].u = 1;
     }
     
     // link from back v to front ^
     if(i[0][0] == i[1][0] && i[0][2] == i[1][2] && i[0][1] == i[1][1] + 1){
-      C.plane({w:size,h:size*.1,x:i[1][0]*size,y:i[1][1]*size+size*.9,z:.2,b:"#d90",o:"top left",css:"barrierleftright"});
+      C.plane({w:20,h:1,x:i[1][0]*20,y:i[1][1]*20+19.5,z:.2,b:"#d90",o:"top left",css:"barrierleftright"});
       space[i[0][0]][i[0][1]][i[0][2]].u = 1;
       space[i[1][0]][i[1][1]][i[1][2]].d = 1;
     }
     
     // link from left < to right >
     if(i[0][0] == i[1][0] - 1 && i[0][2] == i[1][2] && i[0][1] == i[1][1]){
-      C.plane({w:1,h:size,x:i[0][0]*size+size*.9,y:i[1][1]*size,z:.2,b:"#d90",o:"top left",css:"barriertopbottom"});
+      C.plane({w:1,h:20,x:i[0][0]*20+19.5,y:i[1][1]*20,z:.2,b:"#d90",o:"top left",css:"barriertopbottom"});
       space[i[0][0]][i[0][1]][i[0][2]].r = 1;
       space[i[1][0]][i[1][1]][i[1][2]].l = 1;
     }
     
     // link from right > to left <
     if(i[0][0] == i[1][0] + 1 && i[0][2] == i[1][2] && i[0][1] == i[1][1]){
-      C.plane({w:1,h:size,x:i[1][0]*size+size*.9,y:i[1][1]*size,z:.2,b:"#d90",o:"top left",css:"barriertopbottom"});
+      C.plane({w:1,h:20,x:i[1][0]*20+19.5,y:i[1][1]*20,z:.2,b:"#d90",o:"top left",css:"barriertopbottom"});
       space[i[0][0]][i[0][1]][i[0][2]].l = 1;
       space[i[1][0]][i[1][1]][i[1][2]].r = 1;
     }
@@ -118,21 +130,33 @@ var turns = () => {
     
     if(block.u && block.r && !block.d && !block.l){
       C.$(`road-${x}-${y}-${z}`).style.borderRadius = "0 0 0 100%";
+      //C.$(`barrier1-${x}-${y}-${z}`).style.borderRadius = "0 0 0 100%";
+      //C.$(`barrier2-${x}-${y}-${z}`).style.borderRadius = "0 0 0 100%";
+      //C.$(`barrier3-${x}-${y}-${z}`).style.borderRadius = "0 0 0 100%";
       block.flat.d = 0;
       block.flat.l = 0;
     }
     else if(!block.u && block.r && block.d && !block.l){
       C.$(`road-${x}-${y}-${z}`).style.borderRadius = "100% 0 0 0";
+      //C.$(`barrier1-${x}-${y}-${z}`).style.borderRadius = "100% 0 0 0";
+      //C.$(`barrier2-${x}-${y}-${z}`).style.borderRadius = "100% 0 0 0";
+      //C.$(`barrier3-${x}-${y}-${z}`).style.borderRadius = "100% 0 0 0";
       block.flat.u = 0;
       block.flat.l = 0;
     }
     else if(!block.u && !block.r && block.d && block.l){
       C.$(`road-${x}-${y}-${z}`).style.borderRadius = "0 100% 0 0";
+      //C.$(`barrier1-${x}-${y}-${z}`).style.borderRadius = "0 100% 0 0";
+      //C.$(`barrier2-${x}-${y}-${z}`).style.borderRadius = "0 100% 0 0";
+      //C.$(`barrier3-${x}-${y}-${z}`).style.borderRadius = "0 100% 0 0";
       block.flat.u = 0;
       block.flat.r = 0;
     }
     else if(block.u && !block.r && !block.d && block.l){
       C.$(`road-${x}-${y}-${z}`).style.borderRadius = "0 0 100% 0";
+      //C.$(`barrier1-${x}-${y}-${z}`).style.borderRadius = "0 0 100% 0";
+      //C.$(`barrier2-${x}-${y}-${z}`).style.borderRadius = "0 0 100% 0";
+      //C.$(`barrier3-${x}-${y}-${z}`).style.borderRadius = "0 0 100% 0";
       block.flat.d = 0;
       block.flat.r = 0;
     }

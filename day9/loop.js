@@ -12,7 +12,7 @@ setInterval(()=> {
   if(mode == 2){
   
     // Do everything below 5 times per frame to avoid clipping through obstacles.
-    for(times = 0; times < 5; times++){
+    for(var times = 0; times < 5; times++){
     
       delog();
       log("oob", oob);
@@ -68,12 +68,12 @@ setInterval(()=> {
       // ...................................
       
       // Coordinates (range 0 - 400)
-      f = [carx + 2 * Math.sin(toRadians(carrz)), cary - 2 * Math.cos(toRadians(carrz)),0];
-      b = [carx + -2 * Math.sin(toRadians(carrz)), cary - -2 * Math.cos(toRadians(carrz)),0];
+      var f = [carx + 2 * Math.sin(toRadians(carrz)), cary - 2 * Math.cos(toRadians(carrz)),0];
+      var b = [carx + -2 * Math.sin(toRadians(carrz)), cary - -2 * Math.cos(toRadians(carrz)),0];
       
       // Cell (range 0 - 20)
-      fcell = [~~(f[0]/size),~~(f[1]/size),0];
-      bcell = [~~(b[0]/size),~~(b[1]/size),0];
+      fcell = [~~(f[0]/20),~~(f[1]/20),0];
+      bcell = [~~(b[0]/20),~~(b[1]/20),0];
       
       // Cell info
       
