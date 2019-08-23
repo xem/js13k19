@@ -68,8 +68,8 @@ setInterval(()=> {
       // ...................................
       
       // Coordinates (range 0 - 400)
-      f = [carx + 2 * Math.sin(toRadians(carrz)), cary - 2 * Math.cos(toRadians(carrz)),0];
-      b = [carx + -2 * Math.sin(toRadians(carrz)), cary - -2 * Math.cos(toRadians(carrz)),0];
+      var f = [carx + 2 * Math.sin(toRadians(carrz)), cary - 2 * Math.cos(toRadians(carrz)),0];
+      var b = [carx + -2 * Math.sin(toRadians(carrz)), cary - -2 * Math.cos(toRadians(carrz)),0];
       
       // Cell (range 0 - 20)
       fcell = [~~(f[0]/size),~~(f[1]/size),0];
@@ -117,6 +117,6 @@ setInterval(()=> {
   }
   
   // Reset keypress
-  S = U = L = D = R = 0;
+  S = _ = U = L = D = R = 0;
   
 },33);

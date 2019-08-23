@@ -9,8 +9,9 @@ var race = 0; // Current race
 var size = 100; // block size in px
 
 // Keyboard
-var s = u = 0, l = 0, d = 0, r = 0; // hold (space / up / left / down / right)
-var S = U = 0, L = 0, D = 0, R = 0; // press
+var s = 0, u = 0, l = 0, d = 0, r = 0; // hold (space / up / left / down / right)
+var S = 0, U = 0, L = 0, D = 0, R = 0; // press
+var _ = 0; // press suppr key
 
 // Camera
 var cx = 25;
@@ -27,7 +28,7 @@ var carrz = 0;
 var carspeed = 0;
 var front = [0,0,0]
 var back = [0,0,0]; // front/back side coordinates (range: 0 - 400)
-var frontcell = [0,0],
+var frontcell = [0,0];
 var backcell = [0,0]; // front/back side cell (range: 0 - 20)
 var oob = 0;
 var collision = 0;
@@ -61,4 +62,3 @@ var ev; // eval
 var i, j, k, x, y, z;
 var block;
 var times;
-var f, b;

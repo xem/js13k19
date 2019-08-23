@@ -1,7 +1,7 @@
 // Inputs (source: https://xem.github.io/articles/jsgamesinputs.html)
 // ------ 
 
-onkeydown=onkeyup=z=>top['lurdl*d*l*ur*u*s****'[(z.which+3)%20]]=top['LURDL*D*L*UR*U*S****'[(z.which+3)%20]]=z.type[5]
+onkeydown=onkeyup=z=>top['lurdl*d*l_ur*u*s****'[(z.which+3)%20]]=top['LURDL*D*L_UR*U*S****'[(z.which+3)%20]]=z.type[5]
 
 // Editor
 gridup.onclick = () => {
@@ -20,16 +20,18 @@ griddown.onclick = () => {
 }
 
 gridrl.onclick = () => {
+  if(gridrz == 0) gridrz = 360;
   gridrz -= 90;
   C.camera({rz:gridrz})
 }
 
 gridrr.onclick = () => {
+  if(gridrz == 360) gridrz = 0;
   gridrz += 90;
   C.camera({rz:gridrz})
 }
 
-blocku.onclick = () => {
+/*blocku.onclick = () => {
   cursory -= 1;
   //C.camera({y:cursory * 20 + 10});
   //C.move({n:"cursor",y:cursory*20});
@@ -48,4 +50,4 @@ blockr.onclick = () => {
   cursorx += 1;
   //C.camera({x:cursorx * 20 + 10});
   //C.move({n:"cursor",x:cursorx*20});
-}
+}*/
