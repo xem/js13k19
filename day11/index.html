@@ -1,0 +1,73 @@
+﻿<body id=b>
+
+<script src=css3d.js></script>
+<script src=global.js></script>
+<script src=helpers.js></script>
+<script src=func.js></script>
+<script src=collision.js></script>
+<script src=editor.js></script>
+<script src=init.js></script>
+<script src=input.js></script>
+<script src=loop.js></script>
+
+<script>
+// ===============
+//  BACK ON TRACK
+// ===============
+
+// Summary
+// -------
+
+// The game takes place on a 20x20x20 3D grid. (=> see space)
+// Each cell of this grid:
+// - measures 20x20x20in,
+// - can contain 0 or 1 road cell,
+// - has an equation that the game can check to ensure the car is on the road,
+// - can be linked to 0 to 4 other road ,
+// - can have 0 to 4 barriers.
+
+
+
+// Temp
+// ----
+
+// Start flag
+//C.plane({x:7*size+size/2,y:16*size+size/2,z:size/2,w:size,h:5,rx:-90,b:"#5f5",o:"center",html:"start"});
+//C.plane({x:7*size,y:16*size+size/2,z:6.25,w:1,h:12.5,rx:-90,b:"#000",o:"center"});
+//C.plane({x:7*size+size,y:16*size+size/2,z:6.25,w:1,h:12.5,rx:-90,b:"#000",o:"center"});
+
+// End flag
+//C.plane({x:10*size+size/2,y:10*size+size/2,z:size/2,w:size,h:5,rx:-90,b:"#f55",o:"center",html:"end"});
+//C.plane({x:10*size,y:10*size+size/2,z:6.25,w:1,h:12.5,rx:-90,b:"#000",o:"center"});
+//C.plane({x:10*size+size,y:10*size+size/2,z:6.25,w:1,h:12.5,rx:-90,b:"#000",o:"center"});
+
+//C.plane({n:"debug",b:"#00F",w:1,h:1,z:1});
+
+</script>
+
+
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:calibri;cursor:pointer;user-select:none;-moz-user-select:none;}
+#viewport{width:100vw;height:100vh;background:#fff;overflow:hidden;position:relative;perspective:500px}
+#viewport *{transform-style:preserve-3d;box-sizing:border-box}
+#camera{width:0;height:0;position:absolute;top:50%;/*90%*/;left:50%}
+
+x.group{transition:.1s linear}
+.circle{border-radius:50%}
+#deb{position:fixed;top:0;left:0;z-index:2;top:-999px;font-size:10px}
+.plane{text-align:center;font-size:40px;}
+.block0.z0{border:1px solid #ddd}
+.barrierleftright{border-left:5px solid #000;border-right:5px solid #000}
+.barriertopbottom{border-top:5px solid #000;border-bottom:5px solid #000}
+
+/* Editor CSS */
+#grid { background: linear-gradient(#888 2px, transparent 2px), linear-gradient(90deg, #888 2px, transparent 2px),#def8; background-size: 100px 100px; }
+#menu { position: fixed; left: 0; top: 0; text-align:center; width: 145px; background: #fff; padding: 5px; border: 2px solid}
+#menu div { width: 60px; display: inline-block; height: 30px; border: 2px solid #555; background:#eee; font-size: 20px; margin: 2px 0;}
+#parts { position: fixed; bottom: 0; text-align:center; width: 100%; }
+.part { width: 60px; height: 80px; border: 2px solid #555; background:#eee; display: inline-block; vertical-align: top; }
+.part.selected { background: #fff }
+.visual { height: 30px; margin: 25px 30px 0; }
+.editor #scene{ transition:.2s linear }
+p{text-align:left;background:#eee; margin: 0 2px; padding: 5px}
