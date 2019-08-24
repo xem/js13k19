@@ -11,7 +11,7 @@ var size = 100; // block size in px
 // Keyboard
 var s = 0, u = 0, l = 0, d = 0, r = 0; // hold (space / up / left / down / right)
 var S = 0, U = 0, L = 0, D = 0, R = 0; // press
-var _ = 0; // press suppr key
+var _ = 0, $ = 0; // press suppr, enter key
 
 // Camera
 var cx = 25;

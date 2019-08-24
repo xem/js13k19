@@ -1,7 +1,7 @@
 // Inputs (source: https://xem.github.io/articles/jsgamesinputs.html)
 // ------ 
 
-onkeydown=onkeyup=z=>top['lurdl*d*l_ur*u*s****'[(z.which+3)%20]]=top['LURDL*D*L_UR*U*S****'[(z.which+3)%20]]=z.type[5]
+onkeydown=onkeyup=z=>top['lurdl*d*l_ur*u*s$***'[(z.which+3)%20]]=top['LURDL*D*L_UR*U*S$***'[(z.which+3)%20]]=z.type[5]
 
 // Editor
 gridup.onclick = () => {

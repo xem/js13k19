@@ -16,6 +16,10 @@ editor = () => {
   else if(U) cursory --;
   else if(D) cursory ++;
   
+  if($){
+    console.log("enter")
+  }
+  
   // space (place an item)
   if(s) {
     if(inventory[selected][2] > 0 && !space[cursorx][cursory][gridz]){

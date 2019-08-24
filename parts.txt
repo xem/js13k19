@@ -1,0 +1,15 @@
+part
+- accelerateur
+- accélérateur qui descend
+- accélérateur qui monte?
+- checkpoint
+- pente bombée dessus (2 blocs)
+- pente bombée dessous (2 blocs)
+- virage plat vers penché
+- ligne droite penchée
+
+env
+- verglas
+- roche
+- arbre
+- trou

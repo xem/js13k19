@@ -43,6 +43,25 @@
 
 //C.plane({n:"debug",b:"#00F",w:1,h:1,z:1});
 
+// Accelerator
+//C.plane({x:10*size+size/2,y:10*size+size/2,w:size*.8,h:size,o:"center",css:"acc"});
+
+// Accelerator slope down
+//C.plane({x:10*size+size/2,y:10*size+size/2,z:size/4,w:size*.8,h:size*1.2,o:"center",css:"acc",rx:23});
+
+// Checkpoint
+//C.group({n:`tmp`,x:size*10+size/2,y:size*10+size/2,z:0*size+.2,o:"center",css:"block1 z0",rz:i[4]});
+//C.plane({g:`tmp`,w:size*.8,h:size*.8,b:"#d90"});
+//C.plane({g:`tmp`,w:size,h:size,z:size/2,rx:-88,b:"linear-gradient(90deg, #000 5px, transparent 5px, transparent 95px, #000 95px),linear-gradient(#5ae 50px,transparent 50px)",o:"center",html:""});
+
+
+// Jumper
+//C.group({n:`tmp`,x:size*10+size/2,y:size*10+size/2,z:0*size+.2,o:"center",css:"block1 z0",rz:i[4]});
+//C.plane({g:`tmp`,w:size,h:size*.7,y:.2*size,z:size/8,rx:-20,b:"#d00",o:"center",html:""});
+
+// Slope
+//C.plane({x:10*size+size/2,y:10*size+size/2,z:size/4,w:size*.8,h:size*1.2,o:"center",b:"#d90",rx:23});
+
 </script>
 
 
@@ -71,3 +90,9 @@ x.group{transition:.1s linear}
 .visual { height: 30px; margin: 25px 30px 0; }
 .editor #scene{ transition:.2s linear }
 p{text-align:left;background:#eee; margin: 0 2px; padding: 5px}
+
+/* Parts CSS */
+.acc { background:
+linear-gradient(115deg, transparent 75%, #fd3 75%),
+linear-gradient(-115deg, #d90 75%, #fd3 75%) 0 0,#d90;
+background-size: 22px 24px; border-left: 5px solid; border-right: 5px solid;  }
