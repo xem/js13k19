@@ -23,7 +23,7 @@ var init = (puzzle) => {
     
     // menu
     b.innerHTML += `<div id=menu>Camera<br>
-    <div id=gridup>⇑</div> <div id=griddown>⇓</div> <div id=gridrl>↶</div> <div id=gridrr>↷</div><br>⎯<br>Block<br><!--div id=blocku>^</div><div id=blockd>v</div><div id=blockl><</div><div id=blockr>></div--><div id=blockrl>↶</div> <div id=blockrr>↷</div><!--div id=blockp>Put </div><div id=blockr>Remove</div--><br><br><p>Add: <b>space+wasd</b> Remove: <b>Del</b></p>⎯<br><div id=blockc style=width:120px>Clear all</div>`;
+    <div id=gridup>⇑</div> <div id=griddown>⇓</div> <div id=gridrl>↶</div> <div id=gridrr>↷</div><br>⎯<br>Block<br><div id=blockrl>↶</div> <div id=blockrr>↷</div><br><br><p>Add: <b>space+wasd</b> Remove: <b>Del</b><br>Play: <b>Enter</b></p>⎯<br><div id=blockc style=width:120px>Clear all</div>`;
     b.innerHTML += `<div id=parts>`;
     
     // inventory
@@ -87,7 +87,7 @@ var init = (puzzle) => {
       j = inventory[i];
       C.$(`qty${i}`).innerHTML = `${j[2]}/${j[1]}`;
       //C.plane({g:`visual${i}`,w:20,h:20,b:"#d90",rx:45,rz:45});
-      draw_block(j[0],`visual${i}`,((j[0]==6||j[0]==7) ? -.3 : -.5),((j[0]==6||j[0]==7) ? -.8 : -.5),-25,45,((j[0]==5||j[0]==9) ? 120 : 30));
+      draw_block(j[0],`visual${i}`,((j[0]==6||j[0]==7) ? -.7 : -.5),((j[0]==6||j[0]==7) ? -.2 : -.5),-25,45,((j[0]==5||j[0]==9) ? 210 : 30));
     }
     
     //cz = -300;

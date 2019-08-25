@@ -23,8 +23,10 @@ editor = () => {
   // space (place an item)
   if(s) {
     if(inventory[selected][2] > 0 && !space[cursorx][cursory][gridz]){
-      C.plane({n:`road-${cursorx}-${cursory}-${gridz}`,x:cursorx*size+size/2,y:cursory*size+size/2,z:gridz*sizeh,w:size*.8,h:size*.8,b:"#d90", o:"center"});
-      space[cursorx][cursory][gridz] = {type: inventory[selected][0], angle: 0, u: 0, r: 0, d: 0, l: 0, barriers: {u: 0, r: 0, d: 0, l: 0}}
+      
+      draw_block(inventory[selected][0], "scene", cursorx, cursory, gridz, 0, cursorrz)
+      
+      space[cursorx][cursory][gridz] = {type: inventory[selected][0], angle: cursorrz, u: 0, r: 0, d: 0, l: 0, barriers: {u: 0, r: 0, d: 0, l: 0}}
       roads.push([cursorx,cursory,gridz, inventory[selected][0], 0, 0, 0]);// x,y,z,type,angle,fixed
       inventory[selected][2]--;
       C.$(`qty${selected}`).innerHTML = inventory[selected][2] + "/" + inventory[selected][1];
@@ -86,7 +88,7 @@ editor = () => {
   }
   
   if(rerender||L||R||U||D||S||_){
-    C.camera({x:cursorx*size+size/2, y:cursory*size+size/2, z:600+gridz*sizeh, rz:gridrz, rx:30});
+    C.camera({x:cursorx*size+size/2, y:cursory*size+size/2, z:600+gridz*sizeh, rz:gridrzreal, rx:30});
     C.move({n:"cursor",x:cursorx*size+size/2,y:cursory*size+size/2,z:gridz*sizeh});
     rerender = 0;
     
@@ -98,10 +100,8 @@ editor = () => {
   // space down + arrow pressed (create link between two blocks)
   if(s){
     if(U||R||D||L){
-      //console.log(1, space[prevcursorx][prevcursory][gridz], space[cursorx][cursory][gridz]);
       if(space[prevcursorx][prevcursory][gridz] && space[prevcursorx][prevcursory][gridz].type == 0 && space[cursorx][cursory][gridz] && space[cursorx][cursory][gridz].type == 0){
         roadlinks.push([[prevcursorx,prevcursory,gridz],[cursorx,cursory,gridz]]);
-        //console.log(2);
         links();
         turns();
         for(i of roads){
@@ -112,7 +112,6 @@ editor = () => {
       }
     }
   }
-  
 }
 
 // Select an inventory item
@@ -123,7 +122,6 @@ var select = i => {
     selected = i;
     
     C.$("cursor").innerHTML = "";
-    C.plane({g:"cursor",x:size/2+size*.1,y:size/2+size*.1,w:size*.8,h:size*.8,b:"#d90", o:"center"});
-    //blockangle = 0;
+    draw_block(inventory[i][0], "cursor",.1,.1);
   }
 }

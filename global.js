@@ -53,12 +53,14 @@ var roadlinks = []; // links between road blocks
 // Editor
 var gridz = 0;
 var gridrz = 0;
+var gridrzreal = 0;
 var cursorx = 0
 var cursory = 0;
+var cursorrz = 0;
+var cursorrzreal = 0;
 var selected = 0;
 var rerender = 0;
 var inventory = [];
-var blockangle = 0;
 
 // Race
 var ev; // eval

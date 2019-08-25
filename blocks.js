@@ -48,14 +48,14 @@ var draw_block = (n, c, x, y, z, rx, rz) => {
 
   // 6: slope long "up"
   else if(n == 6){
-    C.plane({g:name,w:size*.8,h:size*1.05,z:sizeh*.36,o:"center",b:"#d90",rx:20});
-    C.plane({g:name,y:size,z:sizeh*.84,w:size*.8,h:size*1.05,o:"center",b:"#d90",rx:5});
+    C.plane({g:name,w:size*.8,h:size*1.05,z:sizeh*.36,o:"center",b:"#d90",rx:-20});
+    C.plane({g:name,y:-size,z:sizeh*.84,w:size*.8,h:size*1.05,o:"center",b:"#d90",rx:-5});
   }
   
   // 7: slope long "down"
   else if(n == 7){
-    C.plane({g:name,w:size*.8,h:size*1.05,z:sizeh*.2,o:"center",b:"#d90",rx:5});
-    C.plane({g:name,y:size,z:sizeh*.66,w:size*.8,h:size*1.05,o:"center",b:"#d90",rx:20});
+    C.plane({g:name,w:size*.8,h:size*1.05,z:sizeh*.2,o:"center",b:"#d90",rx:-5});
+    C.plane({g:name,y:-size,z:sizeh*.66,w:size*.8,h:size*1.05,o:"center",b:"#d90",rx:-20});
   }
 
   // 8: accelerator

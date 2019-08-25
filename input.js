@@ -22,32 +22,27 @@ griddown.onclick = () => {
 gridrl.onclick = () => {
   if(gridrz == 0) gridrz = 360;
   gridrz -= 90;
-  C.camera({rz:gridrz})
+  gridrzreal -= 90;
+  C.camera({rz:gridrzreal})
 }
 
 gridrr.onclick = () => {
   if(gridrz == 360) gridrz = 0;
   gridrz += 90;
-  C.camera({rz:gridrz})
+  gridrzreal += 90;
+  C.camera({rz:gridrzreal})
 }
 
-/*blocku.onclick = () => {
-  cursory -= 1;
-  //C.camera({y:cursory * 20 + 10});
-  //C.move({n:"cursor",y:cursory*20});
+blockrl.onclick = () => {
+  if(cursorrz == 0) cursorrz = 360;
+  cursorrz -= 90;
+  cursorrzreal -= 90;
+  C.move({n:"cursor",rz:cursorrzreal})
 }
-blockd.onclick = () => {
-  cursory += 1;
-  //C.camera({y:cursory * 20 + 10});
-  //C.move({n:"cursor",y:cursory*20});
+
+blockrr.onclick = () => {
+  if(cursorrz == 360) cursorrz = 0;
+  cursorrz += 90;
+  cursorrzreal += 90;
+  C.move({n:"cursor",rz:cursorrzreal})
 }
-blockl.onclick = () => {
-  cursorx -= 1;
-  //C.camera({x:cursorx * 20 + 10});
-  //C.move({n:"cursor",x:cursorx*20});
-}
-blockr.onclick = () => {
-  cursorx += 1;
-  //C.camera({x:cursorx * 20 + 10});
-  //C.move({n:"cursor",x:cursorx*20});
-}*/
