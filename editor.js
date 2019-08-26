@@ -26,7 +26,6 @@ editor = () => {
   if(s) {
     if(inventory[selected][2] > 0 && !space[cursorx][cursory][gridz]){
       
-      draw_block(inventory[selected][0], "scene", cursorx, cursory, gridz, 0, cursorrz)
       
       space[cursorx][cursory][gridz] = {
         fixed: 0,
@@ -44,6 +43,7 @@ editor = () => {
       roads.push([cursorx, cursory, gridz, inventory[selected][0], 0, 0]);// x,y,z,id,angle,fixed
       inventory[selected][2]--;
       C.$(`qty${selected}`).innerHTML = inventory[selected][2] + "/" + inventory[selected][1];
+      draw_block(inventory[selected][0], "scene", cursorx, cursory, gridz, 0, cursorrz)
     }
   }
   
