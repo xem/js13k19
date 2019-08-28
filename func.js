@@ -155,6 +155,62 @@ var barriers = i => {
         }
       }
       
+      // #4: jumper
+      else if(block.id == 4){
+ 
+        // Reset barriers
+      
+        C.$(`road-${x}-${y}-${z}`).children[0].style.border = "0";
+      
+        //console.log(block, x, y, z);
+
+        block.barriers = {u: 0, r: 0, d: 0, l: 0};
+        
+        // Add forward barrier if no link
+        if(block.angle == 0 && !block.links.d){
+          block.barriers.d = 1;
+        }
+        if(block.angle == 90 && !block.links.l){
+          block.barriers.l = 1;
+        }
+        if(block.angle == 180 && !block.links.u){
+          block.barriers.u = 1;
+        }
+        if(block.angle == 270 && !block.links.r){
+          block.barriers.r = 1;
+        }
+      }
+      
+      // #8: accelerator
+      else if(block.id == 8){
+ 
+        // Reset barriers
+      
+        C.$(`road-${x}-${y}-${z}`).children[0].style.border = "0";
+      
+        //console.log(block, x, y, z);
+
+        block.barriers = {u: 1, r: 1, d: 1, l: 1};
+        
+        // Add forward barrier if no link
+        if(block.angle == 0 && block.links.d){
+          block.barriers.u = 0;
+          block.barriers.d = 0;
+        }
+        if(block.angle == 90 && block.links.l){
+          block.barriers.l = 0;
+          block.barriers.r = 0;
+        }
+        if(block.angle == 180 && block.links.u){
+          block.barriers.u = 0;
+          block.barriers.d = 0;
+        }
+        if(block.angle == 270 && block.links.r){
+          block.barriers.l = 0;
+          block.barriers.r = 0;
+        }
+      }
+      
       // Draw barriers
       
       if(block.barriers[uu]){

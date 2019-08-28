@@ -41,13 +41,13 @@ var init = (puzzle) => {
       [5, 10, 0, 1, 0, 1], // start
       [9, 10, 0, 2, 90, 1], // end
       [7, 7, 0, 3, 0, 1], // checkpoint
+      [5, 7, 0, 4, 0, 1], // jumper
+      [9, 7, 0, 8, 0, 1], // accelerator
       /*
       [10, 10, 0, 0, 0, 1], // road
-      [13, 5, 0, 4, 0, 1], // jumper
       [4, 8, 0, 5, 90, 1], // slope
       [7, 9, 0, 6, 90, 1], // slope up
       [9, 8, 0, 7, 90, 1], // slope down
-      [11, 9, 0, 8, 0, 1], // accelerator
       [13, 8, 0, 9, 90, 1], // accelerator down*/
     ];
     

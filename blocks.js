@@ -150,6 +150,35 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   else if(n == 4){
     C.plane({g:name,w:size*.8,h:size*.7,y:.2*size,z:sizeh/4,rx:-20,b:"#d00",o:"center"});
     C.plane({g:name,w:size*.8,h:size*.2,y:-10,rx:-90,z:sizeh*.2,b:"linear-gradient(90deg,#000 5px,transparent 5px, transparent 75px, #000 75px)",o:"center"});
+    
+    if(c == "scene"){
+      space[x][y][z] = {
+        fixed: f,
+        free: 0,
+        id: n,
+        linkable: {u: 0, r: 0, d: 0, l: 0},
+        links: { u: 0, r: 0, d: 0, l: 0 },
+        flat: { u: 1, r: 1, d: 1, l: 1},
+        barriers: {u: 1, r: 1, d: 1, l: 1},
+        surrogate: 0,
+        angle: rz,
+        equation: "todo",
+      };    
+      
+      // Make the bottom side linkable
+      if(rz == 0){
+        space[x][y][z].linkable.d  = 1;
+      }
+      else if(rz == 90){
+        space[x][y][z].linkable.l  = 1;
+      }
+      else if(rz == 180){
+        space[x][y][z].linkable.u  = 1;
+      }
+      else if(rz == 270){
+        space[x][y][z].linkable.r  = 1;
+      }
+    }
   }
     
   // 5: slope short
@@ -177,6 +206,40 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   // 8: accelerator
   else if(n == 8){
     C.plane({g:name,z:1,w:size*.8,h:size,o:"center",css:"acc",rz:180});
+    
+    if(c == "scene"){
+      space[x][y][z] = {
+        fixed: f,
+        free: 0,
+        id: n,
+        linkable: {u: 0, r: 0, d: 0, l: 0},
+        links: { u: 0, r: 0, d: 0, l: 0 },
+        flat: { u: 1, r: 1, d: 1, l: 1},
+        barriers: {u: 1, r: 1, d: 1, l: 1},
+        surrogate: 0,
+        angle: rz,
+        equation: "false",
+      };    
+      
+      // Make the top and bottom side linkable
+      if(rz == 0){
+        space[x][y][z].linkable.u  = 1;
+        space[x][y][z].linkable.d  = 1;
+      }
+      else if(rz == 90){
+        space[x][y][z].linkable.r  = 1;
+        space[x][y][z].linkable.l  = 1;
+      }
+      else if(rz == 180){
+        space[x][y][z].linkable.u  = 1;
+        space[x][y][z].linkable.d  = 1;
+      }
+      else if(rz == 270){
+        space[x][y][z].linkable.l  = 1;
+        space[x][y][z].linkable.r  = 1;
+      }
+    }
+    
   }
   
   // 9: accelerator slope down
