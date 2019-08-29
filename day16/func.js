@@ -110,7 +110,7 @@ var barriers = i => {
 
         block.barriers = {u: 1, r: 1, d: 1, l: 1};
         
-        // Add back barrier if no link
+        // Add forward barrier if no link
         if(block.angle == 0 && block.links.d){
           block.barriers.d = 0;
         }
@@ -136,7 +136,7 @@ var barriers = i => {
 
         block.barriers = {u: 1, r: 1, d: 1, l: 1};
         
-        // Add forward/back barrier if no link
+        // Add forward barrier if no link
         if(block.angle == 0 && block.links.d){
           block.barriers.u = 0;
           block.barriers.d = 0;
@@ -166,85 +166,7 @@ var barriers = i => {
 
         block.barriers = {u: 0, r: 0, d: 0, l: 0};
         
-        // Add back barrier if no link
-        if(block.angle == 0 && !block.links.d){
-          block.barriers.d = 1;
-        }
-        if(block.angle == 90 && !block.links.l){
-          block.barriers.l = 1;
-        }
-        if(block.angle == 180 && !block.links.u){
-          block.barriers.u = 1;
-        }
-        if(block.angle == 270 && !block.links.r){
-          block.barriers.r = 1;
-        }
-      }
-      
-      // #5: slope short
-      else if(block.id == 5){
-        
-        // Reset barriers
-      
-        C.$(`road-${x}-${y}-${z}`).children[0].style.border = "0";
-      
-        //console.log(block, x, y, z);
-
-        block.barriers = {u: 0, r: 0, d: 0, l: 0};
-        
-        // Add back barrier if no link
-        if(block.angle == 0 && !block.links.d){
-          block.barriers.d = 1;
-        }
-        if(block.angle == 90 && !block.links.l){
-          block.barriers.l = 1;
-        }
-        if(block.angle == 180 && !block.links.u){
-          block.barriers.u = 1;
-        }
-        if(block.angle == 270 && !block.links.r){
-          block.barriers.r = 1;
-        }
-      }
-      
-      // #6: slope up
-      else if(block.id == 6){
- 
-        // Reset barriers
-      
-        C.$(`road-${x}-${y}-${z}`).children[0].style.border = "0";
-      
-        //console.log(block, x, y, z);
-
-        block.barriers = {u: 1, r: 1, d: 1, l: 1};
-        
-        // Add back barrier if no link
-        if(block.angle == 0 && !block.links.d){
-          block.barriers.d = 1;
-        }
-        if(block.angle == 90 && !block.links.l){
-          block.barriers.l = 1;
-        }
-        if(block.angle == 180 && !block.links.u){
-          block.barriers.u = 1;
-        }
-        if(block.angle == 270 && !block.links.r){
-          block.barriers.r = 1;
-        }
-      }
-      
-      // #7: slope down
-      else if(block.id == 7){
- 
-        // Reset barriers
-      
-        C.$(`road-${x}-${y}-${z}`).children[0].style.border = "0";
-      
-        //console.log(block, x, y, z);
-
-        block.barriers = {u: 1, r: 1, d: 1, l: 1};
-        
-        // Add back barrier if no link
+        // Add forward barrier if no link
         if(block.angle == 0 && !block.links.d){
           block.barriers.d = 1;
         }
@@ -270,7 +192,7 @@ var barriers = i => {
 
         block.barriers = {u: 1, r: 1, d: 1, l: 1};
         
-        // Add forward and back barriers if no link
+        // Add forward barrier if no link
         if(block.angle == 0 && block.links.d){
           block.barriers.u = 0;
           block.barriers.d = 0;
@@ -286,32 +208,6 @@ var barriers = i => {
         if(block.angle == 270 && block.links.r){
           block.barriers.l = 0;
           block.barriers.r = 0;
-        }
-      }
-      
-      // #9: accelerator slope down
-      else if(block.id == 9){
-        
-        // Reset barriers
-      
-        C.$(`road-${x}-${y}-${z}`).children[0].style.border = "0";
-      
-        //console.log(block, x, y, z);
-
-        block.barriers = {u: 0, r: 0, d: 0, l: 0};
-        
-        // Add back barrier if no link
-        if(block.angle == 0 && !block.links.d){
-          block.barriers.d = 1;
-        }
-        if(block.angle == 90 && !block.links.l){
-          block.barriers.l = 1;
-        }
-        if(block.angle == 180 && !block.links.u){
-          block.barriers.u = 1;
-        }
-        if(block.angle == 270 && !block.links.r){
-          block.barriers.r = 1;
         }
       }
       
@@ -332,8 +228,6 @@ var barriers = i => {
     }
   }
 }
-
-// TODO: factorize #5 and #9, #2 and #4, #3 and #8 (and/or) #6 and #7? 
 
 // Compute and draw links between road blocks
 var links = () => {

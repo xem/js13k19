@@ -40,14 +40,15 @@ var init = (puzzle) => {
     roads = [ // [x,y,z,type,angle,fixed]
       [5, 10, 0, 1, 0, 1], // start
       [9, 10, 0, 2, 90, 1], // end
-      [3, 7, 0, 3, 0, 1], // checkpoint
+      [7, 7, 0, 3, 0, 1], // checkpoint
       [5, 7, 0, 4, 0, 1], // jumper
-      [7, 7, 0, 8, 0, 1], // accelerator
-      [9, 7, 0, 5, 0, 1], // slope
-      [11, 7, 0, 6, 0, 1], // slope up
-      [13, 7, 0, 7, 0, 1], // slope down
-      [15, 7, 0, 9, 0, 1], // accelerator down
-      //[10, 10, 0, 0, 0, 1], // road
+      [9, 7, 0, 8, 0, 1], // accelerator
+      /*
+      [10, 10, 0, 0, 0, 1], // road
+      [4, 8, 0, 5, 90, 1], // slope
+      [7, 9, 0, 6, 90, 1], // slope up
+      [9, 8, 0, 7, 90, 1], // slope down
+      [13, 8, 0, 9, 90, 1], // accelerator down*/
     ];
     
     for(i of roads){
@@ -86,7 +87,7 @@ var init = (puzzle) => {
     // Inventory
     inventory = [ // [type, quantity, remaining]
       //[1, 1, 1], // start
-      [0, 40, 40], // road 
+      [0, 20, 20], // road 
       [2, 1, 1], // end
       [3, 20, 20], // checkpoint 
       [4, 20, 20], // jumper 
