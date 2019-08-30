@@ -338,7 +338,7 @@ var barriers = i => {
 // Compute and draw links between road blocks
 var links = () => {
   
-  // Reset all links (HTML)
+  // Reset all links
   for(j of document.querySelectorAll(".barrierleftright,.barriertopbottom")){
     j.remove();
   }
@@ -386,7 +386,6 @@ var turns = () => {
       [x,y,z] = i;
       block = space[x][y][z];
       
-      // #0: basic block
       if(block && block.id == 0){
       
         // Reset indicators of which sides are not rounded

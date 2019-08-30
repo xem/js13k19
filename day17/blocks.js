@@ -28,14 +28,12 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: [x,y-1,z], r: [x+1,y,z], d: [x,y+1,z], l: [x-1,y,z]},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
         barriers: {u: 1, r: 1, d: 1, l: 1},
         surrogates: 0,
         surrogate_of: 0,
-        slope: 0,
         angle: 0,
         equation: "false",
       };
@@ -51,14 +49,12 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
         barriers: {u: 1, r: 1, d: 1, l: 1},
         surrogates: 0,
         surrogate_of: 0,
-        slope: 0,
         angle: rz,
         equation: "false",
       };    
@@ -91,14 +87,12 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
         barriers: {u: 1, r: 1, d: 1, l: 1},
         surrogates: 0,
         surrogate_of: 0,
-        slope: 0,
         angle: rz,
         equation: "false",
       };    
@@ -128,14 +122,12 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
         barriers: {u: 1, r: 1, d: 1, l: 1},
         surrogates: 0,
         surrogate_of: 0,
-        slope: 0,
         angle: rz,
         equation: "false",
       };    
@@ -170,14 +162,12 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
         barriers: {u: 1, r: 1, d: 1, l: 1},
         surrogates: 0,
         surrogate_of: 0,
-        slope: 1,
         angle: rz,
         equation: "todo",
       };    
@@ -211,14 +201,12 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
         barriers: {u: 1, r: 1, d: 1, l: 1},
         surrogates: [x, y, z+1],
         surrogate_of: 0,
-        slope: 1,
         angle: rz,
         equation: "todo",
       };    
@@ -246,7 +234,6 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
@@ -271,14 +258,12 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
         barriers: {u: 1, r: 1, d: 1, l: 1},
         surrogates: [[x,y,z+1]],
         surrogate_of: 0,
-        slope: 1,
         angle: rz,
         equation: "todo",
       };
@@ -308,10 +293,9 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
     
       // surrogate 
       space[X][Y][Z] = {
-        fixed: 1,
+        fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
@@ -324,10 +308,9 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
       
       // Block the cells above
       space[x][y][z+1] = {
-        fixed: 1,
+        fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
@@ -339,10 +322,9 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
       };
       
       space[X][Y][Z+1] = {
-        fixed: 1,
+        fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
@@ -352,6 +334,20 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         angle: rz,
         equation: "todo",
       };
+      
+      /*// Make surrogate linkable
+      if(rz == 0){
+        space[X][Y][Z].linkable.u = [X,Y-1,Z+1];
+      }
+      else if(rz == 90){
+        space[X][Y][Z].linkable.r = [X+1,Y,Z+1];
+      }
+      else if(rz == 180){
+        space[X][Y][Z].linkable.d = [X,Y+1,Z+1];
+      }
+      else if(rz == 270){
+        space[X][Y][Z].linkable.l = [X-1,Y,Z+1];
+      }*/
     }
   }
   
@@ -367,14 +363,12 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
         barriers: {u: 1, r: 1, d: 1, l: 1},
         surrogates: [[x,y,z+1]],
         surrogate_of: 0,
-        slope: 1,
         angle: rz,
         equation: "todo",
       };
@@ -404,10 +398,9 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
     
       // surrogate 
       space[X][Y][Z] = {
-        fixed: 1,
+        fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
@@ -420,10 +413,9 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
       
       // Block the cells above
       space[x][y][z+1] = {
-        fixed: 1,
+        fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
@@ -435,10 +427,9 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
       };
       
       space[X][Y][Z+1] = {
-        fixed: 1,
+        fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
@@ -448,6 +439,20 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         angle: rz,
         equation: "todo",
       };
+      
+      // Make surrogate linkable
+      /*if(rz == 0){
+        space[X][Y][Z].linkable.u = [X,Y-1,Z+1];
+      }
+      else if(rz == 90){
+        space[X][Y][Z].linkable.r = [X+1,Y,Z+1];
+      }
+      else if(rz == 180){
+        space[X][Y][Z].linkable.d = [X,Y+1,Z+1];
+      }
+      else if(rz == 270){
+        space[X][Y][Z].linkable.l = [X-1,Y,Z+1];
+      }*/
     }
   }
 
@@ -460,13 +465,11 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
         barriers: {u: 1, r: 1, d: 1, l: 1},
         surrogate: 0,
-        slope: 0,
         angle: rz,
         equation: "false",
       };    
@@ -489,6 +492,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         space[x][y][z].linkable.r = [x+1,y,z];
       }
     }
+    
   }
   
   // 9: accelerator slope down
@@ -501,13 +505,11 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         fixed: f,
         free: 0,
         id: n,
-        inventoryid: selected,
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
         barriers: {u: 1, r: 1, d: 1, l: 1},
         surrogate: 0,
-        slope: 1,
         angle: rz,
         equation: "todo",
       };    
@@ -532,7 +534,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
       
       // Block the cell above
       space[x][y][z+1] = {
-        fixed: 1,
+        fixed: f,
         free: 0,
         id: n,
         linkable: {u: 0, r: 0, d: 0, l: 0},
@@ -549,10 +551,10 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   
   if(z > 0){
     //for(var i = 0; i < z; i++){
-      //console.log(i);
+      console.log(i);
       
       // poles (except on jumpers and rounded roads)
-      if(n != 4 && n != 0){
+      if(n != 4 && space[x][y][z].flat.u + space[x][y][z].flat.r + space[x][y][z].flat.d + space[x][y][z].flat.l == 4){
         
         C.plane({g:name,w:size*.8,h:sizeh*z,y:-40,z:sizeh*(-z/2),rx:-90,b:"linear-gradient(90deg,#000 5px,transparent 5px, transparent 75px, #000 75px)",o:"center"});
         C.plane({g:name,w:size*.8,h:sizeh*z,y:40,z:sizeh*(-z/2),rx:-90,b:"linear-gradient(90deg,#000 5px,transparent 5px, transparent 75px, #000 75px)",o:"center"});

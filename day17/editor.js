@@ -56,61 +56,52 @@ editor = () => {
   
   // suppr (remove an item)
   else if(_){
-    
-    // Check existence and removability
     if(space[cursorx][cursory][gridz] && !space[cursorx][cursory][gridz].fixed){
-
-      // Delete HTML container
       C.$(`road-${cursorx}-${cursory}-${gridz}`).remove();
-      
-      // Increment inventory
-      var inventoryid = space[cursorx][cursory][gridz].inventoryid;
-      inventory[inventoryid][2]++;
-      C.$(`qty${inventoryid}`).innerHTML = inventory[inventoryid][2] + "/" + inventory[inventoryid][1];
-      
-      // Delete space cell
       space[cursorx][cursory][gridz] = 0;
-      
-      // Remove road
-      for(i in roads){
-        if(roads[i]){ 
-          if(roads[i][0] == cursorx && roads[i][1] == cursory && roads[i][2] == gridz){
-            roads[i] = 0;
-          }
-        }
-      }
+    }
+    inventory[selected][2]++;
+    C.$(`qty${selected}`).innerHTML = inventory[selected][2] + "/" + inventory[selected][1];
     
-      // Remove links attached to this block
-      for(i in roadlinks){
-        for(j = 0; j < 2; j++){
-          if(roadlinks[i]){
-            if(roadlinks[i][j][0] == cursorx && roadlinks[i][j][1] == cursory && roadlinks[i][j][2] == gridz){
-              
-              if(space[roadlinks[i][j][0]-1][roadlinks[i][j][1]][gridz]){
-                space[roadlinks[i][j][0]-1][roadlinks[i][j][1]][gridz].links.r = 0;
-              }
-              if(space[roadlinks[i][j][0]][roadlinks[i][j][1]-1][gridz]){
-                space[roadlinks[i][j][0]][roadlinks[i][j][1]-1][gridz].links.d = 0;
-              }
-              if(space[roadlinks[i][j][0]+1][roadlinks[i][j][1]][gridz]){
-                space[roadlinks[i][j][0]+1][roadlinks[i][j][1]][gridz].links.l = 0;
-              }
-              if(space[roadlinks[i][j][0]][roadlinks[i][j][1]+1][gridz]){
-                space[roadlinks[i][j][0]][roadlinks[i][j][1]+1][gridz].links.u = 0;
-              }
-              roadlinks[i] = 0;
+    // Remove road
+    for(i in roads){
+      if(roads[i]){ 
+        if(roads[i][0] == cursorx && roads[i][1] == cursory && roads[i][2] == gridz){
+          roads[i] = 0;
+        }
+      }
+    }
+    
+    // Remove links attached to this block
+    for(i in roadlinks){
+      for(j = 0; j < 2; j++){
+        if(roadlinks[i]){
+          if(roadlinks[i][j][0] == cursorx && roadlinks[i][j][1] == cursory && roadlinks[i][j][2] == gridz){
+            
+            if(space[roadlinks[i][j][0]-1][roadlinks[i][j][1]][gridz]){
+              space[roadlinks[i][j][0]-1][roadlinks[i][j][1]][gridz].r = 0;
             }
+            if(space[roadlinks[i][j][0]][roadlinks[i][j][1]-1][gridz]){
+              space[roadlinks[i][j][0]][roadlinks[i][j][1]-1][gridz].d = 0;
+            }
+            if(space[roadlinks[i][j][0]+1][roadlinks[i][j][1]][gridz]){
+              space[roadlinks[i][j][0]+1][roadlinks[i][j][1]][gridz].l = 0;
+            }
+            if(space[roadlinks[i][j][0]][roadlinks[i][j][1]+1][gridz]){
+              space[roadlinks[i][j][0]][roadlinks[i][j][1]+1][gridz].u = 0;
+            }
+            roadlinks[i] = 0;
           }
         }
       }
-      links();
-      
-      // Reset barriers, curves, equations
-      turns();
-      for(i of roads){
-        if(i){
-          barriers(i);
-        }
+    }
+    links();
+    
+    // Reset barriers, curves, equations
+    turns();
+    for(i of roads){
+      if(i){
+        barriers(i);
       }
     }
   }
