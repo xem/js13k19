@@ -31,42 +31,42 @@ var barriers = i => {
         
         // Block with no link: no barrier
         // Block with at least 1 link
-        if(block.links.u + block.links.r + block.links.d + block.links.l > 0 ){
+        if(block.links.u || block.links.r || block.links.d || block.links.l){
         
           // if a side has no link and opposite side has no link: barrier on both
-          if(!block.links.u && !block.links.d){
+          if(!block.links[uu] && !block.links[dd]){
             block.barriers[uu] = 1;
             block.barriers[dd] = 1;
           }
-          else if(!block.links.l && !block.links.r){
+          else if(!block.links[ll] && !block.links[rr]){
             block.barriers[ll] = 1;
             block.barriers[rr] = 1;
           }
           
           // if 2 consecutive sides have a link and the two other don't, put barriers on the two others
-          else if(block.links.u && block.links.l && !block.links.r && !block.links.d){
+          else if(block.links[uu] && block.links[ll] && !block.links[rr] && !block.links[dd]){
             block.barriers[rr] = 1;
             block.barriers[dd] = 1;
           }
-          else if(block.links.u && !block.links.l && block.links.r && !block.links.d){
+          else if(block.links[uu] && !block.links[ll] && block.links[rr] && !block.links[dd]){
             block.barriers[ll] = 1;
             block.barriers[dd] = 1;
           }
-          else if(!block.links.u && block.links.l && !block.links.r && block.links.d){
+          else if(!block.links[uu] && block.links[ll] && !block.links[rr] && block.links[dd]){
             block.barriers[rr] = 1;
             block.barriers[uu] = 1;
           }
-          if(!block.links.u && !block.links.l && block.links.r && block.links.d){
+          if(!block.links[uu] && !block.links[ll] && block.links[rr] && block.links[dd]){
             block.barriers[uu] = 1;
             block.barriers[ll] = 1;
           }
           
           // If three sides have a link, put barriers on the 4th
           else if(block.links.u + block.links.r + block.links.d + block.links.l == 3){
-            if(!block.links.u) block.barriers[uu] = 1;
-            if(!block.links.r) block.barriers[rr] = 1;
-            if(!block.links.d) block.barriers[dd] = 1;
-            if(!block.links.l) block.barriers[ll] = 1;
+            if(!block.links[uu]) block.barriers[uu] = 1;
+            if(!block.links[rr]) block.barriers[rr] = 1;
+            if(!block.links[dd]) block.barriers[dd] = 1;
+            if(!block.links[ll]) block.barriers[ll] = 1;
           }
         }
       }
@@ -211,7 +211,7 @@ var barriers = i => {
       else if(block.id == 6){
  
         // Reset barriers
-      
+        //console.log(x,y,z,C.$(`road-${x}-${y}-${z}`));
         C.$(`road-${x}-${y}-${z}`).children[0].style.border = "0";
       
         //console.log(block, x, y, z);
@@ -348,13 +348,19 @@ var links = () => {
   // - Don't draw them between two slopes 
   for(i of roadlinks){
 
-    if(i){
+    //console.log(i);
+    
+    if(i[0]){
       
       var block1 = space[i[0][0]][i[0][1]][i[0][2]];
       var block2 = space[i[1][0]][i[1][1]][i[1][2]];
       
+      console.log(block1, block2);
+      
       // link from front ^ to back v 
-      if(i[0][0] == i[1][0] && i[0][2] == i[1][2] && i[0][1] == i[1][1] - 1){
+      if(i[0][0] == i[1][0] /*&& i[0][2] == i[1][2]*/ && i[0][1] < i[1][1]){
+        
+        console.log("front to back");
         
         if(!block1.slope && !block2.slope){
           C.plane({n:"zer0",w:size*.8,h:size*.2,x:i[0][0]*size+size*.1,y:i[0][1]*size+size*.9,z:sizeh*i[0][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[0][2] == 0 ? "z0":""}`});
@@ -366,13 +372,12 @@ var links = () => {
           C.plane({n:2,w:size*.8,h:size*.1,x:i[0][0]*size+size*.1,y:i[0][1]*size+size*.9,z:sizeh*i[0][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[0][2] == 0 ? "z0":""}`});
         }
         
-        block1.links.d = 1;
-        block2.links.u = 1;
+        block1.links.d = [i[1][0],i[1][1],i[1][2]];
+        block2.links.u = [i[0][0],i[0][1],i[0][2]];
       }
       
       // link from back v to front ^
-      if(i[0][0] == i[1][0] && i[0][2] == i[1][2] && i[0][1] == i[1][1] + 1){
-        
+      if(i[0][0] == i[1][0] /*&& i[0][2] == i[1][2]*/ && i[0][1] > i[1][1]){
         
         if(!block1.slope && !block2.slope){
           C.plane({n:10,w:size*.8,h:size*.2,x:i[1][0]*size+size*.1,y:i[1][1]*size+size*.9,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
@@ -384,12 +389,12 @@ var links = () => {
           C.plane({n:12,w:size*.8,h:size*.1,x:i[1][0]*size+size*.1,y:i[1][1]*size+size,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
         }
 
-        block1.links.u = 1;
-        block2.links.d = 1;
+        block1.links.u = [i[1][0],i[1][1],i[1][2]];
+        block2.links.d = [i[0][0],i[0][1],i[0][2]];
       }
       
       // link from left < to right >
-      if(i[0][0] == i[1][0] - 1 && i[0][2] == i[1][2] && i[0][1] == i[1][1]){
+      if(i[0][0] < i[1][0] /*&& i[0][2] == i[1][2]*/ && i[0][1] == i[1][1]){
 
         if(!block1.slope && !block2.slope){
           C.plane({n:20,w:size*.2,h:size*.8,x:i[0][0]*size+size*.9,y:i[1][1]*size+size*.1,z:sizeh*i[0][2]+1,b:"#d90",o:"top left",css:`barriertopbottom ${i[0][2] == 0 ? "z0":""}`});
@@ -400,16 +405,13 @@ var links = () => {
         else if(!block1.slope && block2.slope){
           C.plane({n:22,w:size*.1,h:size*.8,x:i[0][0]*size+size*.9,y:i[1][1]*size+size*.1,z:sizeh*i[0][2]+1,b:"#d90",o:"top left",css:`barriertopbottom ${i[0][2] == 0 ? "z0":""}`});
         }
-        
-        
-        block1.links.r = 1;
-        block2.links.l = 1;
+
+        block1.links.r = [i[1][0],i[1][1],i[1][2]];
+        block2.links.l = [i[0][0],i[0][1],i[0][2]];
       }
       
       // link from right > to left <
-      if(i[0][0] == i[1][0] + 1 && i[0][2] == i[1][2] && i[0][1] == i[1][1]){
-        
-        
+      if(i[0][0] > i[1][0] /*&& i[0][2] == i[1][2]*/ && i[0][1] == i[1][1]){
         
         if(!block1.slope && !block2.slope){
           C.plane({n:30,w:size*.2,h:size*.8,x:i[1][0]*size+size*.9,y:i[1][1]*size+size*.1,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barriertopbottom ${i[1][2] == 0 ? "z0":""}`});
@@ -421,11 +423,8 @@ var links = () => {
           C.plane({n:32,w:size*.1,h:size*.8,x:i[1][0]*size+size,y:i[1][1]*size+size*.1,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barriertopbottom ${i[1][2] == 0 ? "z0":""}`});
         }
         
-        
-        
-        
-        block1.links.l = 1;
-        block2.links.r = 1;
+        block1.links.l = [i[1][0],i[1][1],i[1][2]];
+        block2.links.r = [i[0][0],i[0][1],i[0][2]];
       }
     }
   }
@@ -440,6 +439,8 @@ var turns = () => {
       
       // #0: basic block
       if(block && block.id == 0){
+        
+        console.log(block);
       
         // Reset indicators of which sides are not rounded
         block.flat = {u: 1, r: 1, d: 1, l: 1};

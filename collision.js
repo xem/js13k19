@@ -11,7 +11,7 @@ var testcollision = (f,fcell,fcellinfo) => {
   }
 
   // Cell has no links (ie. no barriers): inbounds
-  else if(fcellinfo.links.u + fcellinfo.links.r + fcellinfo.links.d + fcellinfo.links.l == 0){
+  else if(!fcellinfo.links.u && !fcellinfo.links.r && !fcellinfo.links.d && !fcellinfo.links.l){
     //log("nolink");
     oob = 0;
   }

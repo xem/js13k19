@@ -39,6 +39,7 @@ var init = (puzzle) => {
     // Roads
     roads = [ // [x,y,z,type,angle,fixed]
       [5, 10, 0, 1, 0, 1], // start
+      /*
       [9, 10, 0, 2, 90, 1], // end
       [3, 7, 0, 3, 0, 1], // checkpoint
       [5, 7, 0, 4, 0, 1], // jumper
@@ -46,7 +47,7 @@ var init = (puzzle) => {
       [9, 7, 0, 5, 0, 1], // slope
       [11, 7, 0, 6, 0, 1], // slope up
       [13, 7, 0, 7, 0, 1], // slope down
-      [15, 7, 0, 9, 0, 1], // accelerator down
+      [15, 7, 0, 9, 0, 1], // accelerator down*/
       //[10, 10, 0, 0, 0, 1], // road
     ];
     
@@ -101,7 +102,7 @@ var init = (puzzle) => {
       j = inventory[i];
       C.$(`qty${i}`).innerHTML = `${j[2]}/${j[1]}`;
       //C.plane({g:`visual${i}`,w:20,h:20,b:"#d90",rx:45,rz:45});
-      draw_block(j[0],`visual${i}`,((j[0]==6||j[0]==7) ? -.7 : -.5),((j[0]==6||j[0]==7) ? -.2 : -.4),((j[0]==6||j[0]==7) ? -25 : -20),50,30);
+      draw_block(j[0],`visual${i}`,((j[0]==6||j[0]==7) ? -.7 : -.5),((j[0]==6||j[0]==7) ? -.2 : -.4),((j[0]==6||j[0]==7) ? -25 : -15),50,30);
     }
     
     //cz = -300;
