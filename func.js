@@ -62,11 +62,19 @@ var barriers = i => {
           }
           
           // If three sides have a link, put barriers on the 4th
-          else if(block.links.u + block.links.r + block.links.d + block.links.l == 3){
-            if(!block.links[uu]) block.barriers[uu] = 1;
-            if(!block.links[rr]) block.barriers[rr] = 1;
-            if(!block.links[dd]) block.barriers[dd] = 1;
-            if(!block.links[ll]) block.barriers[ll] = 1;
+          else {
+            if(block.links[uu] && block.links[rr] && block.links[dd] && !block.links[ll]){
+             block.barriers[ll] = 1;
+            }
+            else if(block.links[uu] && block.links[rr] && !block.links[dd] && block.links[ll]){
+             block.barriers[dd] = 1;
+            }
+            else if(block.links[uu] && !block.links[rr] && block.links[dd] && block.links[ll]){
+             block.barriers[rr] = 1;
+            }
+            else if(!block.links[uu] && block.links[rr] && block.links[dd] && block.links[ll]){
+             block.barriers[uu] = 1;
+            }
           }
         }
       }
@@ -355,12 +363,12 @@ var links = () => {
       var block1 = space[i[0][0]][i[0][1]][i[0][2]];
       var block2 = space[i[1][0]][i[1][1]][i[1][2]];
       
-      console.log(block1, block2);
+      //console.log(block1, block2);
       
       // link from front ^ to back v 
       if(i[0][0] == i[1][0] /*&& i[0][2] == i[1][2]*/ && i[0][1] < i[1][1]){
         
-        console.log("front to back");
+        //console.log("front to back");
         
         if(!block1.slope && !block2.slope){
           C.plane({n:"zer0",w:size*.8,h:size*.2,x:i[0][0]*size+size*.1,y:i[0][1]*size+size*.9,z:sizeh*i[0][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[0][2] == 0 ? "z0":""}`});
@@ -440,7 +448,7 @@ var turns = () => {
       // #0: basic block
       if(block && block.id == 0){
         
-        console.log(block);
+        //console.log(block);
       
         // Reset indicators of which sides are not rounded
         block.flat = {u: 1, r: 1, d: 1, l: 1};

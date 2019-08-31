@@ -62,7 +62,62 @@ editor = () => {
       }
     }
     
-    // TODO? automatic link with neighbours if this block or neighbour block is not a basic road and if both are linkable
+    // Automatic link with neighbours if at least one of the two block is not basic and if both are linkable
+
+    var current = space[cursorx][cursory][gridz];
+    var neighbour, neighbourx, neighboury, neighbourz;
+    
+    // up
+    if(current.linkable.u){
+      neighbour = space[neighbourx = current.linkable.u[0]][neighboury = current.linkable.u[1]][neighbourz = current.linkable.u[2]];
+      if(neighbour && neighbour.surrogate_of){
+        neighbour = space[neighbourx = neighbour.surrogate_of[0]][neighboury = neighbour.surrogate_of[1]][neighbourz = neighbour.surrogate_of[2]];
+      }
+      if(neighbour && neighbour.linkable.d && !current.links.u && !neighbour.links.d && (current.id != 0 || neighbour.id != 0)){
+        roadlinks.push([[cursorx,cursory,gridz],[neighbourx,neighboury,neighbourz]]);
+      }
+    }
+    
+    // right
+    if(current.linkable.r){
+      neighbour = space[neighbourx = current.linkable.r[0]][neighboury = current.linkable.r[1]][neighbourz = current.linkable.r[2]];
+      if(neighbour && neighbour.surrogate_of){
+        neighbour = space[neighbourx = neighbour.surrogate_of[0]][neighboury = neighbour.surrogate_of[1]][neighbourz = neighbour.surrogate_of[2]];
+      }
+      if(neighbour && neighbour.linkable.l && !current.links.r && !neighbour.links.l && (current.id != 0 || neighbour.id != 0)){
+        roadlinks.push([[cursorx,cursory,gridz],[neighbourx,neighboury,neighbourz]]);
+      }
+    }
+    
+    // down
+    if(current.linkable.d){
+      neighbour = space[neighbourx = current.linkable.d[0]][neighboury = current.linkable.d[1]][neighbourz = current.linkable.d[2]];
+      if(neighbour && neighbour.surrogate_of){
+        neighbour = space[neighbourx = neighbour.surrogate_of[0]][neighboury = neighbour.surrogate_of[1]][neighbourz = neighbour.surrogate_of[2]];
+      }
+      if(neighbour && neighbour.linkable.u && !current.links.d && !neighbour.links.u && (current.id != 0 || neighbour.id != 0)){
+        roadlinks.push([[cursorx,cursory,gridz],[neighbourx,neighboury,neighbourz]]);
+      }
+    }
+    
+    // left
+    if(current.linkable.l){
+      neighbour = space[neighbourx = current.linkable.l[0]][neighboury = current.linkable.l[1]][neighbourz = current.linkable.l[2]];
+      if(neighbour && neighbour.surrogate_of){
+        neighbour = space[neighbourx = neighbour.surrogate_of[0]][neighboury = neighbour.surrogate_of[1]][neighbourz = neighbour.surrogate_of[2]];
+      }
+      if(neighbour && neighbour.linkable.r && !current.links.l && !neighbour.links.r && (current.id != 0 || neighbour.id != 0)){
+        roadlinks.push([[cursorx,cursory,gridz],[neighbourx,neighboury,neighbourz]]);
+      }
+    }
+    
+    links();
+    turns();
+    for(i of roads){
+      barriers(i)
+    }
+    
+    
   }
   
   // suppr/del (remove an item)
@@ -92,7 +147,7 @@ editor = () => {
       
       // Delete neighbours links
       if(space[X][Y][Z].links.u){
-        console.log(space[X][Y][Z].links.u);
+        //console.log(space[X][Y][Z].links.u);
         space[space[X][Y][Z].links.u[0]][space[X][Y][Z].links.u[1]][space[X][Y][Z].links.u[2]].links.d = 0;
       }
       if(space[X][Y][Z].links.r){
