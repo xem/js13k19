@@ -46,7 +46,7 @@ C = {
   plane: o => {
     if(!o.n) o.n = `plane${C.plane_count++}`;
     C.init(o);
-    C.$(o.g).innerHTML += `<div id="${o.n}"class="plane ${o.css}"style="position:absolute;width:${o.w}${C.unit};height:${o.h}${C.unit};background:${o.b};transform-origin:${o.o};transform:${C.tr(o)}">${o.html}`;
+    C.$(o.g).innerHTML += `<div id="${o.n}"class="plane ${o.css}"style="position:absolute;width:${o.w}${C.unit};height:${o.h}${C.unit};background:${o.b};background-position:${o.bp};transform-origin:${o.o};transform:${C.tr(o)}">${o.html}`;
     C.camera();
   },
   

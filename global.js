@@ -2,8 +2,12 @@
 // -----------
 
 // HTML ids
-//window.b = b;
-//window.scene = scene;
+window.b = b;
+
+// Keyboard
+window.s = window.u = window.l = window.d = window.r = 0; // hold (space / up / left / down / right)
+window.S = window.U = window.L = window.D = window.R = 0; // press
+window._ = window.$ = 0; // press suppr, enter key
 
 // General
 var mode = 1; // 0: menu, 1: editor, 2: race
@@ -12,11 +16,6 @@ var puzzle = 0; // Current puzzle
 var race = 0; // Current race
 var size = 100; // block size in px (width, depth)
 var sizeh = 50 // block height in px
-
-// Keyboard
-var s = 0, u = 0, l = 0, d = 0, r = 0; // hold (space / up / left / down / right)
-var S = 0, U = 0, L = 0, D = 0, R = 0; // press
-var _ = 0, $ = 0; // press suppr, enter key
 
 // Camera
 var cx = 25;
@@ -49,6 +48,7 @@ var bcellinfo;
 var space = []; // 3D space
 var roads = []; // road blocks (summary)
 var roadlinks = []; // links between road blocks (summary)
+var ice = [];
 
 /*
 // Format:

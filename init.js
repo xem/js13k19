@@ -107,6 +107,16 @@ var init = (puzzle) => {
       draw_block(j[0],`visual${i}`,((j[0]==6||j[0]==7) ? -.7 : -.5),((j[0]==6||j[0]==7) ? -.2 : -.4),((j[0]==6||j[0]==7) ? -25 : -15),50,30);
     }
     
+    // Ice
+    ice = [
+      [5,5,8,8], // x,y,w,h
+      [11,11,5,6]
+    ];
+    
+    for(i of ice){
+      C.plane({x:i[0]*size,y:i[1]*size,w:i[2]*size,h:i[3]*size,css:"ice",o:"top left",bp: (-i[0]*size) + C.unit +  " " + (-i[1] * size) + C.unit});
+    }
+    
     //cz = -300;
     //setTimeout(()=>C.camera({rx:.1}),100);
     

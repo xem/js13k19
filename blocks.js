@@ -593,8 +593,12 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   
   // 10: tree
   else if(n == 10){
-    C[(c=="scene" || c == "vcursor") ? "sprite" : "plane"]({g:name,w:size,h:size,y:0,z:0,rx:-90,html:"🌲",css:"tree",o:"bottom"});
-    
+    if(c=="scene" || c == "vcursor"){
+      C.sprite({g:name,w:size,h:size,y:0,z:0,rx:-90,html:"🌲",css:"tree",o:"bottom"});
+    }
+    else {
+      C.plane({g:name,w:size,h:size,y:0,z:0,rx:-90,html:"🌲",css:"tree",o:"bottom"});
+    }
     if(c == "scene"){
       space[x][y][z] = {
         fixed: f,
