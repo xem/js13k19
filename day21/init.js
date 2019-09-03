@@ -27,7 +27,7 @@ var init = (track = {}) => {
     b.innerHTML += `<div id=parts>`;
     
     // inventory
-    for(i = 0; i < 14; i ++){
+    for(i = 0; i < 12; i ++){
       selected = 0;
       parts.innerHTML += `<div class="part ${i==0?"selected":""}" id=part${i} onclick=select(${i})><div class=visual id=visual${i}></div><div class=remaining id=qty${i}>`;
     }
@@ -99,10 +99,8 @@ var init = (track = {}) => {
       [7, 20, 20], // slope long "down" 
       [8, 20, 20], // accelerator 
       [9, 20, 20], // accelerator slope down
-      [10, 20, 20], // accelerator slope up
-      [11, 20, 20], // road with hole
-      [12, 20, 20], // trees
-      [13, 20, 20], // rocks
+      [10, 20, 20], // trees
+      [11, 20, 20], // rocks
     ];
     
     for(i in inventory){

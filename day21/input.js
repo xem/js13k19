@@ -68,14 +68,10 @@ ui = () => {
   // Export
   exp.onclick = () => {
     var roadsmin = JSON.parse(JSON.stringify(roads));
-    roadsmin = roadsmin.filter(a=>a!=0);
     for(i of roadsmin){
-      if(i){
-        i.pop();
-      }
+      i.pop();
     }
     var roadlinksmin = JSON.parse(JSON.stringify(roadlinks));
-    roadlinksmin = roadlinksmin.filter(a=>a!=0);
     for(i in roadlinksmin){
       if(
         space[roadlinksmin[i][0][0]][roadlinksmin[i][0][1]][roadlinksmin[i][0][2]].id != 0
@@ -85,6 +81,7 @@ ui = () => {
         roadlinksmin[i] = 0;
       }
     }
+    roadlinksmin = roadlinksmin.filter(a=>a!=0);
     prompt("export:",JSON.stringify({roads:roadsmin,roadlinks:roadlinksmin}))
   }
   

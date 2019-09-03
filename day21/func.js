@@ -144,19 +144,22 @@ var barriers = i => {
 
         block.barriers = {u: 1, r: 1, d: 1, l: 1};
         
-        // Remove forward/back barrier if link
-        if(block.links.u){
+        // Add forward/back barrier if no link
+        if(block.angle == 0 && block.links.d){
           block.barriers.u = 0;
-        }
-        if(block.links.d){
           block.barriers.d = 0;
         }
-
-        if(block.links.r){
+        if(block.angle == 90 && block.links.l){
+          block.barriers.l = 0;
           block.barriers.r = 0;
         }
-        if(block.links.l){
+        if(block.angle == 180 && block.links.u){
+          block.barriers.u = 0;
+          block.barriers.d = 0;
+        }
+        if(block.angle == 270 && block.links.r){
           block.barriers.l = 0;
+          block.barriers.r = 0;
         }
       }
       
@@ -275,18 +278,21 @@ var barriers = i => {
 
         block.barriers = {u: 1, r: 1, d: 1, l: 1};
         
-        // Remove forward/back barrier if link
-        if(block.links.u){
+        // Add forward and back barriers if no link
+        if(block.angle == 0 && block.links.d){
+          block.barriers.u = 0;
           block.barriers.d = 0;
         }
-        if(block.links.d){
-          block.barriers.u = 0;
-        }
-
-        if(block.links.r){
+        if(block.angle == 90 && block.links.l){
           block.barriers.l = 0;
+          block.barriers.r = 0;
         }
-        if(block.links.l){
+        if(block.angle == 180 && block.links.u){
+          block.barriers.u = 0;
+          block.barriers.d = 0;
+        }
+        if(block.angle == 270 && block.links.r){
+          block.barriers.l = 0;
           block.barriers.r = 0;
         }
       }

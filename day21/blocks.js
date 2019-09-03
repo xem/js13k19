@@ -424,7 +424,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         else if(rz == 270){
           space[x][y][z].linkable.l = [x-2,y,z+1];
           space[x][y][z].linkable.r = [x+1,y,z];
-          space[x][y][z].surrogates.push([X=x-1,Y=y,Z=z]);
+          space[x][y][z].surrogates.push([X=x,Y=y-1,Z=z]);
         }
         space[x][y][z].surrogates.push([X,Y,Z+1]);
       
@@ -591,12 +591,8 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
       }
   }
   
-  // 10: accelerator slope up
-  
-  // 11: road with hole
-  
-  // 12: tree
-  else if(n == 12){
+  // 10: tree
+  else if(n == 10){
     if(c=="scene" || c == "vcursor"){
       C.sprite({g:name,w:size,h:size,y:0,z:0,rx:-90,html:"🌲",css:"tree",o:"bottom"});
     }
@@ -639,8 +635,8 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
     }
   }
   
-  // 13: rock
-  else if(n == 13){
+  // 11: rock
+  else if(n == 11){
     if(c == "scene"){
       
       C.cube({g:name,w:100,h:sizeh*z+sizeh,z:-sizeh*z,d:100,b:"#aaa",b2:"#777",b3:"#999"});
