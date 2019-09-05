@@ -95,8 +95,7 @@ ui = () => {
     var json = JSON.parse(prompt("import:",""));
     b.innerHTML = "";
     //console.log(json);
-    if(json){
-      init(json);
-    }
+    init(json);
+    
   }
 }

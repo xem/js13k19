@@ -706,23 +706,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
       
       C.cube({g:name,w:100,h:sizeh*z+sizeh,z:-sizeh*z,d:100,b:"#aaa",b2:"#777",b3:"#999"});
       
-      space[x][y][z] = {
-        fixed: f,
-        free: 0,
-        id: n,
-        inventoryid: selected,
-        linkable: {u: 0, r: 0, d: 0, l: 0},
-        links: { u: 0, r: 0, d: 0, l: 0 },
-        flat: { u: 1, r: 1, d: 1, l: 1},
-        barriers: {u: 0, r: 0, d: 0, l: 0},
-        surrogates: [],
-        surrogate_of: 0,
-        slope: 0,
-        angle: 0,
-        equation: "todo",
-      };
-        
-      for(var Z = 0; Z < z; Z++){
+      for(var Z = 0; Z <= z; Z++){
         space[x][y][Z] = {
           fixed: f,
           free: 0,
@@ -733,13 +717,11 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
           flat: { u: 1, r: 1, d: 1, l: 1},
           barriers: {u: 0, r: 0, d: 0, l: 0},
           surrogates: 0,
-          surrogate_of: [x,y,z],
+          surrogate_of: 0,
           slope: 0,
           angle: 0,
           equation: "todo",
-        };
-        
-        space[x][y][z].surrogates.push([x,y,Z]);
+        }
       }
     }
     else {
