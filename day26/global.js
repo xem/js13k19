@@ -91,7 +91,6 @@ var timer = 0;
 var speeder = 0;
 var carangledisplay = 0;
 var air = 0;
-var acc = 0;
 
 // Temp vars
 var i, j, k, x, y, z;

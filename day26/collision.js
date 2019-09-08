@@ -43,7 +43,7 @@ var testcollision = () => {
       // Apply gravity and fall on the ground or the current block
       ev = +(eval(cellinfo.fall));
       
-      //console.log(carz, cellinfo.fall, ev);
+      console.log(carz, cellinfo.fall, ev);
       if(carz > ev){
         air = 1;
         if(vspeed += .01);
@@ -52,7 +52,6 @@ var testcollision = () => {
           carz = ev;
           vspeed = 0;
           air = 0;
-          oob = 0;
         }
         if(carz < 0){
           carz = 0;
@@ -65,40 +64,38 @@ var testcollision = () => {
     
     // Drive on the road
     else {
+      
+      // Drive on slopes
+      ev = +(eval(cellinfo.fall));
+      carz = ev;
     
-      //log(JSON.stringify(cellinfo));
+      log(JSON.stringify(cellinfo));
       //log(cellinfo.barriers.u, cellinfo.flat.u, (cary%size))
       
       // Barriers, only if block is on the ground
       // up
-      if(carz < 10 && cellinfo.barriers.u && cellinfo.flat.u && (cary%size) < 20){
+      if(carz == 0 && cellinfo.barriers.u && cellinfo.flat.u && (cary%size) < 20){
         //log("u");
         collision = 1;
-        console.log(1);
-        console.log(cellinfo);
-        speedduringcollision = carspeed;
       }
         
       // right
-      else if(carz < 10 && cellinfo.barriers.r && cellinfo.flat.r && (carx%size) > 80){
+      else if(carz == 0 && cellinfo.barriers.r && cellinfo.flat.r && (carx%size) > 80){
         //log("r");
         collision = 1;
-        console.log(2);
         speedduringcollision = carspeed;
       }
         
       // down
-      else if(carz < 10 && cellinfo.barriers.d && cellinfo.flat.d && (cary%size) > 80){
+      else if(carz == 0 && cellinfo.barriers.d && cellinfo.flat.d && (cary%size) > 80){
         //log("d");
         collision = 1;
-        console.log(3);
         speedduringcollision = carspeed;
       }
         // left
-      else if(carz < 10 && cellinfo.barriers.l && cellinfo.flat.l && (carx%size) < 20){
+      else if(carz == 0 && cellinfo.barriers.l && cellinfo.flat.l && (carx%size) < 20){
         //log("l");
         collision = 1;
-        console.log(4);
         speedduringcollision = carspeed;
       }
 
@@ -109,112 +106,21 @@ var testcollision = () => {
         ev = eval(cellinfo.inbounds);
         if((oob && ev) || (!oob && !ev)){
           collision = 1;
-          console.log(5);
           speedduringcollision = carspeed;
         }
       }
-      
-      
-      
-      
-
       
       // oob to not-oob
       else {
         oob = 0;
       }
-      
-      
-      
-      // Accelerator
-      if(cellinfo.id == 8){
-        //console.log(cellinfo.angle==0, carspeed, (carrz > 270 || carrz < 90), cellinfo.angle == 0 && carspeed >= 0 && (carrz > 270 || carrz < 90));
-        if(cellinfo.angle == 0 && carspeed >= 0 && (carrz > 270 || carrz < 90)){
-          carspeed += .2;
-          acc = 1;
-        }
-        else {
-          carspeed -= .2;
-          acc = 1;
-        }
-        
-        /*if(cellinfo.angle == 90 && (carrz > 0 && carrz < 180)){
-          carspeed += .1;
-        }
-        else {
-          carspeed -= .1;
-        }
-        
-        if(cellinfo.angle == 180 && (carrz > 90 && carrz < 270)){
-          carspeed += .1;
-        }
-        else {
-          carspeed -= .1;
-        }
-        
-        if(cellinfo.angle == 270 && (carrz > 180 || carrz < 360)){
-          carspeed += .1;
-        }
-        else {
-          carspeed -= .1;
-        }*/
-      }
-      else {
-         acc = 0;
-      }
-      
-      
-      
-      
-      // Drive on slopes
-      ev = +(eval(cellinfo.fall));
-      //console.log(cellinfo.fall, cary, ev);
-      if(carz >= ev - (z == 0 ? 5 : 20)){
-        if(ev > 0 && carz > 0){
-          vspeed = carz - (ev + 2);
-        }
-        carz = ev+2;
-      }
-      else if(carz == 0 && ev < 15){
-        collision = 1;
-        console.log(6);
-        speedduringcollision = carspeed;
-      }
-      else {
-        oob = 1;
-      }
     }
   }
 };
 
   
   
-var justslopes = () => {
   
-  
-  
-  //collision = 0;
-  var x,y,z,cellinfo,ev;
-  
-  // Get cell info
-  [x,y,z] = [~~(carx/size),~~(cary/size),~~(carz/sizeh)];
-  try{cellinfo = space[x][y][z];}catch(e){}
-  //console.log(cellinfo, carz);
-  //console.log(cellinfo.inbounds);
-  
-  if(cellinfo){    
-    // Drive on slopes
-    ev = +(eval(cellinfo.fall));
-    if(carz >= ev - (z == 0 ? 5 : 20)){
-      if(carz > 0 && ev > 0){
-        carz = ev+2;
-      }
-    }
-    else {
-      oob = 1;
-    }
-  }
-};
   
   
   

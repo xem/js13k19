@@ -168,7 +168,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   // 4: jumper
   else if(n == 4){
     
-    C.plane({g:name,w:size*.8,h:106,z:18,rx:-20,b:"#d00",o:"center"});
+    C.plane({g:name,w:size*.8,h:size*.7,y:.2*size,z:sizeh/4,rx:-20,b:"#d00",o:"center"});
     C.plane({g:name,w:size*.8,h:size*.2,y:-10,rx:-90,z:sizeh*.2,b:"linear-gradient(90deg,#666 5px,transparent 5px, transparent 75px, #666 75px)",o:"center"});
     
     if(c == "scene"){
@@ -180,12 +180,12 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
-        barriers: {u: 0, r: 0, d: 0, l: 0},
+        barriers: {u: 1, r: 1, d: 1, l: 1},
         surrogates: 0,
         surrogate_of: 0,
         slope: 1,
         angle: rz,
-        fall: rz == 0 ? `${z*sizeh}+(100-(cary%size))/2` : rz == 90 ? `${z*sizeh}+(carx%size)/2` : rz == 180 ? `${z*sizeh}+(cary%size)/2` : `${z*sizeh}+(100-(carx%size))/2`,
+        fall: "",
         inbounds: ""
       };    
       
@@ -213,7 +213,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   else if(n == 5){
       
       C.plane({g:name,z:sizeh/2,w:size*.8,h:112,o:"center",b:"#d90",rx:-26.5});
-      C.plane({g:name,w:size*.8,h:44,y:-40,rx:-90,z:22,b:"linear-gradient(90deg,#666 5px,transparent 5px, transparent 75px, #666 75px)",o:"center"});
+      C.plane({g:name,w:size*.8,h:40,y:-40,rx:-90,z:20,b:"linear-gradient(90deg,#666 5px,transparent 5px, transparent 75px, #666 75px)",o:"center"});
       
       if(c == "scene"){
         space[x][y][z] = {
@@ -229,11 +229,11 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
           surrogate_of: 0,
           slope: 1,
           angle: rz,
-          fall: rz == 0 ? `${z*sizeh}+(100-(cary%size))/2` : rz == 90 ? `${z*sizeh}+(carx%size)/2` : rz == 180 ? `${z*sizeh}+(cary%size)/2` : `${z*sizeh}+(100-(carx%size))/2`,
+          fall: `${z*sizeh}+(100-(cary%size))/2`,
           inbounds: ""
         };
 
-        //console.log(space[x][y][z]);
+        console.log(space[x][y][z]);
         
         // Make the front (higher) and bottom side linkable
         if(rz == 0){
@@ -267,7 +267,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
           surrogate_of: [x, y, z],
           slope: 1,
           angle: rz,
-          fall: rz == 0 ? `${z*sizeh}+(100-(cary%size))/2` : rz == 90 ? `${z*sizeh}+(carx%size)/2` : rz == 180 ? `${z*sizeh}+(cary%size)/2` : `${z*sizeh}+(100-(carx%size))/2`,
+          fall: "0",
           inbounds: ""
         };
       }
@@ -276,12 +276,9 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   // 6: slope long "up"
   else if(n == 6){
     
-      C.plane({g:name,w:size*.8,h:107,z:17,o:"center",b:"#d90",rx:-19});
-      
-      C.plane({g:name,y:-size,z:42,w:size*.8,h:107,o:"center",b:"#d90",rx:-9});
-      
+      C.plane({g:name,w:size*.8,h:105,z:sizeh*.36,o:"center",b:"#d90",rx:-20});
+      C.plane({g:name,y:-size,z:sizeh*.84,w:size*.8,h:107,o:"center",b:"#d90",rx:-7});
       C.plane({g:name,w:size*.8,h:sizeh,y:-size-40,rx:-90,z:sizeh*.4,b:"linear-gradient(90deg,#666 5px,transparent 5px, transparent 75px, #666 75px)",o:"center"});
-      
       C.plane({g:name,w:size*.8,h:sizeh*.6,y:-40,rx:-90,z:sizeh*.3,b:"linear-gradient(90deg,#666 5px,transparent 5px, transparent 75px, #666 75px)",o:"center"});
       
       if(c == "scene"){
@@ -299,7 +296,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
           surrogate_of: 0,
           slope: 1,
           angle: rz,
-          fall: rz == 0 ? `${z*sizeh}+(100-(cary%size))/4` : rz == 90 ? `${z*sizeh}+(carx%size)/4` : rz == 180 ? `${z*sizeh}+(cary%size)/4` : `${z*sizeh}+(100-(carx%size))/4`,
+          fall: "",
           inbounds: ""
         };
         
@@ -351,12 +348,12 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
             linkable: {u: 0, r: 0, d: 0, l: 0},
             links: { u: 0, r: 0, d: 0, l: 0 },
             flat: { u: 1, r: 1, d: 1, l: 1},
-            barriers: {u: 0, r: 0, d: 0, l: 0},
+            barriers: {u: 1, r: 1, d: 1, l: 1},
             surrogates: 0,
             surrogate_of: [x,y,z],
             slope: 1,
             angle: rz,
-            fall: rz == 0 ? `${z*sizeh+25}+(100-(cary%size))/4` : rz == 90 ? `${z*sizeh+25}+(carx%size)/4` : rz == 180 ? `${z*sizeh+25}+(cary%size)/4` : `${z*sizeh+25}+(100-(carx%size))/4`,
+            fall: "",
             inbounds: ""
           };
           
@@ -369,12 +366,12 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
             linkable: {u: 0, r: 0, d: 0, l: 0},
             links: { u: 0, r: 0, d: 0, l: 0 },
             flat: { u: 1, r: 1, d: 1, l: 1},
-            barriers: {u: 0, r: 0, d: 0, l: 0},
+            barriers: {u: 1, r: 1, d: 1, l: 1},
             surrogates: 0,
             surrogate_of: [x, y, z],
             slope: 1,
             angle: rz,
-            fall: rz == 0 ? `${z*sizeh}+(100-(cary%size))/4` : rz == 90 ? `${z*sizeh}+(carx%size)/4` : rz == 180 ? `${z*sizeh}+(cary%size)/4` : `${z*sizeh}+(100-(carx%size))/4`,
+            fall: "",
             inbounds: ""
           };
           
@@ -386,12 +383,12 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
             linkable: {u: 0, r: 0, d: 0, l: 0},
             links: { u: 0, r: 0, d: 0, l: 0 },
             flat: { u: 1, r: 1, d: 1, l: 1},
-            barriers: {u: 0, r: 0, d: 0, l: 0},
+            barriers: {u: 1, r: 1, d: 1, l: 1},
             surrogates: 0,
             surrogate_of: [x, y, z],
             slope: 1,
             angle: rz,
-            fall: rz == 0 ? `${z*sizeh+25}+(100-(cary%size))/4` : rz == 90 ? `${z*sizeh+25}+(carx%size)/4` : rz == 180 ? `${z*sizeh+25}+(cary%size)/4` : `${z*sizeh+25}+(100-(carx%size))/4`,
+            fall: "",
             inbounds: ""
           };
         }
@@ -401,10 +398,8 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   // 7: slope long "down"
   else if(n == 7){
 
-      C.plane({g:name,w:size*.8,h:103,z:7,o:"center",b:"#d90",rx:-8});
-      C.plane({g:name,y:-size,z:32,w:size*.8,h:105,o:"center",b:"#d90",rx:-20});
-      
-      
+      C.plane({g:name,w:size*.8,h:105,z:6,o:"center",b:"#d90",rx:-7});
+      C.plane({g:name,y:-size,z:32,w:size*.8,h:107,o:"center",b:"#d90",rx:-20});
       C.plane({g:name,w:size*.8,h:sizeh,y:-size-40,rx:-90,z:sizeh*.4,b:"linear-gradient(90deg,#666 5px,transparent 5px, transparent 75px, #666 75px)",o:"center"});
       C.plane({g:name,w:size*.8,h:sizeh*.2,y:-40,rx:-90,z:sizeh*.1,b:"linear-gradient(90deg,#666 5px,transparent 5px, transparent 75px, #666 75px)",o:"center"});
       
@@ -422,7 +417,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
           surrogate_of: 0,
           slope: 1,
           angle: rz,
-          fall: rz == 0 ? `${z*sizeh}+(100-(cary%size))/4` : rz == 90 ? `${z*sizeh}+(carx%size)/4` : rz == 180 ? `${z*sizeh}+(cary%size)/4` : `${z*sizeh}+(100-(carx%size))/4`,
+          fall: "",
           inbounds: ""
         };
         
@@ -469,12 +464,12 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
             linkable: {u: 0, r: 0, d: 0, l: 0},
             links: { u: 0, r: 0, d: 0, l: 0 },
             flat: { u: 1, r: 1, d: 1, l: 1},
-            barriers: {u: 0, r: 0, d: 0, l: 0},
+            barriers: {u: 1, r: 1, d: 1, l: 1},
             surrogates: 0,
             surrogate_of: [x, y, z],
             slope: 1,
             angle: rz,
-            fall: rz == 0 ? `${z*sizeh+25}+(100-(cary%size))/4` : rz == 90 ? `${z*sizeh+25}+(carx%size)/4` : rz == 180 ? `${z*sizeh+25}+(cary%size)/4` : `${z*sizeh+25}+(100-(carx%size))/4`,
+            fall: "",
             inbounds: ""
           };
           
@@ -487,12 +482,12 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
             linkable: {u: 0, r: 0, d: 0, l: 0},
             links: { u: 0, r: 0, d: 0, l: 0 },
             flat: { u: 1, r: 1, d: 1, l: 1},
-            barriers: {u: 0, r: 0, d: 0, l: 0},
+            barriers: {u: 1, r: 1, d: 1, l: 1},
             surrogates: 0,
             surrogate_of: [x, y, z],
             slope: 1,
             angle: rz,
-            fall: rz == 0 ? `${z*sizeh}+(100-(cary%size))/4` : rz == 90 ? `${z*sizeh}+(carx%size)/4` : rz == 180 ? `${z*sizeh}+(cary%size)/4` : `${z*sizeh}+(100-(carx%size))/4`,
+            fall: "",
             inbounds: ""
           };
           
@@ -504,12 +499,12 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
             linkable: {u: 0, r: 0, d: 0, l: 0},
             links: { u: 0, r: 0, d: 0, l: 0 },
             flat: { u: 1, r: 1, d: 1, l: 1},
-            barriers: {u: 0, r: 0, d: 0, l: 0},
+            barriers: {u: 1, r: 1, d: 1, l: 1},
             surrogates: 0,
             surrogate_of: [x, y, z],
             slope: 1,
             angle: rz,
-            fall: rz == 0 ? `${z*sizeh+25}+(100-(cary%size))/4` : rz == 90 ? `${z*sizeh+25}+(carx%size)/4` : rz == 180 ? `${z*sizeh+25}+(cary%size)/4` : `${z*sizeh+25}+(100-(carx%size))/4`,
+            fall: "",
             inbounds: ""
           };
         }
@@ -562,7 +557,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   else if(n == 9){
       
     C.plane({g:name,w:size*.8,h:112,z:sizeh/2,o:"center",css:"acc",rx:-26.5});
-    C.plane({g:name,w:size*.8,h:44,y:-40,rx:-90,z:22,b:"linear-gradient(90deg,#666 5px,transparent 5px, transparent 75px, #666 75px)",o:"center"});
+    C.plane({g:name,w:size*.8,h:40,y:-40,rx:-90,z:20,b:"linear-gradient(90deg,#666 5px,transparent 5px, transparent 75px, #666 75px)",o:"center"});
     
     if(c == "scene"){
       space[x][y][z] = {
@@ -578,7 +573,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         surrogate_of: 0,
         slope: 1,
         angle: rz,
-        fall: rz == 0 ? `${z*sizeh}+(100-(cary%size))/2` : rz == 90 ? `${z*sizeh}+(carx%size)/2` : rz == 180 ? `${z*sizeh}+(cary%size)/2` : `${z*sizeh}+(100-(carx%size))/2`,
+        fall: "",
         inbounds: ""
       };    
       
@@ -613,7 +608,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         surrogate_of: [x, y, z],
         slope: 1,
         angle: rz,
-        fall: "0",
+        fall: "",
         inbounds: ""
       };
     }
@@ -622,7 +617,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   // 10: accelerator slope up
   else if(n == 10){
     C.plane({g:name,w:size*.8,h:112,z:sizeh/2,o:"center",css:"acc",rx:-26.5,rz:180});
-    C.plane({g:name,w:size*.8,h:44,y:-40,rx:-90,z:22,b:"linear-gradient(90deg,#666 5px,transparent 5px, transparent 75px, #666 75px)",o:"center"});
+    C.plane({g:name,w:size*.8,h:40,y:-40,rx:-90,z:20,b:"linear-gradient(90deg,#666 5px,transparent 5px, transparent 75px, #666 75px)",o:"center"});
       
     if(c == "scene"){
       space[x][y][z] = {
@@ -638,7 +633,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         surrogate_of: 0,
         slope: 1,
         angle: rz,
-        fall: rz == 0 ? `${z*sizeh}+(100-(cary%size))/2` : rz == 90 ? `${z*sizeh}+(carx%size)/2` : rz == 180 ? `${z*sizeh}+(cary%size)/2` : `${z*sizeh}+(100-(carx%size))/2`,
+        fall: "",
         inbounds: ""
       };    
       
@@ -673,7 +668,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         surrogate_of: [x, y, z],
         slope: 1,
         angle: rz,
-        fall: "0",
+        fall: "",
         inbounds: ""
       };
     }
@@ -734,7 +729,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   else if(n == 13){
     if(c == "scene"){
       
-      C.cube({g:name,w:100,h:sizeh*z+sizeh,z:-sizeh*z-1,d:100,b:"#aaa",b2:"#777",b3:"#999"});
+      C.cube({g:name,w:100,h:sizeh*z+sizeh,z:-sizeh*z,d:100,b:"#aaa",b2:"#777",b3:"#999"});
       
       space[x][y][z] = {
         fixed: f,
@@ -744,7 +739,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         linkable: {u: 0, r: 0, d: 0, l: 0},
         links: { u: 0, r: 0, d: 0, l: 0 },
         flat: { u: 1, r: 1, d: 1, l: 1},
-        barriers: {u: 1, r: 1, d: 1, l: 1},
+        barriers: {u: 0, r: 0, d: 0, l: 0},
         surrogates: [],
         surrogate_of: 0,
         slope: 0,
@@ -762,7 +757,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
           linkable: {u: 0, r: 0, d: 0, l: 0},
           links: { u: 0, r: 0, d: 0, l: 0 },
           flat: { u: 1, r: 1, d: 1, l: 1},
-          barriers: {u: 1, r: 1, d: 1, l: 1},
+          barriers: {u: 0, r: 0, d: 0, l: 0},
           surrogates: 0,
           surrogate_of: [x,y,z],
           slope: 0,

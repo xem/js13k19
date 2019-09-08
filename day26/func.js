@@ -277,27 +277,25 @@ var barriers = i => {
         
         // Remove forward/back barrier if link
         if(block.links.u){
-          block.barriers.u = 0;
+          block.barriers.d = 0;
         }
         if(block.links.d){
-          block.barriers.d = 0;
+          block.barriers.u = 0;
         }
 
         if(block.links.r){
-          block.barriers.r = 0;
-        }
-        if(block.links.l){
           block.barriers.l = 0;
         }
-        
-        console.log(block);
+        if(block.links.l){
+          block.barriers.r = 0;
+        }
       }
       
-      // #9: accelerator slope down/up
+      // #9: accelerator slope down
       else if(block.id == 9){
         
         // Reset barriers
-
+      
         C.$(`road-${x}-${y}-${z}`).children[0].style.border = "0";
       
         //console.log(block, x, y, z);
@@ -319,61 +317,19 @@ var barriers = i => {
         }
       }
       
-      else if(block.id == 10){
-        
-        // Reset barriers
-        console.log(1);
-        C.$(`road-${x}-${y}-${z}`).children[0].style.border = "0";
-      
-        //console.log(block, x, y, z);
-
-        block.barriers = {u: 0, r: 0, d: 0, l: 0};
-        
-        // Add back barrier if no link
-        if(block.angle == 0 && !block.links.u){
-          block.barriers.u = 1;
-        }
-        if(block.angle == 90 && !block.links.r){
-          block.barriers.r = 1;
-        }
-        if(block.angle == 180 && !block.links.d){
-          block.barriers.d = 1;
-        }
-        if(block.angle == 270 && !block.links.l){
-          block.barriers.l = 1;
-        }
-      }
-      
       // Draw barriers
       
-      if(block.id == 8 || block.id == 10){
-        if(block.barriers[uu]){
-         C.$(`road-${x}-${y}-${z}`).children[0].style.borderBottom = "5px solid #000";
-        }
-        if(block.barriers[dd]){
-         C.$(`road-${x}-${y}-${z}`).children[0].style.borderTop = "5px solid #000";
-        }
-        if(block.barriers[ll]){
-         C.$(`road-${x}-${y}-${z}`).children[0].style.borderRight = "5px solid #000";
-        }
-        if(block.barriers[rr]){
-         C.$(`road-${x}-${y}-${z}`).children[0].style.borderLeft = "5px solid #000";
-        }
+      if(block.barriers[uu]){
+       C.$(`road-${x}-${y}-${z}`).children[0].style.borderTop = "5px solid #000";
       }
-      
-      else {
-        if(block.barriers[uu]){
-         C.$(`road-${x}-${y}-${z}`).children[0].style.borderTop = "5px solid #000";
-        }
-        if(block.barriers[dd]){
-         C.$(`road-${x}-${y}-${z}`).children[0].style.borderBottom = "5px solid #000";
-        }
-        if(block.barriers[ll]){
-         C.$(`road-${x}-${y}-${z}`).children[0].style.borderLeft = "5px solid #000";
-        }
-        if(block.barriers[rr]){
-         C.$(`road-${x}-${y}-${z}`).children[0].style.borderRight = "5px solid #000";
-        }
+      if(block.barriers[dd]){
+       C.$(`road-${x}-${y}-${z}`).children[0].style.borderBottom = "5px solid #000";
+      }
+      if(block.barriers[ll]){
+       C.$(`road-${x}-${y}-${z}`).children[0].style.borderLeft = "5px solid #000";
+      }
+      if(block.barriers[rr]){
+       C.$(`road-${x}-${y}-${z}`).children[0].style.borderRight = "5px solid #000";
       }
     }
   }

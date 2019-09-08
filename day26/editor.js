@@ -61,7 +61,7 @@ editor = () => {
           "scene",
           cursorx, cursory, gridz,
           0,
-          ((inventory[selected][0] == 0 || inventory[selected][0] == 11) ? 0 : cursorrz),
+          ((inventory[selected][0] == 0 || inventory[selected][0] == 10) ? 0 : cursorrz),
           0
         )
       }

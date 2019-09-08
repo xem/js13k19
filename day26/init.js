@@ -243,11 +243,11 @@ var init = (t = {}) => {
     carry = 0;
     carrz = 0;
     
-    b.innerHTML = "<textarea id=deb rows=5 cols=180></textarea><div id=viewport><div id=camera><div id=scene></div></div><h1 onclick='mode=1;init(track)'>X</h1><h1 id=time></h1><h1 id=speed>";
+    b.innerHTML = "<textarea id=deb rows=3 cols=180></textarea><div id=viewport><div id=camera><div id=scene></div></div><h1 onclick='mode=1;init(track)'>X</h1><h1 id=time></h1><h1 id=speed>";
     
     
     // Create the car
-    carz = 50;
+    carz = 500;
     C.group({n:"car",w:0,h:0,rz:90,x:carx,y:cary,z:carz});
 
       // car body
@@ -293,7 +293,6 @@ var init = (t = {}) => {
     timer = -1;
     speeder = 0;
     air = 1;
-    vspeed = 0;
     
   }
   

@@ -55,12 +55,12 @@ var init = (t = {}) => {
     // UI
     
     // menu
-    b.innerHTML += `<textarea id=deb rows=1 cols=1></textarea><div id=menu>Camera<br>
+    b.innerHTML += `<div id=menu>Camera<br>
     <div id=gridup>⇑</div> <div id=griddown>⇓</div> <div id=gridrl>↶</div> <div id=gridrr>↷</div><br>⎯<br>Block<br><div id=blockrl>↶</div> <div id=blockrr>↷</div><br><br><p>Add: <b>space+wasd</b> Remove: <b>Del</b><br>Play: <b>Enter</b></p>⎯<br><div id=blockc style=width:120px>Clear all</div><div id=exp>Export</div> <div id=load>Load</div>⎯<br><div onclick="mode = 0; init(); cl()">Exit`;
     b.innerHTML += `<div id=parts>`;
     
     // inventory
-    for(i = 0; i < 14; i ++){
+    for(i = 0; i < 6; i ++){
       selected = 0;
       parts.innerHTML += `<div class="part ${i==0?"selected":""}" id=part${i} onclick=select(${i})><div class=visual id=visual${i}></div><div class=remaining id=qty${i}>`;
     }
@@ -172,9 +172,9 @@ var init = (t = {}) => {
     ];*/
     
     // Inventory
-    inventory = //track.inventory || [];
+    inventory = track.inventory || [];
     
-    [ // [id, quantity, remaining]
+    /*[ // [id, quantity, remaining]
       [0, 60, 60], // road 
       [1, 1, 1], // start
       [2, 1, 1], // end
@@ -189,7 +189,7 @@ var init = (t = {}) => {
       [11, 20, 20], // road with hole
       [12, 20, 20], // trees
       [13, 20, 20], // rocks
-    ];
+    ];*/
     
     for(i in inventory){
       j = inventory[i];
@@ -243,11 +243,11 @@ var init = (t = {}) => {
     carry = 0;
     carrz = 0;
     
-    b.innerHTML = "<textarea id=deb rows=5 cols=180></textarea><div id=viewport><div id=camera><div id=scene></div></div><h1 onclick='mode=1;init(track)'>X</h1><h1 id=time></h1><h1 id=speed>";
+    b.innerHTML = "<div id=viewport><div id=camera><div id=scene></div></div><h1 onclick='mode=1;init(track)'>X</h1><h1 id=time></h1><h1 id=speed>";
     
     
     // Create the car
-    carz = 50;
+    carz = 200;
     C.group({n:"car",w:0,h:0,rz:90,x:carx,y:cary,z:carz});
 
       // car body
@@ -293,7 +293,6 @@ var init = (t = {}) => {
     timer = -1;
     speeder = 0;
     air = 1;
-    vspeed = 0;
     
   }
   

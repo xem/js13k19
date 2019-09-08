@@ -277,27 +277,25 @@ var barriers = i => {
         
         // Remove forward/back barrier if link
         if(block.links.u){
-          block.barriers.u = 0;
+          block.barriers.d = 0;
         }
         if(block.links.d){
-          block.barriers.d = 0;
+          block.barriers.u = 0;
         }
 
         if(block.links.r){
-          block.barriers.r = 0;
-        }
-        if(block.links.l){
           block.barriers.l = 0;
         }
-        
-        console.log(block);
+        if(block.links.l){
+          block.barriers.r = 0;
+        }
       }
       
-      // #9: accelerator slope down/up
+      // #9: accelerator slope down
       else if(block.id == 9){
         
         // Reset barriers
-
+      
         C.$(`road-${x}-${y}-${z}`).children[0].style.border = "0";
       
         //console.log(block, x, y, z);
@@ -319,61 +317,19 @@ var barriers = i => {
         }
       }
       
-      else if(block.id == 10){
-        
-        // Reset barriers
-        console.log(1);
-        C.$(`road-${x}-${y}-${z}`).children[0].style.border = "0";
-      
-        //console.log(block, x, y, z);
-
-        block.barriers = {u: 0, r: 0, d: 0, l: 0};
-        
-        // Add back barrier if no link
-        if(block.angle == 0 && !block.links.u){
-          block.barriers.u = 1;
-        }
-        if(block.angle == 90 && !block.links.r){
-          block.barriers.r = 1;
-        }
-        if(block.angle == 180 && !block.links.d){
-          block.barriers.d = 1;
-        }
-        if(block.angle == 270 && !block.links.l){
-          block.barriers.l = 1;
-        }
-      }
-      
       // Draw barriers
       
-      if(block.id == 8 || block.id == 10){
-        if(block.barriers[uu]){
-         C.$(`road-${x}-${y}-${z}`).children[0].style.borderBottom = "5px solid #000";
-        }
-        if(block.barriers[dd]){
-         C.$(`road-${x}-${y}-${z}`).children[0].style.borderTop = "5px solid #000";
-        }
-        if(block.barriers[ll]){
-         C.$(`road-${x}-${y}-${z}`).children[0].style.borderRight = "5px solid #000";
-        }
-        if(block.barriers[rr]){
-         C.$(`road-${x}-${y}-${z}`).children[0].style.borderLeft = "5px solid #000";
-        }
+      if(block.barriers[uu]){
+       C.$(`road-${x}-${y}-${z}`).children[0].style.borderTop = "5px solid #000";
       }
-      
-      else {
-        if(block.barriers[uu]){
-         C.$(`road-${x}-${y}-${z}`).children[0].style.borderTop = "5px solid #000";
-        }
-        if(block.barriers[dd]){
-         C.$(`road-${x}-${y}-${z}`).children[0].style.borderBottom = "5px solid #000";
-        }
-        if(block.barriers[ll]){
-         C.$(`road-${x}-${y}-${z}`).children[0].style.borderLeft = "5px solid #000";
-        }
-        if(block.barriers[rr]){
-         C.$(`road-${x}-${y}-${z}`).children[0].style.borderRight = "5px solid #000";
-        }
+      if(block.barriers[dd]){
+       C.$(`road-${x}-${y}-${z}`).children[0].style.borderBottom = "5px solid #000";
+      }
+      if(block.barriers[ll]){
+       C.$(`road-${x}-${y}-${z}`).children[0].style.borderLeft = "5px solid #000";
+      }
+      if(block.barriers[rr]){
+       C.$(`road-${x}-${y}-${z}`).children[0].style.borderRight = "5px solid #000";
       }
     }
   }
@@ -515,7 +471,10 @@ var turns = () => {
         else {
           if(C.$(`road-${x}-${y}-${z}`)){
             C.$(`road-${x}-${y}-${z}`).children[0].style.borderRadius = "0";
-            block.flat = {u: 1, r: 1, d: 1, l: 1};
+            block.flat.u = 0;
+            block.flat.r = 0;
+            block.flat.d = 0;
+            block.flat.l = 0;
           }
         }
       }
@@ -523,7 +482,7 @@ var turns = () => {
   }
 }
 
-// Generate the equations for every road block 
+// Generate the oob equations for every road block 
 var equations = () => {
   for(i of roads){
     if(i){
@@ -535,40 +494,22 @@ var equations = () => {
         // #0: basic road block
         if(block.id == 0){
       
-          // Turns
-          
-          // down left
           if(block.links.u && block.links.r && !block.links.d && !block.links.l){
-            block.inbounds = `dist2([carx,cary],[${x*size+size},${y*size}])<80**2`;
+            block.equation = `dist2([x,y],[${x*size+size},${y*size}])>(size*.8)**2`;
           }
-          
-          // up left
           else if(!block.links.u && block.links.r && block.links.d && !block.links.l){
-            block.inbounds = `dist2([carx,cary],[${x*size+size},${y*size+size}])<80**2`;
+            block.equation = `dist2([x,y],[${x*size+size},${y*size+size}])>(size*.8)**2`;
           }
-          
-          // up right
           else if(!block.links.u && !block.links.r && block.links.d && block.links.l){
-            block.inbounds = `dist2([carx,cary],[${x*size},${y*size+size}])<80**2`;
+            block.equation = `dist2([x,y],[${x*size},${y*size+size}])>(size*.8)**2`;
           }
-          
-          // down right
           else if(block.links.u && !block.links.r && !block.links.d && block.links.l){
-            block.inbounds = `dist2([carx,cary],[${x*size},${y*size}])<80**2`;
+            block.equation = `dist2([x,y],[${x*size},${y*size}])>(size*.8)**2`;
           }
           else {
-            block.inbounds = "true";
+            block.equation = "false";
           }
         }
-        
-        // Flags, accelerator
-        else if(block.id == 1 || block.id == 2 || block.id == 3 || block.id == 8){
-          //block.inbounds = `x > ${x*size+(block.links.l?0:20)} && x < ${x*size+(block.links.r?100:80)} && y > ${y*size+(block.links.u?0:20)} && y < ${y*size+(block.links.d?100:80)}`;  
-        }
-        
-        
-        
-        
       }
     }
   }
