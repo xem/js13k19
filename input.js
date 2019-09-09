@@ -41,7 +41,7 @@ ui = () => {
     cursorrzreal -= 90;
     if(cursorrz == -90) cursorrz = 270;
     C.move({n:"cursor",rz:cursorrzreal})
-    console.log(cursorrz);
+    //console.log(cursorrz);
   }
 
   blockrr.onclick = () => {
@@ -50,7 +50,7 @@ ui = () => {
       cursorrzreal += 90;
       if(cursorrz == 360) cursorrz = 0;
       C.move({n:"cursor",rz:cursorrzreal})
-    console.log(cursorrz);
+    //console.log(cursorrz);
     /*}
     else {
       cursorz = 0;

@@ -21,8 +21,14 @@ var race = () => {
           if(carspeed < (oob ? .4 : acc ? 1.5 : .7)){
             carspeed += .002;
           }
+          if(carspeed < -.7){
+            carspeed += .1;
+          }
           if(carspeed > 1.5){
             carspeed = 1.5;
+          }
+          if(carspeed > .7){
+            carspeed *= .999;
           }
           //console.log(carspeed, acc);
         }
@@ -30,11 +36,17 @@ var race = () => {
         // Down (go back)
         else if(d){
           //if(carspeed > 0 && !collision) carspeed = 0;
-          if(carspeed > (oob ? -.4 : acc ? -105 : -.7)){
+          if(carspeed > (oob ? -.4 : acc ? -1.5 : -.7)){
             carspeed -= .002;
+          }
+          if(carspeed > .7){
+            carspeed -= .1;
           }
           if(carspeed < -1.5){
             carspeed = -1.5;
+          }
+          if(carspeed < -.7){
+            carspeed *= .999;
           }
         }
         
@@ -46,6 +58,10 @@ var race = () => {
         // Up + left or down + right: Z angle decreases
         if((l && u) || (r && d) ){
           carrz -= .8;
+          if(carrz < 0){
+            carrz += 360;
+          }
+          
           if(carangledisplay > -15){
             carangledisplay -= .5;
           }
@@ -54,6 +70,9 @@ var race = () => {
         // Up + right or down + left: angle increases
         else if((r && u) || (l && d)){
           carrz += .8;
+          if(carrz >= 360){
+            carrz -= 360;
+          }
           if(carangledisplay < 15){
             carangledisplay += .5;
           }
@@ -130,7 +149,7 @@ var race = () => {
     }
     
     if(collision){
-      carspeed = speedduringcollision >= 0 ? -.1 : .1;
+      carspeed = speedduringcollision >= 0 ? -.2 : .2;
       collision -= .1;
       if(collision <= 0) collision = 0;
     }
@@ -153,6 +172,7 @@ var race = () => {
   log("coll",collision);
   log("carspeed",carspeed.toFixed(3));
   log("vspeed",vspeed);
+  log("carrz",carrz);
   
 }
 

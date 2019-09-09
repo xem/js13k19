@@ -290,7 +290,7 @@ var barriers = i => {
           block.barriers.l = 0;
         }
         
-        console.log(block);
+        //console.log(block);
       }
       
       // #9: accelerator slope down/up
@@ -322,7 +322,7 @@ var barriers = i => {
       else if(block.id == 10){
         
         // Reset barriers
-        console.log(1);
+        //console.log(1);
         C.$(`road-${x}-${y}-${z}`).children[0].style.border = "0";
       
         //console.log(block, x, y, z);

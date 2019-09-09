@@ -74,8 +74,8 @@ var testcollision = () => {
       if(carz < 10 && cellinfo.barriers.u && cellinfo.flat.u && (cary%size) < 20){
         //log("u");
         collision = 1;
-        console.log(1);
-        console.log(cellinfo);
+        //console.log(1);
+        //console.log(cellinfo);
         speedduringcollision = carspeed;
       }
         
@@ -83,7 +83,7 @@ var testcollision = () => {
       else if(carz < 10 && cellinfo.barriers.r && cellinfo.flat.r && (carx%size) > 80){
         //log("r");
         collision = 1;
-        console.log(2);
+        //console.log(2);
         speedduringcollision = carspeed;
       }
         
@@ -91,14 +91,14 @@ var testcollision = () => {
       else if(carz < 10 && cellinfo.barriers.d && cellinfo.flat.d && (cary%size) > 80){
         //log("d");
         collision = 1;
-        console.log(3);
+        //console.log(3);
         speedduringcollision = carspeed;
       }
         // left
       else if(carz < 10 && cellinfo.barriers.l && cellinfo.flat.l && (carx%size) < 20){
         //log("l");
         collision = 1;
-        console.log(4);
+        //console.log(4);
         speedduringcollision = carspeed;
       }
 
@@ -109,7 +109,7 @@ var testcollision = () => {
         ev = eval(cellinfo.inbounds);
         if((oob && ev) || (!oob && !ev)){
           collision = 1;
-          console.log(5);
+          //console.log(5);
           speedduringcollision = carspeed;
         }
       }
@@ -128,36 +128,81 @@ var testcollision = () => {
       
       // Accelerator
       if(cellinfo.id == 8){
-        //console.log(cellinfo.angle==0, carspeed, (carrz > 270 || carrz < 90), cellinfo.angle == 0 && carspeed >= 0 && (carrz > 270 || carrz < 90));
-        if(cellinfo.angle == 0 && carspeed >= 0 && (carrz > 270 || carrz < 90)){
-          carspeed += .2;
-          acc = 1;
-        }
-        else {
-          carspeed -= .2;
-          acc = 1;
+        console.log(cellinfo.angle, carspeed, carrz);
+        
+        // acc up
+        if(cellinfo.angle == 0){
+
+          // car in the same direction as the road: accelerate
+          if(
+            carrz > 270 || carrz < 90
+          ){
+            carspeed += .2;
+            acc = 1;
+          }
+
+          // else, decelerate
+          else {
+            carspeed -= .2;
+            acc = 1;
+          }
         }
         
-        /*if(cellinfo.angle == 90 && (carrz > 0 && carrz < 180)){
-          carspeed += .1;
-        }
-        else {
-          carspeed -= .1;
+        
+        // acc right
+        else if(cellinfo.angle == 90){
+
+          // car in the same direction as the road: accelerate
+          if(
+            carrz > 0 && carrz < 180
+          ){
+            carspeed += .2;
+            acc = 1;
+          }
+
+          // else, decelerate
+          else {
+            carspeed -= .2;
+            acc = 1;
+          }
         }
         
-        if(cellinfo.angle == 180 && (carrz > 90 && carrz < 270)){
-          carspeed += .1;
-        }
-        else {
-          carspeed -= .1;
+        // acc down
+        else if(cellinfo.angle == 180){
+
+          // car in the same direction as the road: accelerate
+          if(
+            carrz > 90 && carrz < 270
+          ){
+            carspeed += .2;
+            acc = 1;
+          }
+
+          // else, decelerate
+          else {
+            carspeed -= .2;
+            acc = 1;
+          }
         }
         
-        if(cellinfo.angle == 270 && (carrz > 180 || carrz < 360)){
-          carspeed += .1;
+        // acc up
+        else if(cellinfo.angle == 270){
+
+          // car in the same direction as the road: accelerate
+          if(
+            carrz > 180 && carrz < 360
+          ){
+            carspeed += .2;
+            acc = 1;
+          }
+
+          // else, decelerate
+          else {
+            carspeed -= .2;
+            acc = 1;
+          }
         }
-        else {
-          carspeed -= .1;
-        }*/
+
       }
       else {
          acc = 0;
@@ -177,7 +222,7 @@ var testcollision = () => {
       }
       else if(carz == 0 && ev < 15){
         collision = 1;
-        console.log(6);
+        //console.log(6);
         speedduringcollision = carspeed;
       }
       else {
