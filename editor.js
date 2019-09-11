@@ -14,10 +14,10 @@ editor = () => {
   }
   
   // arrow keys (move cursor)
-  if(L) cursorx --;
-  else if(R) cursorx ++;
-  else if(U) cursory --;
-  else if(D) cursory ++;
+  if(L && cursorx > 1) cursorx --;
+  else if(R && cursorx < 18) cursorx ++;
+  else if(U && cursory > 1) cursory --;
+  else if(D && cursory < 18) cursory ++;
   
   document.title = [cursorx,cursory,gridz];
   
@@ -41,6 +41,7 @@ editor = () => {
           onice = 1;
         }
       }
+     
       
       if(!onice){
         

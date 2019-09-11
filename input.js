@@ -64,7 +64,7 @@ ui = () => {
     //roads = [];
     //roadlinks = [];
     b.innerHTML = "";
-    init();
+    init(originaltrack);
   }
   
   // Export

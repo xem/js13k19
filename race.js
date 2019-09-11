@@ -21,19 +21,22 @@ var race = () => {
         carspeed = -1.5;
       }
       
-      if(!air){
+      if(!air && !onice){
         
         // Up (go forward)
         if(u){
           //if(carspeed < 0 && !collision) carspeed = 0;
           if(carspeed < (oob ? .4 : acc ? 1.5 : .7)){
-            carspeed += .002;
+            carspeed = carspeed + .002;
           }
           if(carspeed < -.7){
             carspeed += .1;
           }
           if(carspeed > .7){
             carspeed *= .999;
+          }
+          if(carrzd < -.5 || carrzd > .5){
+            carspeed *= .991;
           }
           //console.log(carspeed, acc);
         }
@@ -42,7 +45,7 @@ var race = () => {
         else if(d){
           //if(carspeed > 0 && !collision) carspeed = 0;
           if(carspeed > (oob ? -.4 : acc ? -1.5 : -.7)){
-            carspeed -= .002;
+            carspeed = carspeed - .002;
           }
           if(carspeed > .7){
             carspeed -= .1;
@@ -50,6 +53,10 @@ var race = () => {
           if(carspeed < -.7){
             carspeed *= .999;
           }
+          if(carrzd < -5 || carrzd > .5){
+            carspeed *= .991;
+          }
+          
         }
         
         // Idle: decelerate if the car speed is not zero
@@ -59,30 +66,45 @@ var race = () => {
         
         // Up + left or down + right: Z angle decreases
         if((l && u) || (r && d) ){
-          carrz -= .8;
+          carrzd -= .01;
+          if(carrzd >0){
+            carrzd = 0;
+          }
+          if(carrzd < -.8){
+            carrzd = -.8;
+          }
+          carrz += carrzd;
           if(carrz < 0){
             carrz += 360;
           }
           
           if(carangledisplay > -15){
-            carangledisplay -= .5;
+            carangledisplay += carrzd;
           }
         }
         
         // Up + right or down + left: angle increases
         else if((r && u) || (l && d)){
-          carrz += .8;
+          if(carrzd <0){
+            carrzd = 0;
+          }
+          carrzd += .01;
+          if(carrzd > .8){
+            carrzd = .8;
+          }
+          carrz += carrzd;
           if(carrz >= 360){
             carrz -= 360;
           }
           if(carangledisplay < 15){
-            carangledisplay += .5;
+            carangledisplay += carrzd;
           }
         }
         
         // Idle
         else {
           carangledisplay *= .99;
+          carrzd *= .99;
         }
       }
         
@@ -90,57 +112,6 @@ var race = () => {
       // ...................
       carx += carspeed * Math.sin(toRadians(carrz));
       cary -= carspeed * Math.cos(toRadians(carrz));
-        
-      
-      // Compute car's front and back points
-      // ...................................
-      
-      // Coordinates (range 0 - 400)
-      //var f = [carx + 2 * Math.sin(toRadians(carrz)), cary - 2 * Math.cos(toRadians(carrz)),0];
-      //var b = [carx + -2 * Math.sin(toRadians(carrz)), cary - -2 * Math.cos(toRadians(carrz)),0];
-      
-      // Cell (range 0 - 20)
-      //fcell = [~~(f[0]/size),~~(f[1]/size),0];
-      //bcell = [~~(b[0]/size),~~(b[1]/size),0];
-      
-      // Cell info
-      
-      
-      // Collisions / position
-      // .....................
-      
-      // Compute if the car is on the road or oob (in the snow), and handle collisions with barriers.
-      
-      //oob = 0;
-      //delog();
-      
-      
-      //[x,y,z] = fcell;
-      //try{fcellinfo = space[x][y][z];}catch(e){}
-      
-      
-      // Forward
-      if(carspeed >= 0){
-        
-        //if(carz == 0){
-        //  if(oob && 
-        //}
-        
-        
-        //testcollision(fcell,fcellinfo);
-      }
-      
-      // Backward
-      else {
-        //testcollision(bcell,bcellinfo);
-      }
-      
-      // Save front and back cells
-      // .........................
-      
-      //frontcell = fcell;
-      //backcell = bcell;
-      
       
       if(collision){
         justslopes();
@@ -155,10 +126,7 @@ var race = () => {
       collision -= .1;
       if(collision <= 0) collision = 0;
     }
-
-    
   }
-  
   
   // Move the car and the camera
   // ...........................
@@ -178,6 +146,7 @@ var race = () => {
   log("vspeed",vspeed);
   log("carrz",carrz);
   log("onice",onice);
+  log("carrzd",carrzd);
   
   // Start = restart
   if($){

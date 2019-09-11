@@ -40,7 +40,7 @@ var testcollision = () => {
     for(i of track.ice){
       if(carx >= i[0]*size && carx <= (i[0]*size + i[2]*size) && cary >= i[1]*size && cary <= (i[1]*size + i[3]*size)){
         onice = 1;
-        console.log("onice")
+        //console.log("onice")
       }
     }
   }

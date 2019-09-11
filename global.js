@@ -29,7 +29,9 @@ var crz = 0;
 var carx = 10 * size + size/2;
 var cary = 16 * size + size/2;
 var carrz = 0;
+var carrzd = 0;
 var carspeed = 0;
+var caracc = 0;
 var front = [0,0,0]
 var back = [0,0,0]; // front/back side coordinates (range: 0 - 400)
 var frontcell = [0,0];
@@ -84,6 +86,7 @@ var selected = 0;
 var rerender = 0;
 var inventory = [];
 var track = {};
+var originaltrack = {};
 
 // Race
 var ev; // eval

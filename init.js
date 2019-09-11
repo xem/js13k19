@@ -7,6 +7,7 @@ var init = (t = {}) => {
     document.body.className="fx";
   }
   
+  originaltrack = t;
   track = JSON.parse(JSON.stringify(t));
   
   // Reset the space data
