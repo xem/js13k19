@@ -35,7 +35,7 @@ var init = (t = {}) => {
       }
     }
     
-    C.camera({x:900,y:900,z:900,rx:25});
+    C.camera({x:900,y:1300,z:900,rx:25});
     
     links();
     
@@ -65,7 +65,8 @@ var init = (t = {}) => {
     b.innerHTML += `<div id=parts>`;
     
     // inventory
-    for(i = 0; i < 13; i ++){
+    inventory = track.inventory || [];
+    for(i = 0; i < Math.max(6,inventory.length); i ++){
       selected = 0;
       parts.innerHTML += `<div class="part ${i==0?"selected":""}" id=part${i} onclick=select(${i})><div class=visual id=visual${i}></div><div class=remaining id=qty${i}>`;
     }
@@ -177,9 +178,9 @@ var init = (t = {}) => {
     ];*/
     
     // Inventory
-    inventory = //track.inventory || [];
     
-    [ // [id, quantity, remaining]
+    
+    /*[ // [id, quantity, remaining]
       [0, 60, 60], // road 
       [1, 1, 1], // start
       [2, 1, 1], // end
@@ -195,7 +196,7 @@ var init = (t = {}) => {
       [12, 20, 20], // trees
       [13, 20, 20], // rocks
     ];
-    
+    */
     for(i in inventory){
       j = inventory[i];
       C.$(`qty${i}`).innerHTML = `${j[2]}/${j[1]}`;
@@ -251,7 +252,7 @@ var init = (t = {}) => {
     cary = start[1]*size+size/2;
     carz = start[2]*size+size/2;
     
-    b.innerHTML = "<textarea id=deb rows=7 cols=180></textarea><div id=viewport><div id=camera><div id=scene></div></div><h1 onclick='mode=1;init(track)'>X</h1><h1 id=time></h1><h1 id=speed>";
+    b.innerHTML = "<textarea id=deb rows=7 cols=180></textarea><div id=viewport><div id=camera><div id=scene></div></div><h1 onclick='mode=1;init(track); play(musics.editor[0],musics.editor[1],1100,16600)'>X</h1><h1 id=time></h1><h1 id=speed>";
     
     
     // Create the car
@@ -328,12 +329,12 @@ var init = (t = {}) => {
       html += "<br>(bronze: "+track.bronze+":00)";
     }
     
-    html+="<div onclick='mode=1;init(track)'>Return to editor";
+    html+="<div onclick='mode=1;init(track); play(musics.editor[0],musics.editor[1],1100,16600)'>Return to editor";
     
     b.innerHTML = html;
   }
   
 }
 
-mode = 1;
-init(levels.A1);
+mode = 0;
+init(levels.title);

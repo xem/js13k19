@@ -25,6 +25,7 @@ editor = () => {
     //console.log("enter");
     mode = 2;
     init(track);
+    play(musics.race[0],musics.race[0],38600,38600);
     return;
   }
   

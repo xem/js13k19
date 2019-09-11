@@ -37,10 +37,12 @@ var testcollision = () => {
     }
     
     // Ice
-    for(i of track.ice){
-      if(carx >= i[0]*size && carx <= (i[0]*size + i[2]*size) && cary >= i[1]*size && cary <= (i[1]*size + i[3]*size)){
-        onice = 1;
-        //console.log("onice")
+    if(track.ice){
+      for(i of track.ice){
+        if(carx >= i[0]*size && carx <= (i[0]*size + i[2]*size) && cary >= i[1]*size && cary <= (i[1]*size + i[3]*size)){
+          onice = 1;
+          //console.log("onice")
+        }
       }
     }
   }
@@ -139,6 +141,7 @@ var testcollision = () => {
             console.log("end");
             mode = 3;
             init(track);
+            play(musics.menu[0],musics.menu[0],7100,7100)
           }
         }
       }

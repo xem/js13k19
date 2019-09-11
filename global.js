@@ -104,3 +104,9 @@ var onice = 0;
 var i, j, k, x, y, z;
 var block;
 var times;
+
+
+// Music
+var audiocontexts = [];
+var intervals = [];
+var timeout = 0;

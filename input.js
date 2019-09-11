@@ -104,15 +104,18 @@ ui = () => {
 var cl = onclick = () => {
   if(mode == 0){
     var html = "<div class=m><h1>Snow</h1>";
-    for(i = 1; i < 9; i++){
-      html += "<div onclick='mode = 1; init(levels.A"+i+")'>" + i + "</div>";
+    for(i = 1; i < 7; i++){
+      html += "<div onclick='mode = 1; init(levels.A"+i+"); play(musics.editor[0],musics.editor[1],1100,16600)'>" + i + "</div>";
     }
     
     html += "<br><br><h1>Desert</h1>";
-    for(i = 1; i < 9; i++){
-      html += "<div onclick='mode = 1; init(levels.B"+i+")'>" + i + "</div>";
+    for(i = 1; i < 7; i++){
+      html += "<div onclick='A.close(); mode = 1; init(levels.B"+i+"); play(musics.editor[0],musics.editor[1],1100,16600)'>" + i + "</div>";
     }
     b.innerHTML = html;
     mode = 99;
+    
+    play(musics.menu[0],musics.menu[0],7100,7100)
+    
   }
 }
