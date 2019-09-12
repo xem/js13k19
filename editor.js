@@ -19,7 +19,7 @@ editor = () => {
   else if(U && cursory > 1) cursory --;
   else if(D && cursory < 18) cursory ++;
   
-  document.title = [cursorx,cursory,gridz];
+  //document.title = [cursorx,cursory,gridz];
   
   if($){
     //console.log("enter");
@@ -37,9 +37,11 @@ editor = () => {
       
       // Not on ice
       onice = 0;
-      for(i of track.ice){
-        if(gridz > 0 || (cursorx >= i[0] && cursorx < (i[0]+ i[2]) && cursory >= i[1] && cursory < (i[1] + i[3]))){
-          onice = 1;
+      if(track.ice){
+        for(i of track.ice){
+          if(gridz > 0 || (cursorx >= i[0] && cursorx < (i[0]+ i[2]) && cursory >= i[1] && cursory < (i[1] + i[3]))){
+            onice = 1;
+          }
         }
       }
      

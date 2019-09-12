@@ -114,7 +114,7 @@ var timeout = 0;
 
 onload = onhashchange = ()=>{
   if(location.hash){
-    mode=2;
+    mode=1;
     init(JSON.parse(atob(location.hash.slice(1))));
     location.hash = "";
   }

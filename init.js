@@ -61,7 +61,7 @@ var init = (t = {}) => {
     
     // menu
     b.innerHTML += `<textarea id=deb rows=1 cols=1></textarea><div id=menu>Camera<br>
-    <div id=gridup>⇑</div> <div id=griddown>⇓</div> <div id=gridrl>↶</div> <div id=gridrr>↷</div><br>⎯<br>Block<br><div id=blockrl>↶</div> <div id=blockrr>↷</div><br><br><p>Add: <b>space+wasd</b> Remove: <b>Del</b><br>Play/retry: <b>Enter</b></p>⎯<br><div id=blockc style=width:120px>Clear all</div><div id=exp>Export</div> <div id=load>Load</div>⎯<br><div onclick="mode = 0; init(); cl()">Exit`;
+    <div id=gridup>⇑</div> <div id=griddown>⇓</div> <div id=gridrl>↶</div> <div id=gridrr>↷</div><br>⎯<br>Block<br><div id=blockrl>↶</div> <div id=blockrr>↷</div><br><br><p>Add: <b>space+wasd</b> Remove: <b>Del</b><br>Play/retry: <b>Enter</b></p>⎯<br><div id=blockc style=width:120px>Clear all</div>${ (document.monetization||true) ? "<div id=exp>Export</div> <div id=load>Load</div>" : '<br>'}⎯<br><div onclick="mode = 0; init(); cl()">Exit`;
     b.innerHTML += `<div id=parts>`;
     
     // inventory

@@ -115,3 +115,4 @@ C = {
   
   tr: o => `${o.o=="top left"?"":"translateX(-50%)translateY(-50%)"}translateX(${o.x}${C.unit})translateY(${o.y}${C.unit})translateZ(${o.z}${C.unit})rotateX(${o.rx}deg)rotateY(${o.ry}deg)rotateZ(${o.rz}deg)`
 }
+

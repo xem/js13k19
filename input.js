@@ -68,7 +68,7 @@ ui = () => {
   }
   
   // Export
-  exp.onclick = () => {
+  if(top.exp) exp.onclick = () => {
     var roadsmin = JSON.parse(JSON.stringify(roads));
     roadsmin = roadsmin.filter(a=>a!=0);
     for(i of roadsmin){
@@ -87,11 +87,11 @@ ui = () => {
         roadlinksmin[i] = 0;
       }
     }*/
-    prompt("export:",location+"#"+btoa(JSON.stringify({roads:roadsmin,roadlinks:roadlinksmin,inventory:[]})))
+    prompt("",location+"#"+btoa(JSON.stringify({roads:roadsmin,roadlinks:roadlinksmin,inventory:[]})))
   }
   
   // load
-  load.onclick = () => {
+  if(top.load) load.onclick = () => {
     var json = JSON.parse(prompt("import:",""));
     b.innerHTML = "";
     //console.log(json);
