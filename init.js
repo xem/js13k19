@@ -321,13 +321,19 @@ var init = (t = {}) => {
   else if(mode == 3){
     var html = "<div class=s>Score: "+(timer.toFixed(2).replace(".",":"));
     if(+timer.toFixed(2) <= track.gold){
+      html += "<br>🏆 DEV'S TIME!";
+      if(track.n){
+        localStorage["backontrack"+track.n]="🏆";
+      }
+    }
+    else if(+timer.toFixed(2) <= track.gold-.2){
       html += "<br>🥇 GOLD";
       if(track.n){
         localStorage["backontrack"+track.n]="🥇";
       }
     }
     else if(+timer.toFixed(2) <= track.silver){
-      html += "<br>🥈 SILVER<br>(gold: "+(track.gold.toFixed(2).replace(".",":"))+")";
+      html += "<br>🥈 SILVER<br>(gold: "+((track.gold-.2).toFixed(2).replace(".",":"))+")";
       if(track.n){
         if(localStorage["backontrack"+track.n] != "🥇"){
           localStorage["backontrack"+track.n]="🥈";
