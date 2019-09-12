@@ -141,7 +141,7 @@ var testcollision = () => {
             //console.log("end");
             mode = 3;
             init(track);
-            play(musics.menu[0],musics.menu[0],7100,7100)
+            //play(musics.menu[0],musics.menu[0],7100,7100)
           }
         }
       }

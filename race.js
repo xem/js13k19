@@ -21,10 +21,10 @@ var race = () => {
         carspeed = -1.5;
       }
       
-      if(!air && !onice){
+      if(!air){
         
         // Up (go forward)
-        if(u){
+        if(u && !onice){
           //if(carspeed < 0 && !collision) carspeed = 0;
           if(carspeed < (oob ? .4 : acc ? 1.5 : .7)){
             carspeed = carspeed + .002;
@@ -42,7 +42,7 @@ var race = () => {
         }
         
         // Down (go back)
-        else if(d){
+        else if(d && !onice){
           //if(carspeed > 0 && !collision) carspeed = 0;
           if(carspeed > (oob ? -.4 : acc ? -1.5 : -.7)){
             carspeed = carspeed - .002;
@@ -60,14 +60,14 @@ var race = () => {
         }
         
         // Idle: decelerate if the car speed is not zero
-        else{
+        else if(!onice){
           carspeed *= .99;
         }
         
         // Up + left or down + right: Z angle decreases
         if((l && u) || (r && d) ){
-          carrzd -= .01;
-          if(carrzd >0){
+          carrzd -= onice ? .0001 : .01;
+          if(carrzd > 0){
             carrzd = 0;
           }
           if(carrzd < -.8){
@@ -79,7 +79,7 @@ var race = () => {
           }
           
           if(carangledisplay > -15){
-            carangledisplay -= .08;
+            carangledisplay -= onice? .0001 : .08;
           }
         }
         
@@ -88,7 +88,7 @@ var race = () => {
           if(carrzd <0){
             carrzd = 0;
           }
-          carrzd += .01;
+          carrzd += onice ? .0001 : .01;
           if(carrzd > .8){
             carrzd = .8;
           }
@@ -97,7 +97,7 @@ var race = () => {
             carrz -= 360;
           }
           if(carangledisplay < 15){
-            carangledisplay += .08;
+            carangledisplay += onice ? .0001 : .08;
           }
         }
         

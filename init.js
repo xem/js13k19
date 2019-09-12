@@ -200,7 +200,7 @@ var init = (t = {}) => {
       j = inventory[i];
       C.$(`qty${i}`).innerHTML = `${j[2]}/${j[1]}`;
       //C.plane({g:`visual${i}`,w:20,h:20,b:"#d90",rx:45,rz:45});
-      draw_block(j[0],`visual${i}`,((j[0]==6||j[0]==7) ? -.7 : -.5),((j[0]==6||j[0]==7) ? -.2 : -.4),((j[0]==6||j[0]==7) ? -25 : -15),50,30);
+      draw_block(j[0],`visual${i}`,((j[0]==6) ? -.7 : -.5),((j[0]==6) ? -.2 : -.4),((j[0]==6) ? -25 : -15),50,30);
     }
     
     // Ice
@@ -313,7 +313,8 @@ var init = (t = {}) => {
     carrz = 0;
     carrzd = 0;
     carangledisplay = 0;
-
+    speedduringcollision = 0;
+    collision = 0;
     
   }
   

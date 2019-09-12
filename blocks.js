@@ -278,16 +278,16 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
       }
   }
 
-  // 6: slope long "up"
-  else if(n == 6){
+  // 6: slope long
+  else if(n == 6 || n == 7){
     
-      C.plane({g:name,w:size*.8,h:107,z:17,o:"center",b:"#d90",rx:-19});
+      C.plane({g:name,w:size*.8,h:207.5,y:-50,z:25,o:"center",b:"#d90",rx:-14});
       
-      C.plane({g:name,y:-size,z:42,w:size*.8,h:107,o:"center",b:"#d90",rx:-9});
+      //C.plane({g:name,y:-size,z:sizeh/4,w:size*.8,h:107,o:"center",b:"#d90",rx:-26.5});
       
-      C.plane({g:name,w:size*.8,h:sizeh,y:-size-40,rx:-90,z:sizeh*.4,b:"linear-gradient(90deg,#666 5px,transparent 5px, transparent 75px, #666 75px)",o:"center"});
+      //C.plane({g:name,w:size*.8,h:sizeh,y:-size-40,rx:-90,z:sizeh*.4,b:"linear-gradient(90deg,#666 5px,transparent 5px, transparent 75px, #666 75px)",o:"center"});
       
-      C.plane({g:name,w:size*.8,h:sizeh*.6,y:-40,rx:-90,z:sizeh*.3,b:"linear-gradient(90deg,#666 5px,transparent 5px, transparent 75px, #666 75px)",o:"center"});
+      C.plane({g:name,w:size*.8,h:22,y:-40,rx:-90,z:11,b:"linear-gradient(90deg,#666 5px,transparent 5px, transparent 75px, #666 75px)",o:"center"});
       
       if(c == "scene"){
       
@@ -404,7 +404,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   }
   
   // 7: slope long "down"
-  else if(n == 7){
+  /*else if(n == 7){
 
       C.plane({g:name,w:size*.8,h:103,z:7,o:"center",b:"#d90",rx:-8});
       C.plane({g:name,y:-size,z:32,w:size*.8,h:105,o:"center",b:"#d90",rx:-20});
@@ -520,7 +520,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
         }
       }
 
-  }
+  }*/
 
   // 8: accelerator
   else if(n == 8){

@@ -226,7 +226,7 @@ var barriers = i => {
       }
       
       // #6: slope long "up"
-      else if(block.id == 6){
+      else if(block.id == 6 || block.id == 7){
  
         // Reset barriers
         //console.log(x,y,z,C.$(`road-${x}-${y}-${z}`));
@@ -252,7 +252,7 @@ var barriers = i => {
       }
       
       // #7: slope long "down"
-      else if(block.id == 7){
+      /*else if(block.id == 7){
  
         // Reset barriers
       
@@ -275,7 +275,7 @@ var barriers = i => {
         if(block.angle == 270 && !block.links.r){
           block.barriers.r = 1;
         }
-      }
+      }*/
       
       // #8: accelerator
       else if(block.id == 8){
@@ -335,16 +335,16 @@ var barriers = i => {
       
       // Draw barriers
       if(block.barriers[uu]){
-       C.$(`road-${x}-${y}-${z}`).children[0].style.borderTop = "5px solid #000";
+       C.$(`road-${x}-${y}-${z}`).children[0].style.borderTop = "6px solid #000";
       }
       if(block.barriers[dd]){
-       C.$(`road-${x}-${y}-${z}`).children[0].style.borderBottom = "5px solid #000";
+       C.$(`road-${x}-${y}-${z}`).children[0].style.borderBottom = "6px solid #000";
       }
       if(block.barriers[ll]){
-       C.$(`road-${x}-${y}-${z}`).children[0].style.borderLeft = "5px solid #000";
+       C.$(`road-${x}-${y}-${z}`).children[0].style.borderLeft = "6px solid #000";
       }
       if(block.barriers[rr]){
-       C.$(`road-${x}-${y}-${z}`).children[0].style.borderRight = "5px solid #000";
+       C.$(`road-${x}-${y}-${z}`).children[0].style.borderRight = "6px solid #000";
       }
 
     }

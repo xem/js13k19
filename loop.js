@@ -19,9 +19,13 @@ setInterval(()=> {
   }
   
   // score
-  //else if(mode == 3){
+  else if(mode == 3){
     //console.log(timer);
-  //}
+    if($){
+      mode = 2;
+      init(track);
+    }
+  }
   
   // Reset 
   S = _ = U = L = D = R = 0;
