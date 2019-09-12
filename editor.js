@@ -245,7 +245,7 @@ editor = () => {
     // Cursor color (if there's already something here or on top of the slope or no more quantity)
     if(
       space[cursorx][cursory][gridz] 
-      || inventory[selected][2] == 0
+      || (inventory[selected] && inventory[selected][2] == 0)
       || 
       (
         space[cursorx][cursory][gridz+1]

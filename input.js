@@ -96,20 +96,20 @@ ui = () => {
 var cl = onclick = () => {
   if(mode == 0){
     var html = "<div class=m><h1>Snow</h1>";
-    for(i = 1; i < 7; i++){
-      html += "<div onclick='mode = 1; init(levels.A"+i+"); play(musics.editor[0],musics.editor[1],1100,16600)'>" + (localStorage["backontrackA"+i] || i) + "</div>";
+    for(i = 1; i < 6; i++){
+      html += "<div onclick='mode=1;world=1;init(levels.A"+i+"); play(musics.editor[0],musics.editor[1],1100,16600)'>" + (localStorage["backontrackA"+i] || i) + "</div>";
     }
     
     html += "<br><br><h1>Desert</h1>";
-    for(i = 1; i < 7; i++){
-      html += "<div onclick='A.close(); mode = 1; init(levels.B"+i+"); play(musics.editor[0],musics.editor[1],1100,16600)'>" + (localStorage["backontrackB"+i] || i) + "</div>";
+    for(i = 1; i < 6; i++){
+      html += "<div onclick='A.close();mode=1;world=1;init(levels.B"+i+"); play(musics.editor[0],musics.editor[1],1100,16600)'>" + (localStorage["backontrackB"+i] || i) + "</div>";
     }
     
     html += "<br><br><h1>More levels</h1><a href='//xem.github.iom/js13k19/more'>soon!</a><br><br><h1>Coil bonus</h1>" +
     
     (
       (document.monetization || true)
-      ? "<div onclick='mode=1;init(levels.editor);play(musics.editor[0],musics.editor[1],1100,16600)'>Track editor</div>"
+      ? "<div onclick='mode=1;world=1;init(levels.editor);play(musics.editor[0],musics.editor[1],1100,16600)'>Track editor</div>"
       :"<a href='//coil.com/signup'>Join"
     );
     
