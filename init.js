@@ -251,7 +251,7 @@ var init = (t = {}) => {
     cary = start[1]*size+size/2;
     carz = start[2]*size+size/2;
     
-    b.innerHTML = "<textarea id=deb rows=7 cols=180></textarea><div id=viewport><div id=camera><div id=scene></div></div><h1 onclick='mode=1;init(track); play(musics.editor[0],musics.editor[1],1100,16600)'>X</h1><h1 id=time></h1><h1 id=speed>";
+    b.innerHTML = "<textarea id=deb rows=1 cols=1></textarea><div id=viewport><div id=camera><div id=scene></div></div><h1 onclick='mode=1;init(track); play(musics.editor[0],musics.editor[1],1100,16600)'>X</h1><h1 id=time></h1><h1 id=speed>";
     
     
     // Create the car
@@ -312,19 +312,20 @@ var init = (t = {}) => {
     carspeed = 0;
     carrz = 0;
     carrzd = 0;
+    carangledisplay = 0;
 
     
   }
   
   else if(mode == 3){
     var html = "<div class=s>Score: "+(timer.toFixed(2).replace(".",":"));
-    if(timer <= track.gold){
+    if(+timer.toFixed(2) <= track.gold){
       html += "<br>🥇 GOLD";
       if(track.n){
         localStorage["backontrack"+track.n]="🥇";
       }
     }
-    else if(timer <= track.silver){
+    else if(+timer.toFixed(2) <= track.silver){
       html += "<br>🥈 SILVER<br>(gold: "+(track.gold.toFixed(2).replace(".",":"))+")";
       if(track.n){
         if(localStorage["backontrack"+track.n] != "🥇"){
@@ -332,7 +333,7 @@ var init = (t = {}) => {
         }
       }
     }
-    else if(timer <= track.bronze){
+    else if(+timer.toFixed(2) <= track.bronze){
       html += "<br>🥉 BRONZE<br>(silver: "+(track.silver.toFixed(2).replace(".",":"))+")";
       if(track.n){
         if(!localStorage["backontrack"+track.n]){

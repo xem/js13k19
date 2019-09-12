@@ -3,6 +3,11 @@
 
 setInterval(()=> {
   
+  // Menu
+  //if(mode == 0){
+    
+  //}
+  
   // Editor mode:
   if(mode == 1){
     editor();
