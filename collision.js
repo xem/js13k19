@@ -125,7 +125,7 @@ var testcollision = () => {
         if(cellinfo.passed == 0){
           cellinfo.passed = 1;
           checkpoints--;
-          console.log(checkpoints);
+          //console.log(checkpoints);
         }
       }
       
@@ -138,7 +138,7 @@ var testcollision = () => {
           ||(cellinfo.angle == 270 && (carx%size)<50)
         ){
           if(checkpoints == 0){
-            console.log("end");
+            //console.log("end");
             mode = 3;
             init(track);
             play(musics.menu[0],musics.menu[0],7100,7100)

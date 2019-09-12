@@ -146,14 +146,14 @@ editor = () => {
   else if(_){
     
     // Check existence and removability
-    console.log(0);
+    //console.log(0);
     if(space[cursorx][cursory][gridz] && !space[cursorx][cursory][gridz].fixed){
       
       var X = cursorx;
       var Y = cursory;
       var Z = gridz;
       
-      console.log(1);
+      //console.log(1);
       
       // Delete space cell and surrogates
       if(space[X][Y][Z].surrogate_of){
@@ -232,6 +232,7 @@ editor = () => {
           barriers(i);
         }
       }
+      links();
     }
   }
   

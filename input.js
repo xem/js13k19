@@ -64,30 +64,21 @@ ui = () => {
     //roads = [];
     //roadlinks = [];
     b.innerHTML = "";
-    init(originaltrack);
+    if(track.n){
+      init(levels[track.n]);
+    }
+    else {
+      init({roads:[],roadlinks:[],inventory:track.inventory,ice:track.ice});
+    }
   }
   
   // Export
   if(top.exp) exp.onclick = () => {
     var roadsmin = JSON.parse(JSON.stringify(roads));
     roadsmin = roadsmin.filter(a=>a!=0);
-    for(i of roadsmin){
-      if(i){
-        //i.pop();
-      }
-    }
     var roadlinksmin = JSON.parse(JSON.stringify(roadlinks));
     roadlinksmin = roadlinksmin.filter(a=>a!=0);
-    /*for(i in roadlinksmin){
-      if(
-        space[roadlinksmin[i][0][0]][roadlinksmin[i][0][1]][roadlinksmin[i][0][2]].id != 0
-        ||
-        space[roadlinksmin[i][1][0]][roadlinksmin[i][1][1]][roadlinksmin[i][1][2]].id != 0
-      ){
-        roadlinksmin[i] = 0;
-      }
-    }*/
-    prompt("",location+"#"+btoa(JSON.stringify({roads:roadsmin,roadlinks:roadlinksmin,inventory:[]})))
+    window.open("//xem.github.io/js13k19/share/#"+btoa(JSON.stringify({roads:roadsmin,roadlinks:roadlinksmin,inventory:[]})));
   }
   
   // load
@@ -105,17 +96,21 @@ var cl = onclick = () => {
   if(mode == 0){
     var html = "<div class=m><h1>Snow</h1>";
     for(i = 1; i < 7; i++){
-      html += "<div onclick='mode = 1; init(levels.A"+i+"); play(musics.editor[0],musics.editor[1],1100,16600)'>" + i + "</div>";
+      html += "<div onclick='mode = 1; init(levels.A"+i+"); play(musics.editor[0],musics.editor[1],1100,16600)'>" + (localStorage["backontrackA"+i] || i) + "</div>";
     }
     
     html += "<br><br><h1>Desert</h1>";
     for(i = 1; i < 7; i++){
-      html += "<div onclick='A.close(); mode = 1; init(levels.B"+i+"); play(musics.editor[0],musics.editor[1],1100,16600)'>" + i + "</div>";
+      html += "<div onclick='A.close(); mode = 1; init(levels.B"+i+"); play(musics.editor[0],musics.editor[1],1100,16600)'>" + (localStorage["backontrackB"+i] || i) + "</div>";
     }
     
-    html += "<br><br><h1>More levels</h1><a href='xem.github.iom/js13k19/more'>soon!</a>";
+    html += "<br><br><h1>More levels</h1><a href='//xem.github.iom/js13k19/more'>soon!</a><br><br><h1>Coil bonus</h1>" +
     
-    if (document.monetization || true) html += "<br><br><h1>Coil bonus</h1><div onclick='mode=1;init(levels.editor);play(musics.editor[0],musics.editor[1],1100,16600)'>Track editor</div>";
+    (
+      (document.monetization || true)
+      ? "<div onclick='mode=1;init(levels.editor);play(musics.editor[0],musics.editor[1],1100,16600)'>Track editor</div>"
+      :"<a href='//coil.com/signup'>Join"
+    );
     
     b.innerHTML = html;
     mode = 99;

@@ -76,6 +76,19 @@ var barriers = i => {
              block.barriers[uu] = 1;
             }
           }
+          
+          // RING: If the block is the top right side of a circle, close it 
+          block.ring = 0;
+          if(block.links.d && block.links.l){
+            var [xx,yy,zz] = block.links.l;
+            if(space[xx][yy][zz].id == 0 && space[xx][yy][zz].links.d){
+              [xx,yy,zz] = block.links.d;
+              if(space[xx][yy][zz].id == 0 && space[xx][yy][zz].links.l){
+                //console.log("ring detected");
+                block.ring = 1;
+              }
+            }
+          }
         }
       }
       
@@ -344,8 +357,17 @@ var barriers = i => {
 var links = () => {
   
   // Reset all links (HTML)
-  for(j of document.querySelectorAll(".barrierleftright,.barriertopbottom")){
+  for(j of document.querySelectorAll(".barrierleftright,.barriertopbottom,.ring")){
     j.remove();
+  }
+  
+  for(i of roads){
+    if(i[0]){
+      var block1 = space[i[0]][i[1]][i[2]];
+      if(block1.ring){
+        C.plane({w:size*.5,h:size*.5,x:i[0]*size-size*.25,y:i[1]*size+size*.75,z:sizeh*i[2]+1.2,b:"#d90",o:"top left",css:`ring`});
+      }
+    }
   }
 
   // Redraw all links, but:
@@ -369,13 +391,13 @@ var links = () => {
         //console.log("front to back");
         
         if(!block1.slope && !block2.slope){
-          C.plane({n:"zer0",w:size*.8,h:size*.2,x:i[0][0]*size+size*.1,y:i[0][1]*size+size*.9,z:sizeh*i[0][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[0][2] == 0 ? "z0":""}`});
+          C.plane({w:size*.8,h:size*.2,x:i[0][0]*size+size*.1,y:i[0][1]*size+size*.9,z:sizeh*i[0][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[0][2] == 0 ? "z0":""}`});
         }
         else if(block1.slope && !block2.slope){
-          C.plane({n:1,w:size*.8,h:size*.1,x:i[1][0]*size+size*.1,y:i[1][1]*size+size*1-size,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
+          C.plane({w:size*.8,h:size*.1,x:i[1][0]*size+size*.1,y:i[1][1]*size+size*1-size,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
         }
         else if(!block1.slope && block2.slope){
-          C.plane({n:2,w:size*.8,h:size*.1,x:i[0][0]*size+size*.1,y:i[0][1]*size+size*.9,z:sizeh*i[0][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[0][2] == 0 ? "z0":""}`});
+          C.plane({w:size*.8,h:size*.1,x:i[0][0]*size+size*.1,y:i[0][1]*size+size*.9,z:sizeh*i[0][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[0][2] == 0 ? "z0":""}`});
         }
         
         block1.links.d = [i[1][0],i[1][1],i[1][2]];
@@ -386,13 +408,13 @@ var links = () => {
       if(i[0][0] == i[1][0] /*&& i[0][2] == i[1][2]*/ && i[0][1] > i[1][1]){
         
         if(!block1.slope && !block2.slope){
-          C.plane({n:10,w:size*.8,h:size*.2,x:i[1][0]*size+size*.1,y:i[1][1]*size+size*.9,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
+          C.plane({w:size*.8,h:size*.2,x:i[1][0]*size+size*.1,y:i[1][1]*size+size*.9,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
         }
         else if(block1.slope && !block2.slope){
-          C.plane({n:11,w:size*.8,h:size*.1,x:i[1][0]*size+size*.1,y:i[1][1]*size+size*.9,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
+          C.plane({w:size*.8,h:size*.1,x:i[1][0]*size+size*.1,y:i[1][1]*size+size*.9,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
         }
         else if(!block1.slope && block2.slope){
-          C.plane({n:12,w:size*.8,h:size*.1,x:i[1][0]*size+size*.1,y:i[1][1]*size+size,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
+          C.plane({w:size*.8,h:size*.1,x:i[1][0]*size+size*.1,y:i[1][1]*size+size,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
         }
 
         block1.links.u = [i[1][0],i[1][1],i[1][2]];
@@ -403,13 +425,13 @@ var links = () => {
       if(i[0][0] < i[1][0] /*&& i[0][2] == i[1][2]*/ && i[0][1] == i[1][1]){
 
         if(!block1.slope && !block2.slope){
-          C.plane({n:20,w:size*.2,h:size*.8,x:i[0][0]*size+size*.9,y:i[1][1]*size+size*.1,z:sizeh*i[0][2]+1,b:"#d90",o:"top left",css:`barriertopbottom ${i[0][2] == 0 ? "z0":""}`});
+          C.plane({w:size*.2,h:size*.8,x:i[0][0]*size+size*.9,y:i[1][1]*size+size*.1,z:sizeh*i[0][2]+1,b:"#d90",o:"top left",css:`barriertopbottom ${i[0][2] == 0 ? "z0":""}`});
         }
         else if(block1.slope && !block2.slope){
-          C.plane({n:21,w:size*.1,h:size*.8,x:i[1][0]*size,y:i[1][1]*size+size*.1,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barriertopbottom ${i[1][2] == 0 ? "z0":""}`});
+          C.plane({w:size*.1,h:size*.8,x:i[1][0]*size,y:i[1][1]*size+size*.1,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barriertopbottom ${i[1][2] == 0 ? "z0":""}`});
         }
         else if(!block1.slope && block2.slope){
-          C.plane({n:22,w:size*.1,h:size*.8,x:i[0][0]*size+size*.9,y:i[0][1]*size+size*.1,z:sizeh*i[0][2]+1,b:"#d90",o:"top left",css:`barriertopbottom ${i[0][2] == 0 ? "z0":""}`});
+          C.plane({w:size*.1,h:size*.8,x:i[0][0]*size+size*.9,y:i[0][1]*size+size*.1,z:sizeh*i[0][2]+1,b:"#d90",o:"top left",css:`barriertopbottom ${i[0][2] == 0 ? "z0":""}`});
         }
 
         block1.links.r = [i[1][0],i[1][1],i[1][2]];
@@ -420,13 +442,13 @@ var links = () => {
       if(i[0][0] > i[1][0] /*&& i[0][2] == i[1][2]*/ && i[0][1] == i[1][1]){
         
         if(!block1.slope && !block2.slope){
-          C.plane({n:30,w:size*.2,h:size*.8,x:i[1][0]*size+size*.9,y:i[1][1]*size+size*.1,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barriertopbottom ${i[1][2] == 0 ? "z0":""}`});
+          C.plane({w:size*.2,h:size*.8,x:i[1][0]*size+size*.9,y:i[1][1]*size+size*.1,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barriertopbottom ${i[1][2] == 0 ? "z0":""}`});
         }
         else if(block1.slope && !block2.slope){
-          C.plane({n:31,w:size*.1,h:size*.8,x:i[1][0]*size+size*.9,y:i[1][1]*size+size*.1,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barriertopbottom ${i[1][2] == 0 ? "z0":""}`});
+          C.plane({w:size*.1,h:size*.8,x:i[1][0]*size+size*.9,y:i[1][1]*size+size*.1,z:sizeh*i[1][2]+1,b:"#d90",o:"top left",css:`barriertopbottom ${i[1][2] == 0 ? "z0":""}`});
         }
         else if(!block1.slope && block2.slope){
-          C.plane({n:32,w:size*.1,h:size*.8,x:i[0][0]*size,y:i[0][1]*size+size*.1,z:sizeh*i[0][2]+1,b:"#d90",o:"top left",css:`barriertopbottom ${i[0][2] == 0 ? "z0":""}`});
+          C.plane({w:size*.1,h:size*.8,x:i[0][0]*size,y:i[0][1]*size+size*.1,z:sizeh*i[0][2]+1,b:"#d90",o:"top left",css:`barriertopbottom ${i[0][2] == 0 ? "z0":""}`});
         }
         
         block1.links.l = [i[1][0],i[1][1],i[1][2]];

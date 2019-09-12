@@ -79,7 +79,7 @@ var race = () => {
           }
           
           if(carangledisplay > -15){
-            carangledisplay += carrzd;
+            carangledisplay -= .08;
           }
         }
         
@@ -97,7 +97,7 @@ var race = () => {
             carrz -= 360;
           }
           if(carangledisplay < 15){
-            carangledisplay += carrzd;
+            carangledisplay += .08;
           }
         }
         

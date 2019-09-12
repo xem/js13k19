@@ -44,7 +44,6 @@ var init = (t = {}) => {
         barriers(i)
       }
     }
-    
     turns();
     
   }
@@ -61,7 +60,7 @@ var init = (t = {}) => {
     
     // menu
     b.innerHTML += `<textarea id=deb rows=1 cols=1></textarea><div id=menu>Camera<br>
-    <div id=gridup>⇑</div> <div id=griddown>⇓</div> <div id=gridrl>↶</div> <div id=gridrr>↷</div><br>⎯<br>Block<br><div id=blockrl>↶</div> <div id=blockrr>↷</div><br><br><p>Add: <b>space+wasd</b> Remove: <b>Del</b><br>Play/retry: <b>Enter</b></p>⎯<br><div id=blockc style=width:120px>Clear all</div>${ (document.monetization||true) ? "<div id=exp>Export</div> <div id=load>Load</div>" : '<br>'}⎯<br><div onclick="mode = 0; init(); cl()">Exit`;
+    <div id=gridup>⇑</div> <div id=griddown>⇓</div> <div id=gridrl>↶</div> <div id=gridrr>↷</div><br>⎯<br>Block<br><div id=blockrl>↶</div> <div id=blockrr>↷</div><br><br><p>Add: <b>space+wasd</b> Remove: <b>Del</b><br>Play/retry: <b>Enter</b></p>⎯<br><div id=blockc style=width:120px>Clear all</div>${ (document.monetization||true) ? "<div id=exp>Share</div> <div id=load>Load</div>" : '<br>'}⎯<br><div onclick="mode = 0; init(); cl()">Exit`;
     b.innerHTML += `<div id=parts>`;
     
     // inventory
@@ -233,7 +232,7 @@ var init = (t = {}) => {
         barriers(i)
       }
     }
-    
+    links();
     turns();
     
     equations();
@@ -287,13 +286,14 @@ var init = (t = {}) => {
       C.plane({x:i[0]*size,y:i[1]*size,w:i[2]*size,h:i[3]*size,css:"ice",o:"top left",bp: (-i[0]*size) + C.unit +  " " + (-i[1] * size) + C.unit});
     }
     
-    links();
     
+    links();
     for(i of roads){
       if(i){
         barriers(i)
       }
     }
+    links();
     
     turns();
       
@@ -310,6 +310,8 @@ var init = (t = {}) => {
     air = 1;
     vspeed = 0;
     carspeed = 0;
+    carrz = 0;
+    carrzd = 0;
 
     
   }
@@ -318,15 +320,28 @@ var init = (t = {}) => {
     var html = "<div class=s>Score: "+(timer.toFixed(2).replace(".",":"));
     if(timer <= track.gold){
       html += "<br>🥇 GOLD";
+      if(track.n){
+        localStorage["backontrack"+track.n]="🥇";
+      }
     }
     else if(timer <= track.silver){
-      html += "<br>🥈 SILVER<br>(gold: "+track.gold+":00)";
+      html += "<br>🥈 SILVER<br>(gold: "+(track.gold.toFixed(2).replace(".",":"))+")";
+      if(track.n){
+        if(localStorage["backontrack"+track.n] != "🥇"){
+          localStorage["backontrack"+track.n]="🥈";
+        }
+      }
     }
-    else if(timer <= track.silver){
-      html += "<br>🥉 SILVER<br>(silver: "+track.silver+":00)";
+    else if(timer <= track.bronze){
+      html += "<br>🥉 BRONZE<br>(silver: "+(track.silver.toFixed(2).replace(".",":"))+")";
+      if(track.n){
+        if(!localStorage["backontrack"+track.n]){
+          localStorage["backontrack"+track.n]="🥉";
+        }
+      }
     }
     else {
-      html += "<br>(bronze: "+track.bronze+":00)";
+      html += "<br>(bronze: "+(track.silver.toFixed(2).replace(".",":"))+")";
     }
     
     html+="<div onclick='mode=1;init(track); play(musics.editor[0],musics.editor[1],1100,16600)'>Return to editor";

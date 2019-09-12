@@ -47,7 +47,7 @@ var play = (intro, song, delay, interval) => {
             for(i of song){
               a(...i);
             }
-            console.log("1");
+            //console.log("1");
           }, interval
         )
       );
@@ -56,7 +56,7 @@ var play = (intro, song, delay, interval) => {
   );
     
   
-  console.log("0");
+  //console.log("0");
   for(i of intro){
     a(...i);
   }
