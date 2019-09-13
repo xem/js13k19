@@ -21,6 +21,14 @@ editor = () => {
   
   //document.title = [cursorx,cursory,gridz];
   
+  // Esc
+  if(P){
+    mode=0;
+    init();
+    cl()
+  }
+  
+  // Enter 
   if($){
     //console.log("enter");
     mode = 2;
@@ -407,7 +415,7 @@ editor = () => {
 }
 
 // Select an inventory item
-var select = i => {
+window.select = i => {
   if(inventory[i]){
     document.querySelector(".part.selected").classList.remove("selected");
     C.$("part"+i).classList.add("selected");

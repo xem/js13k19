@@ -121,7 +121,7 @@ var barriers = i => {
       }
       
       // #2: end
-      else if(block.id == 2){
+      /*else if(block.id == 2){
  
         // Reset barriers
       
@@ -144,10 +144,10 @@ var barriers = i => {
         if(block.angle == 270 && block.links.r){
           block.barriers.r = 0;
         }
-      }
+      }*/
       
       // #3: checkpoint
-      else if(block.id == 3){
+      else if(block.id == 2 || block.id == 3){
  
         // Reset barriers
       

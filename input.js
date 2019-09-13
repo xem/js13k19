@@ -1,7 +1,7 @@
 // Inputs (source: https://xem.github.io/articles/jsgamesinputs.html)
 // ------ 
 
-onkeydown=onkeyup=z=>top['lurdl*d*l_ur*u*s$***'[(z.which+3)%20]]=top['LURDL*D*L_UR*U*S$***'[(z.which+3)%20]]=z.type[5]
+onkeydown=onkeyup=z=>{z.which==27&&!z.type[5]?P=1:top['lurdl*d*l_ur*u*s$***'[(z.which+3)%20]]=top['LURDL*D*L_UR*U*S$***'[(z.which+3)%20]]=z.type[5]}
 
 ui = () => {
   
@@ -81,43 +81,34 @@ ui = () => {
     //window.open("//xem.github.io/js13k19/share/#"+btoa(JSON.stringify({roads:roadsmin,roadlinks:roadlinksmin,inventory:[]})));
     console.log(JSON.stringify({roads:roadsmin,roadlinks:roadlinksmin,inventory:[]}));
   }
-  
-  // load
-  if(top.load) load.onclick = () => {
-    var json = JSON.parse(prompt("import:",""));
-    b.innerHTML = "";
-    //console.log(json);
-    if(json){
-      init(json);
-    }
-  }
 }
 
 var cl = onclick = () => {
+  
+  unlock =  
+  (
+    document.monetization
+    ||
+    (
+      (localStorage.backontrackA1 == "🏆" || localStorage.backontrackA1 == "🥇")
+      &&(localStorage.backontrackA2 == "🏆" || localStorage.backontrackA2 == "🥇")
+      &&(localStorage.backontrackA3 == "🏆" || localStorage.backontrackA3 == "🥇")
+      &&(localStorage.backontrackA4 == "🏆" || localStorage.backontrackA4 == "🥇")
+      &&(localStorage.backontrackA5 == "🏆" || localStorage.backontrackA5 == "🥇")
+      &&(localStorage.backontrackA6 == "🏆" || localStorage.backontrackA6 == "🥇")
+    )
+  );
+  
+  
   if(mode == 0){
     var html = "<div class=m><h1>Puzzles</h1>";
-    for(i = 1; i < 7; i++){
-      html += "<div onclick='mode=1;init(levels.A"+i+"); play(musics.editor[0],musics.editor[1],1100,16600)'>" + (localStorage["backontrackA"+i] || i) + "</div>";
+    for(i = 1; i < 8; i++){
+      html += "<div onclick='mode=1;init(levels.A"+i+");play(musics.editor[0],musics.editor[1],1100,16600)'>" + (localStorage["backontrackA"+i] || i) + "</div>";
     }
-    
-    /*html += "<br><br><h1>Desert</h1>";
-    for(i = 1; i < 6; i++){
-      html += "<div onclick='mode=1;world=1;init(levels.B"+i+"); play(musics.editor[0],musics.editor[1],1100,16600)'>" + (localStorage["backontrackB"+i] || i) + "</div>";
-    }*/
     
     html += "<br><br><h1>More puzzles</h1><div><a href='//xem.github.iom/js13k19/more'>here!</a></div><br><br><h1>Track editor</h1>" +
     
-    (
-      document.monetization
-      || 
-      (
-        (localStorage.backontrackA1 == "🏆" || localStorage.backontrackA1 == "🥇")
-        &&(localStorage.backontrackA2 == "🏆" || localStorage.backontrackA2 == "🥇")
-        &&(localStorage.backontrackA3 == "🏆" || localStorage.backontrackA3 == "🥇")
-        &&(localStorage.backontrackA4 == "🏆" || localStorage.backontrackA4 == "🥇")
-        &&(localStorage.backontrackA5 == "🏆" || localStorage.backontrackA5 == "🥇")
-        &&(localStorage.backontrackA6 == "🏆" || localStorage.backontrackA6 == "🥇")
-      )
+    (unlock
       ? "<div onclick='mode=1;world=1;init(levels.editor);play(musics.editor[0],musics.editor[1],1100,16600)'>here!"
       :"<div>Join <a href='//coil.com/signup'>Coil</a> or win 6 gold medals"
     );

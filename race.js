@@ -1,9 +1,6 @@
 var race = () => {
   timer += .015;
   time.innerHTML = timer.toFixed(2).replace(".",":");
-
-  delog();
-  log("oob", oob);
   
   if(timer >= 0){
   
@@ -141,12 +138,12 @@ var race = () => {
   }
   //speed.innerHTML = ~~(carspeed*10) + "km/h";
   
-  log("coll",collision);
+  /*log("coll",collision);
   log("carspeed",carspeed.toFixed(3));
   log("vspeed",vspeed);
   log("carrz",carrz);
   log("onice",onice);
-  log("carrzd",carrzd);
+  log("carrzd",carrzd);*/
   
   // Start = restart
   if($){

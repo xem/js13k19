@@ -7,15 +7,16 @@ window.b = b;
 // Keyboard
 window.s = window.u = window.l = window.d = window.r = 0; // hold (space / up / left / down / right)
 window.S = window.U = window.L = window.D = window.R = 0; // press
-window._ = window.$ = 0; // press suppr, enter key
+window._ = window.$ = window.P = 0; // press suppr, enter, esc
 
 // General
-var mode = 0; // 0: menu, 1: editor, 2: race
-var world = 0 // 0: snow, 1: desert, 2: castle
+window.mode = 0; // 0: menu, 1: editor, 2: race
+window.world = 0 // 0: snow, 1: desert, 2: castle
 var puzzle = 0; // Current puzzle
 var race = 0; // Current race
 var size = 100; // block size in px (width, depth)
 var sizeh = 50 // block height in px
+var unlock = 0;
 
 // Camera
 var cx = 0;
@@ -112,10 +113,10 @@ var intervals = [];
 var timeout = 0;
 
 
-onload = onhashchange = ()=>{
+onload =()=>{
   if(location.hash){
     mode=1;
     init(JSON.parse(atob(location.hash.slice(1))));
-    location.hash = "";
   }
 }
+

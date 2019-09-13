@@ -1,7 +1,7 @@
 // Initialization (called when switching modes)
 // --------------
 
-var init = (t = {}) => {
+window.init = (t = {}) => {
   
   if(navigator.userAgent.includes("Fir")){
     document.body.className="fx";
@@ -63,9 +63,13 @@ var init = (t = {}) => {
     // UI
     
     // menu
-    b.innerHTML += `<textarea id=deb rows=1 cols=1></textarea><div id=menu>Camera<br>
-    <div id=gridup>⇑</div> <div id=griddown>⇓</div> <div id=gridrl>↶</div> <div id=gridrr>↷</div><br>⎯<br>Block<br><div id=blockrl>↶</div> <div id=blockrr>↷</div><br><br><p>Add: <b>space+wasd</b> Remove: <b>Del</b><br>Play/retry: <b>Enter</b></p>⎯<br><div id=blockc style=width:120px>Clear all</div>${ (document.monetization||true) ? "<div id=exp>Share</div> <div id=load>Load</div>" : '<br>'}⎯<br><div onclick="mode = 0; init(); cl()">Exit`;
+    b.innerHTML += `<textarea id=deb rows=1 cols=1></textarea><div id=tuto></div><div id=menu>Camera<br>
+    <div id=gridup>⇑</div> <div id=griddown>⇓</div> <div id=gridrl>↶</div> <div id=gridrr>↷</div><br>⎯<br>Block<br><div id=blockrl>↶</div> <div id=blockrr>↷</div><br>⎯<br><div id=blockc style=width:120px>Clear all</div>${(unlock&&track.n=="editor")?"<div id=exp>Share":''}`;
     b.innerHTML += `<div id=parts>`;
+    
+    if(track.n == "A1"){
+      tuto.innerHTML = `<h2>Welcome!</h2>Complete the track using space and arrow keys (or WASD/ZQSD).<br>The inventory (at the bottom) tells you how many blocks are available.<br>When you are done, press Enter to drive on your track.<br>While driving, press Enter to restart or Esc to quit!<br>You can get better times by redrawing your track!<div onclick=tuto.remove()>OK</div>`;
+    }
     
     // inventory
     inventory = track.inventory || [];
@@ -255,7 +259,7 @@ var init = (t = {}) => {
     cary = start[1]*size+size/2;
     carz = start[2]*size+size/2;
     
-    b.innerHTML = "<div id=viewport><div id=camera><div id=scene></div></div><h1 onclick='mode=1;init(track); play(musics.editor[0],musics.editor[1],1100,16600)'>X</h1><h1 id=time></h1><h1 id=speed>";
+    b.innerHTML = "<div id=viewport><div id=camera><div id=scene></div></div><h1 id=time></h1><h1 id=speed>";
     
     
     // Create the car
@@ -325,7 +329,7 @@ var init = (t = {}) => {
   else if(mode == 3){
     var html = "<div class=s>Score: "+(timer.toFixed(2).replace(".",":"));
     if(+timer.toFixed(2) <= track.gold){
-      html += "<br>🏆 DEV'S TIME!";
+      html += "<br>🏆 YOU BEAT THE DEV'S TIME!";
       if(track.n){
         localStorage["backontrack"+track.n]="🏆";
       }
@@ -356,7 +360,7 @@ var init = (t = {}) => {
       html += "<br>(bronze: "+(track.bronze.toFixed(2).replace(".",":"))+")";
     }
     
-    html+="<br><br>enter: retry / esc: quit<!--div onclick='mode=1;init(track); play(musics.editor[0],musics.editor[1],1100,16600)'>Return to editor-->";
+    html+="<br><br><sub>enter: retry / esc: quit";
     
     b.innerHTML = html;
   }

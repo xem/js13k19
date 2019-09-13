@@ -19,7 +19,7 @@ var a=(notes,center,duration,decaystart,decayduration,interval,volume,waveform,i
    audiocontexts.push(A);
 }
 
-var play = (intro, song, delay, interval) => {
+window.play = (intro, song, delay, interval) => {
   for(var i of audiocontexts){
     i.close();
   }

@@ -114,14 +114,18 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
       // Make the bottom side linkable
       if(rz == 0){
         space[x][y][z].linkable.d = [x,y+1,z];
+        space[x][y][z].linkable.u = [x,y-1,z];
       }
       else if(rz == 90){
         space[x][y][z].linkable.l = [x-1,y,z];
+        space[x][y][z].linkable.r = [x+1,y,z];
       }
       else if(rz == 180){
+        space[x][y][z].linkable.d = [x,y+1,z];
         space[x][y][z].linkable.u = [x,y-1,z];
       }
       else if(rz == 270){
+        space[x][y][z].linkable.l = [x-1,y,z];
         space[x][y][z].linkable.r = [x+1,y,z];
       }
     }
@@ -713,10 +717,10 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   // 12: tree
   else if(n == 12){
     if(c=="scene" || c == "vcursor"){
-      C.sprite({g:name,w:size,h:size,y:0,z:0,rx:-90,html:"🌲",css:"tree",o:"bottom"});
+      C.sprite({g:name,w:size,h:size,y:0,z:0,rx:-90,html:world?"🌵":"🌲",css:"tree",o:"bottom"});
     }
     else {
-      C.plane({g:name,w:size,h:size,y:0,z:-20,rx:-80,html:"🌲",css:"tree",o:"bottom"});
+      C.plane({g:name,w:size,h:size,y:0,z:-20,rx:-80,html:world?"🌵":"🌲",css:"tree",o:"bottom"});
     }
     if(c == "scene"){
       space[x][y][z] = {
@@ -757,7 +761,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   }
   
   // 13: rock
-  else if(n == 13){
+  /*else if(n == 13){
     if(c == "scene"){
       
       C.cube({g:name,w:100,h:sizeh*z+sizeh,z:-sizeh*z-1,d:100,b:"#aaa",b2:"#777",b3:"#999"});
@@ -803,7 +807,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
     else {
       C.cube({g:name,w:100,h:sizeh,d:100,b:"#aaa",b2:"#777",b3:"#999"});
     }
-  }
+  }*/
   
   if(z > 0){
     //for(var i = 0; i < z; i++){
