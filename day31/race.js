@@ -132,7 +132,7 @@ var race = () => {
   // ...........................
   //carz = vspeed;
     
-  C.camera({x:carx, y:cary, z:carz, rz:-carrz + carangledisplay, rx:72, el:-620});
+  C.camera({x:carx, y:cary, z:carz, rz:-carrz + carangledisplay, rx:75, el:-550});
   
   C.move({n:"car",x:carx,y:cary,z:carz,rz:carrz});
   

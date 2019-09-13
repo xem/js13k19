@@ -47,7 +47,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   
   // 1: start
   else if(n == 1){
-    C.plane({g:name,w:size*.8,h:sizeh,z:sizeh/2,rx:-88,b:"linear-gradient(90deg, #666 5px, transparent 5px, transparent 75px, #666 75px),linear-gradient(#6c4 22px,transparent 22px)",o:"center",html:"start"});
+    C.plane({g:name,w:size*.8,h:sizeh,z:sizeh/2,rx:-88,b:"linear-gradient(90deg, #666 5px, transparent 5px, transparent 75px, #666 75px),linear-gradient(#6c4 25px,transparent 25px)",o:"center",html:"start"});
     
     if(c == "scene"){
       space[x][y][z] = {
@@ -91,7 +91,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   // 2: end
   else if(n == 2){
 
-    C.plane({g:name,w:size*.8,h:sizeh,z:sizeh/2,rx:-88,b:"linear-gradient(90deg, #666 5px, transparent 5px, transparent 75px, #666 75px),linear-gradient(#d22 25px,transparent 22px)",o:"center",html:"end"});
+    C.plane({g:name,w:size*.8,h:sizeh,z:sizeh/2,rx:-88,b:"linear-gradient(90deg, #666 5px, transparent 5px, transparent 75px, #666 75px),linear-gradient(#d22 25px,transparent 25px)",o:"center",html:"end"});
     
     if(c == "scene"){
       space[x][y][z] = {
@@ -129,7 +129,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
   
   // 3: checkpoint
   else if(n == 3){
-    C.plane({g:name,w:size*.8,h:sizeh,z:sizeh/2,rx:-88,b:"linear-gradient(90deg, #666 5px, transparent 5px, transparent 75px, #666 75px),linear-gradient(#5ae 25px,transparent 22px)",o:"center"});
+    C.plane({g:name,w:size*.8,h:sizeh,z:sizeh/2,rx:-88,b:"linear-gradient(90deg, #666 5px, transparent 5px, transparent 75px, #666 75px),linear-gradient(#5ae 25px,transparent 25px)",o:"center"});
     
     if(c == "scene"){
       space[x][y][z] = {

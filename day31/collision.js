@@ -309,7 +309,6 @@ var testcollision = () => {
       
       
       // Inbounds equation (curves, trees)
-      console.log(cellinfo.inbounds, carz);
       if(cellinfo.inbounds && carz == 0){
         ev = eval(cellinfo.inbounds);
         //console.log(cellinfo.inbounds, ev);
@@ -329,9 +328,6 @@ var testcollision = () => {
         }
         if(ev > 0){
           carz = ev+2;
-        }
-        else {
-          carz = 0;
         }
       }
       else if(carz == 0 && ev < 15){

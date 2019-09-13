@@ -330,14 +330,14 @@ var init = (t = {}) => {
         localStorage["backontrack"+track.n]="🏆";
       }
     }
-    else if(+timer.toFixed(2) <= track.gold+.2){
+    else if(+timer.toFixed(2) <= track.gold-.2){
       html += "<br>🥇 GOLD";
       if(track.n){
         localStorage["backontrack"+track.n]="🥇";
       }
     }
     else if(+timer.toFixed(2) <= track.silver){
-      html += "<br>🥈 SILVER<br>(gold: "+((track.gold+.2).toFixed(2).replace(".",":"))+")";
+      html += "<br>🥈 SILVER<br>(gold: "+((track.gold-.2).toFixed(2).replace(".",":"))+")";
       if(track.n){
         if(localStorage["backontrack"+track.n] != "🥇"){
           localStorage["backontrack"+track.n]="🥈";
@@ -356,7 +356,7 @@ var init = (t = {}) => {
       html += "<br>(bronze: "+(track.bronze.toFixed(2).replace(".",":"))+")";
     }
     
-    html+="<br><br>enter: retry / esc: quit<!--div onclick='mode=1;init(track); play(musics.editor[0],musics.editor[1],1100,16600)'>Return to editor-->";
+    html+="<div onclick='mode=1;init(track); play(musics.editor[0],musics.editor[1],1100,16600)'>Return to editor";
     
     b.innerHTML = html;
   }
