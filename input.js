@@ -87,7 +87,7 @@ var cl = onclick = () => {
   
   unlock =  
   (
-    document.monetization
+    true||document.monetization
     ||
     (
       (localStorage.backontrackA1 == "🏆" || localStorage.backontrackA1 == "🥇")
