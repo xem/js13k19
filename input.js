@@ -111,7 +111,7 @@ var cl = onclick = () => {
     
     (unlock
       ? "<div onclick='mode=1;world=1;init(levels.editor);play(musics.editor[0],musics.editor[1],1100,16600)'>here!"
-      :"<div>Join <a href='//coil.com/signup'>Coil</a> or win 6 gold medals"
+      :"<div>Join <a href='//coil.com/signup'>Coil</a> or win 7 gold medals"
     );
     
     b.innerHTML = html;
