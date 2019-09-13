@@ -96,6 +96,7 @@ var cl = onclick = () => {
       &&(localStorage.backontrackA4 == "🏆" || localStorage.backontrackA4 == "🥇")
       &&(localStorage.backontrackA5 == "🏆" || localStorage.backontrackA5 == "🥇")
       &&(localStorage.backontrackA6 == "🏆" || localStorage.backontrackA6 == "🥇")
+      &&(localStorage.backontrackA7 == "🏆" || localStorage.backontrackA7 == "🥇")
     )
   );
   
@@ -106,7 +107,7 @@ var cl = onclick = () => {
       html += "<div onclick='mode=1;init(levels.A"+i+");play(musics.editor[0],musics.editor[1],1100,16600)'>" + (localStorage["backontrackA"+i] || i) + "</div>";
     }
     
-    html += "<br><br><h1>More puzzles</h1><div><a href='//xem.github.iom/js13k19/more'>here!</a></div><br><br><h1>Track editor</h1>" +
+    html += "<br><br><h1>More puzzles</h1><div><a href='//xem.github.io/js13k19/more'>here!</a></div><br><br><h1>Track editor</h1>" +
     
     (unlock
       ? "<div onclick='mode=1;world=1;init(levels.editor);play(musics.editor[0],musics.editor[1],1100,16600)'>here!"

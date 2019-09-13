@@ -70,6 +70,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
       start = [x,y,z];
       
       
+      
       // Make the top side linkable
       if(rz == 0){
         space[x][y][z].linkable.u = [x,y-1,z];
@@ -83,6 +84,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
       else if(rz == 270){
         space[x][y][z].linkable.l = [x-1,y,z];
       }
+      console.log(rz,space[x][y][z]);
       
       
     }

@@ -63,12 +63,12 @@ window.init = (t = {}) => {
     // UI
     
     // menu
-    b.innerHTML += `<textarea id=deb rows=1 cols=1></textarea><div id=tuto></div><div id=menu>Camera<br>
+    b.innerHTML += `${track.n=="A1"?"<div id=tuto></div>":""}<div id=menu>Camera<br>
     <div id=gridup>⇑</div> <div id=griddown>⇓</div> <div id=gridrl>↶</div> <div id=gridrr>↷</div><br>⎯<br>Block<br><div id=blockrl>↶</div> <div id=blockrr>↷</div><br>⎯<br><div id=blockc style=width:120px>Clear all</div>${(unlock&&track.n=="editor")?"<div id=exp>Share":''}`;
     b.innerHTML += `<div id=parts>`;
     
-    if(track.n == "A1"){
-      tuto.innerHTML = `<h2>Welcome!</h2>Complete the track using space and arrow keys (or WASD/ZQSD).<br>The inventory (at the bottom) tells you how many blocks are available.<br>When you are done, press Enter to drive on your track.<br>While driving, press Enter to restart or Esc to quit!<br>You can get better times by redrawing your track!<div onclick=tuto.remove()>OK</div>`;
+    if(track.n=="A1"){
+      tuto.innerHTML = `<h2>Welcome!</h2>Complete the track using space and arrow keys (or WASD/ZQSD).<br>Keep space key pressed to link two road parts.<br>The inventory (at the bottom) tells you how many blocks are available.<br>When you are done, press Enter to drive on your track.<br>While driving, press Enter to restart or Esc to quit.<br>You can try to get better times by drawing a shorter track!<br>PS: if you turn a lot on the road, it will slow you down!<div onclick=tuto.remove()>OK</div>`;
     }
     
     // inventory
