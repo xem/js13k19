@@ -78,8 +78,8 @@ ui = () => {
     roadsmin = roadsmin.filter(a=>a!=0);
     var roadlinksmin = JSON.parse(JSON.stringify(roadlinks));
     roadlinksmin = roadlinksmin.filter(a=>a!=0);
-    //window.open("//xem.github.io/js13k19/share/#"+btoa(JSON.stringify({roads:roadsmin,roadlinks:roadlinksmin,inventory:[]})));
-    console.log(JSON.stringify({roads:roadsmin,roadlinks:roadlinksmin,inventory:[]}));
+    window.open("//xem.github.io/js13k19/share/#"+btoa(JSON.stringify({roads:roadsmin,roadlinks:roadlinksmin,inventory:[]})));
+    //console.log(JSON.stringify({roads:roadsmin,roadlinks:roadlinksmin,inventory:[]}));
   }
 }
 

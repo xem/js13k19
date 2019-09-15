@@ -389,34 +389,36 @@ var links = () => {
       if(i[0][0] == i[1][0] /*&& i[0][2] == i[1][2]*/ && i[0][1] < i[1][1]){
         
         //console.log("front to back");
-        
-        if(!block1.slope && !block2.slope){
-          C.plane({w:size*.8,h:size*.2,x:i[0][0]*size+size*.1,y:i[0][1]*size+size*.9,z:sizeh*i[0][2]+1,b:world?"#999":"#d90",o:"top left",css:`barrierleftright ${i[0][2] == 0 ? "z0":""}`});
+        if(!(block1.id == 8 && block2.id == 8)){
+          if(!block1.slope && !block2.slope){
+            C.plane({w:size*.8,h:size*.2,x:i[0][0]*size+size*.1,y:i[0][1]*size+size*.9,z:sizeh*i[0][2]+1,b:world?"#999":"#d90",o:"top left",css:`barrierleftright ${i[0][2] == 0 ? "z0":""}`});
+          }
+          else if(block1.slope && !block2.slope){
+            C.plane({w:size*.8,h:size*.1,x:i[1][0]*size+size*.1,y:i[1][1]*size+size*1-size,z:sizeh*i[1][2]+1,b:world?"#999":"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
+          }
+          else if(!block1.slope && block2.slope){
+            C.plane({w:size*.8,h:size*.1,x:i[0][0]*size+size*.1,y:i[0][1]*size+size*.9,z:sizeh*i[0][2]+1,b:world?"#999":"#d90",o:"top left",css:`barrierleftright ${i[0][2] == 0 ? "z0":""}`});
+          }
         }
-        else if(block1.slope && !block2.slope){
-          C.plane({w:size*.8,h:size*.1,x:i[1][0]*size+size*.1,y:i[1][1]*size+size*1-size,z:sizeh*i[1][2]+1,b:world?"#999":"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
-        }
-        else if(!block1.slope && block2.slope){
-          C.plane({w:size*.8,h:size*.1,x:i[0][0]*size+size*.1,y:i[0][1]*size+size*.9,z:sizeh*i[0][2]+1,b:world?"#999":"#d90",o:"top left",css:`barrierleftright ${i[0][2] == 0 ? "z0":""}`});
-        }
-        
         block1.links.d = [i[1][0],i[1][1],i[1][2]];
         block2.links.u = [i[0][0],i[0][1],i[0][2]];
       }
       
+      //console.log(i[0],i[1]);
       // link from back v to front ^
       if(i[0][0] == i[1][0] /*&& i[0][2] == i[1][2]*/ && i[0][1] > i[1][1]){
         
-        if(!block1.slope && !block2.slope){
-          C.plane({w:size*.8,h:size*.2,x:i[1][0]*size+size*.1,y:i[1][1]*size+size*.9,z:sizeh*i[1][2]+1,b:world?"#999":"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
+        if(!(block1.id == 8 && block2.id == 8)){
+          if(!block1.slope && !block2.slope){
+            C.plane({w:size*.8,h:size*.2,x:i[1][0]*size+size*.1,y:i[1][1]*size+size*.9,z:sizeh*i[1][2]+1,b:world?"#999":"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
+          }
+          else if(block1.slope && !block2.slope){
+            C.plane({w:size*.8,h:size*.1,x:i[1][0]*size+size*.1,y:i[1][1]*size+size*.9,z:sizeh*i[1][2]+1,b:world?"#999":"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
+          }
+          else if(!block1.slope && block2.slope){
+            C.plane({w:size*.8,h:size*.1,x:i[1][0]*size+size*.1,y:i[1][1]*size+size,z:sizeh*i[1][2]+1,b:world?"#999":"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
+          }
         }
-        else if(block1.slope && !block2.slope){
-          C.plane({w:size*.8,h:size*.1,x:i[1][0]*size+size*.1,y:i[1][1]*size+size*.9,z:sizeh*i[1][2]+1,b:world?"#999":"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
-        }
-        else if(!block1.slope && block2.slope){
-          C.plane({w:size*.8,h:size*.1,x:i[1][0]*size+size*.1,y:i[1][1]*size+size,z:sizeh*i[1][2]+1,b:world?"#999":"#d90",o:"top left",css:`barrierleftright ${i[1][2] == 0 ? "z0":""}`});
-        }
-
         block1.links.u = [i[1][0],i[1][1],i[1][2]];
         block2.links.d = [i[0][0],i[0][1],i[0][2]];
       }
@@ -424,14 +426,16 @@ var links = () => {
       // link from left < to right >
       if(i[0][0] < i[1][0] /*&& i[0][2] == i[1][2]*/ && i[0][1] == i[1][1]){
 
-        if(!block1.slope && !block2.slope){
-          C.plane({w:size*.2,h:size*.8,x:i[0][0]*size+size*.9,y:i[1][1]*size+size*.1,z:sizeh*i[0][2]+1,b:world?"#999":"#d90",o:"top left",css:`barriertopbottom ${i[0][2] == 0 ? "z0":""}`});
-        }
-        else if(block1.slope && !block2.slope){
-          C.plane({w:size*.1,h:size*.8,x:i[1][0]*size,y:i[1][1]*size+size*.1,z:sizeh*i[1][2]+1,b:world?"#999":"#d90",o:"top left",css:`barriertopbottom ${i[1][2] == 0 ? "z0":""}`});
-        }
-        else if(!block1.slope && block2.slope){
-          C.plane({w:size*.1,h:size*.8,x:i[0][0]*size+size*.9,y:i[0][1]*size+size*.1,z:sizeh*i[0][2]+1,b:world?"#999":"#d90",o:"top left",css:`barriertopbottom ${i[0][2] == 0 ? "z0":""}`});
+        if(!(block1.id == 8 && block2.id == 8)){
+          if(!block1.slope && !block2.slope){
+            C.plane({w:size*.2,h:size*.8,x:i[0][0]*size+size*.9,y:i[1][1]*size+size*.1,z:sizeh*i[0][2]+1,b:world?"#999":"#d90",o:"top left",css:`barriertopbottom ${i[0][2] == 0 ? "z0":""}`});
+          }
+          else if(block1.slope && !block2.slope){
+            C.plane({w:size*.1,h:size*.8,x:i[1][0]*size,y:i[1][1]*size+size*.1,z:sizeh*i[1][2]+1,b:world?"#999":"#d90",o:"top left",css:`barriertopbottom ${i[1][2] == 0 ? "z0":""}`});
+          }
+          else if(!block1.slope && block2.slope){
+            C.plane({w:size*.1,h:size*.8,x:i[0][0]*size+size*.9,y:i[0][1]*size+size*.1,z:sizeh*i[0][2]+1,b:world?"#999":"#d90",o:"top left",css:`barriertopbottom ${i[0][2] == 0 ? "z0":""}`});
+          }
         }
 
         block1.links.r = [i[1][0],i[1][1],i[1][2]];
@@ -441,14 +445,16 @@ var links = () => {
       // link from right > to left <
       if(i[0][0] > i[1][0] /*&& i[0][2] == i[1][2]*/ && i[0][1] == i[1][1]){
         
-        if(!block1.slope && !block2.slope){
-          C.plane({w:size*.2,h:size*.8,x:i[1][0]*size+size*.9,y:i[1][1]*size+size*.1,z:sizeh*i[1][2]+1,b:world?"#999":"#d90",o:"top left",css:`barriertopbottom ${i[1][2] == 0 ? "z0":""}`});
-        }
-        else if(block1.slope && !block2.slope){
-          C.plane({w:size*.1,h:size*.8,x:i[1][0]*size+size*.9,y:i[1][1]*size+size*.1,z:sizeh*i[1][2]+1,b:world?"#999":"#d90",o:"top left",css:`barriertopbottom ${i[1][2] == 0 ? "z0":""}`});
-        }
-        else if(!block1.slope && block2.slope){
-          C.plane({w:size*.1,h:size*.8,x:i[0][0]*size,y:i[0][1]*size+size*.1,z:sizeh*i[0][2]+1,b:world?"#999":"#d90",o:"top left",css:`barriertopbottom ${i[0][2] == 0 ? "z0":""}`});
+        if(!(block1.id == 8 && block2.id == 8)){
+          if(!block1.slope && !block2.slope){
+            C.plane({w:size*.2,h:size*.8,x:i[1][0]*size+size*.9,y:i[1][1]*size+size*.1,z:sizeh*i[1][2]+1,b:world?"#999":"#d90",o:"top left",css:`barriertopbottom ${i[1][2] == 0 ? "z0":""}`});
+          }
+          else if(block1.slope && !block2.slope){
+            C.plane({w:size*.1,h:size*.8,x:i[1][0]*size+size*.9,y:i[1][1]*size+size*.1,z:sizeh*i[1][2]+1,b:world?"#999":"#d90",o:"top left",css:`barriertopbottom ${i[1][2] == 0 ? "z0":""}`});
+          }
+          else if(!block1.slope && block2.slope){
+            C.plane({w:size*.1,h:size*.8,x:i[0][0]*size,y:i[0][1]*size+size*.1,z:sizeh*i[0][2]+1,b:world?"#999":"#d90",o:"top left",css:`barriertopbottom ${i[0][2] == 0 ? "z0":""}`});
+          }
         }
         
         block1.links.l = [i[1][0],i[1][1],i[1][2]];

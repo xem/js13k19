@@ -115,6 +115,7 @@ window.init = (t = {}) => {
 
         // Draw current road block
         //console.log(i);
+        selected = i[3];
         draw_block(i[3],"scene",i[0],i[1],i[2],0,i[4],i.length == 5 ? 1 : 0); // fixed
         
         // Place cursor on start flag

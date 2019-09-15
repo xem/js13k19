@@ -84,7 +84,7 @@ var draw_block = (n, c, x, y, z, rx, rz, f) => {
       else if(rz == 270){
         space[x][y][z].linkable.l = [x-1,y,z];
       }
-      console.log(rz,space[x][y][z]);
+      //console.log(rz,space[x][y][z]);
       
       
     }

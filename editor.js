@@ -174,7 +174,12 @@ editor = () => {
       }
       
       // Increment inventory
-      var inventoryid = space[X][Y][Z].inventoryid;
+      var inventoryid = 0;
+      for(i in track.inventory){
+        if(track.inventory[i][0] == space[X][Y][Z].id){
+          inventoryid = +i;
+        }
+      }
       inventory[inventoryid][2]++;
       C.$(`qty${inventoryid}`).innerHTML = inventory[inventoryid][2] + "/" + inventory[inventoryid][1];
       
