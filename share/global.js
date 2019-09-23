@@ -159,6 +159,10 @@ oninput = onclick = () => {
   if(accup.value && accup.value!="0"){track.inventory.push([9,+accup.value,+accup.value])}
   if(accdn.value && accdn.value!="0"){track.inventory.push([10,+accdn.value,+accdn.value])}
   
+  if(gold.value) track.gold = +gold.value;
+  if(silver.value) silver.gold = +silver.value;
+  if(bronze.value) track.bronze = +bronze.value;
+  
   url.value = "https://js13kgames.com/games/back-on-track-mania/index.html#"+btoa(JSON.stringify({roads:track.roads,roadlinks:track.roadlinks,inventory:track.inventory,w:track.w,ice:track.ice}));
   
   init(track);
