@@ -1,3 +1,100 @@
-<h1>BACK ON TRACK LEVEL SHARE PAGE</h1>
+﻿<title>Back on Track</title>
+<meta name=monetization content=$pay.stronghold.co/1a1fbf27169a5334158b2c531b946427ceb>
+<h1>Back on Track (mania)</h1>
+<h2>Edit your track's properties</h2>
+<div>
+<p>Environment: 
+<input type=radio id=snow name=env checked>Snow 
+<input type=radio id=desert name=env>Desert
+<p>Ice (if any)
+<input placeholder=x id=icex size=1> 
+<input placeholder=y id=icey size=1> 
+<input placeholder=w id=icew size=1> 
+<input placeholder=h id=iceh size=1>
+<p>Inventory (if any)
+<table>
+<tr>
+<td><img src=1.PNG>
+<td><img src=2.PNG>
+<td><img src=3.PNG>
+<td><img src=4.PNG>
+<td><img src=5.PNG>
+<td><img src=6.PNG>
+<td><img src=7.PNG>
+<tr>
+<td><input id=road value=0 min=0 max=99 type=number>
+<td><input id=jump value=0 min=0 max=99 type=number>
+<td><input id=slope value=0 min=0 max=99 type=number>
+<td><input id=longslope value=0 min=0 max=99 type=number>
+<td><input id=accel value=0 min=0 max=99 type=number>
+<td><input id=accup value=0 min=0 max=99 type=number>
+<td><input id=accdn value=0 min=0 max=99 type=number>
+</tr></table>
 
-<p>(soon)
+</div>
+<h2>Preview your track</h2>
+<div id=b></div>
+<h2>share your track</h2>
+<div style="padding:15px 0">
+<p>URL: <input style="width:100%" id=url>
+<p><button id=test>TEST THIS LINK</tweet> <button id=tweet>TWEET THIS LINK</tweet>
+</div>
+<script src=global.js></script>
+<script src=css3d.js></script>
+<script src=levels.js></script>
+<script src=music.js></script>
+<script src=helpers.js></script>
+<script src=func.js></script>
+<script src=collision.js></script>
+<script src=editor.js></script>
+<script src=race.js></script>
+<script src=blocks.js></script>
+<script src=input.js></script>
+<script src=init.js></script>
+<script src=loop.js></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Calibri,Candara,Arial;cursor:pointer;user-select:none;-moz-user-select:none}
+
+body { padding: 20px }
+#b { width: 500px; height: 400px; border: 1px solid }
+h2 { margin: 10px 0 }
+table { background: #ddd }
+button { padding: 5px; margin: 0 5px }
+
+#viewport{width:100%;height:100%;background:#fff;overflow:hidden;position:relative;perspective:700px}
+#viewport *,.part *{transform-style:preserve-3d;box-sizing:border-box}
+#camera{width:0;height:0;position:absolute;top:50%;left:50%}
+.circle{border-radius:50%}
+.plane{text-align:center;font:25px/18px Calibri,Candara,Arial}
+.block0.z0{border:1px solid #ddd}
+.barrierleftright.z0{border-left:6px solid #000;border-right:6px solid #000}
+.barriertopbottom.z0{border-top:6px solid #000;border-bottom:6px solid #000}
+.m,.s{text-align:center;position:fixed;top:50%;margin:-180px 0 0;width:100%}
+.m div{padding:5px 15px;font-size:30px;border:1px solid;display:inline-block;margin:5px;background:#d90}
+#grid{background:linear-gradient(#888 5px,transparent 2px),linear-gradient(90deg,#888 5px,transparent 2px),#def8;background-size:100px 100px}
+#menu{position:fixed;left:0;top:0;text-align:center;width:145px;background:#fff;padding:5px;border:2px solid}
+#menu div{width:60px;display:inline-block;height:30px;border:2px solid #555;background:#eee;font-size:20px;margin:2px 0}
+#parts{position:fixed;bottom:0;text-align:center;width:100%}
+.part{width:60px;height:80px;border:2px solid #555;background:#ddd;display:inline-block;vertical-align:top;perspective:500px}
+.part.selected{background:#fff}
+.visual{height:30px;margin:25px 30px 0}
+.fx .editor #scene{transition:.2s linear}
+p{text-align:left;background:#eee;margin:0 2px;padding:5px}
+#cursor{transition:.1s linear}
+.tree{font-size:90px;line-height:105px;text-align:center}
+.w1 .tree{font-size:55px;line-height:145px;text-align:center}
+.ice{border-radius:25px;background:#def;background:linear-gradient(45deg,#def,#cde,#def,#cde,#def);background-size:2000px 2000px}
+.acc{background:linear-gradient(70deg,transparent 75%,#fd3 75%) center center,linear-gradient(-70deg,#d90 75%,#fd3 75%) center center,#d90;background-size:28px 24px}
+.acc2{background:linear-gradient(110deg,transparent 75%,#fd3 75%) center center,linear-gradient(-110deg,#d90 75%,#fd3 75%) center center,#d90;background-size:28px 24px}
+.w1 .acc{background:linear-gradient(70deg,transparent 75%,#fd3 75%) center center,linear-gradient(-70deg,#999 75%,#fd3 75%) center center,#999;background-size:28px 24px}
+.w1 .acc2{background:linear-gradient(110deg,transparent 75%,#fd3 75%) center center,linear-gradient(-110deg,#999 75%,#fd3 75%) center center,#999;background-size:28px 24px}
+.race #viewport{background:linear-gradient(#def 10%,#fff 15%)}
+.editor h1,.race h1{position:fixed;right:10px}
+#time{right:auto;left:10px}
+#speed{bottom:0}
+.s{font-size:50px;margin:-150px 0 0}
+.s div{width:400px;height:60px;font-size:50px;border:2px solid;margin:50px auto;background:#d90}
+.w1 #viewport{background:#ec7}
+.race.w1 #viewport{background:linear-gradient(#def 10%,#ec7 15%)}
+#tuto{position:fixed;z-index:5;font-size:14px;top:50%;left:50%;width:450px;padding:15px;transform:translateX(-50%)translateY(-50%);background:#d90;border-radius:15px}
+#tuto div{width:70px;font-size:30px;border:1px solid;padding:5px 15px;margin:10px auto}
